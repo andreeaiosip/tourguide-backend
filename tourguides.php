@@ -79,36 +79,7 @@ include('myDBConnection.php');
  <div class="navbar">
  <?php
  
- if ($procedure=="home"){
-	  $myActivehome = "class='active'";
-	 }
- if ($procedure=="tours"){
-	  $myActiveTour = "class='active'";
-	 }
- if ($procedure=="tourguides"){
-	  $myActiveGuide = "class='active'";
-	 }
- if ($procedure=="comms"){
-	  $myActiveComms = "class='active'";
-	 }
- 
- if ($procedure=="bookings"){
-	  $myActiveBook = "class='active'";
-	 }
- 
- // For you to code!
- // try and add the Payroll link as the active when you click or select it
- 
- 
-   echo '<a '.  $myActivehome  . 'href="home.php?procedure=home"><i class="fa fa-fw fa-home"></i>Home</a>';
-   echo '<a '.  $myActiveTour  . 'href="home.php?procedure=tours"><i class="fa fa-fw fa-search"></i>Tours</a>';
-   echo '<a '.  $myActiveGuide . 'href="home.php?procedure=tourguides"><i class="fa fa-fw fa-envelope"></i> Tour Guides</a>';
-   echo '<a '.  $myActiveComms . 'href="home.php?procedure=comms"><i class="fa fa-fw fa-envelope"></i> Comms Levels</a>';
-   echo '<a '.  $myActiveBook  . 'href="home.php?procedure=bookings"><i class="fa fa-fw fa-envelope"></i> Bookings</a>';
-   echo '<a '.  $myActive      . 'href="home.php?procedure=payroll"><i class="fa fa-fw fa-envelope"></i> Payroll</a>';
-   echo '<a '.  $myActive      . 'href="home.php?procedure=admin"><i class="fa fa-fw fa-envelope"></i> Admin</a>';
-   echo '<a '.  $myActive      . 'href="index.php"><i class="fa fa-fw fa-user"></i> Logout</a>';
- 
+ include('menuTabs.php');
  ?>
  </div>
  
@@ -321,7 +292,7 @@ include('myDBConnection.php');
  
  if ($myerror=="" && $wasiposted <> ""){
  
-	  $query = "INSERT INTO tours (name,description,price) VALUES (".
+	  $query = "INSERT INTO tours (TourName,Description,Price) VALUES (".
 				 "'".$Tname."',".
 				 "'".$Desc."',".
 				 "'".$price."')";

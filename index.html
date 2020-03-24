@@ -1,19 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-   <head>
+   <head id="trackUser">
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <meta http-equiv="X-UA-Compatible" content="ie=edge">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-      <link rel="stylesheet" href="./assets/css/style.css">
-      <style>
-         h2 {
-         text-align: center;
-         }
-         .fa, .fa-fw, .fa-lg, .fa-home {
-         margin-right:5px;
-         }
-      </style>
+      <link rel="stylesheet" href="./assets/css/indexstyle.css">
       <title>Brasov City</title>
    </head>
    <body>
@@ -21,41 +13,57 @@
          <span class="navbar-toggle" id="js-navbar-toggle">
          <i class="fas fa fa-bars"></i>
          </span>
-         <a href="index.html" class="logo grow">BRASOV CITY</a>
+         <a href="#" class="logo grow">BRASOV CITY</a>
          <ul class="main-nav" id="js-menu">
             <li>
                <a href="index.html" class="nav-links"><i class="fa fa-fw fa-lg fa-home"></i>HOME</a>
             </li>
             
             <li>
-               <a href="tours.php" class="nav-links"><i class="fas fa-bus" style='margin-right:5px'></i>TOURS</a>
+               <a href="events.html" class="nav-links" target="_blank"><i class="fas fa-bus" style='margin-right:5px'></i>TOURS</a>
             </li>
           
             <li>
-               <a href="login.html" class="nav-links"><i class="fa fa-fw fa-sign-in-alt" style='margin-right:5px'></i>LOGIN</a>
+               <a href="login.html" class="nav-links" target="_blank"><i class="fa fa-fw fa-sign-in-alt" style='margin-right:5px'></i>LOGIN</a>
+            </li>
+            <li>
+               <a href="home.php" class="nav-links" target="_blank"><i class="fa fa-fw fa-user" style='margin-right:5px'></i>ADMIN</a>
             </li>
          </ul>
       </nav>
       <!--End Navbar-->
-      <main class="main-contact">
-         <h2>LOGIN </h2>
-         <div class="container container-form">
-            <!-- Helpful code found here: https://www.w3schools.com/html/html_forms.asp -->
-            <form name="myForm" action="/action_page.php" onsubmit="return validateForm()" method="post">
-               
-               <div>
-                  <label for="email">Email address</label>
-                  <input type="email" id="email" required placeholder="Your email address">
+      <div class="indexSlider">
+         <div class="indexContainer">
+            <!-- Helpful code for the slider found here: https://codepen.io/cyberveos/pen/MvaMmw -->
+            <div class="slider-inner">
+               <input class="slider-open" type="radio" id="slide-1" name="slider" aria-hidden="true" hidden="" checked="checked">
+               <div class="slider-item">
+                  <img src="./assets/img/brasov2.jpg">
                </div>
-               <br>
-               
-                  <input type="submit" onClick="testEmpty()" value="Submit">
-            </form>
+               <input class="slider-open" type="radio" id="slide-2" name="slider" aria-hidden="true" hidden="">
+               <div class="slider-item">
+                  <img src="./assets/img/brasov21.jpg">
+               </div>
+               <input class="slider-open" type="radio" id="slide-3" name="slider" aria-hidden="true" hidden="">
+               <div class="slider-item">
+                  <img src="./assets/img/brasov76.jpg">
+               </div>
+               <label for="slide-3" class="slider-control prev control-1">‹</label>
+               <label for="slide-2" class="slider-control next control-1">›</label>
+               <label for="slide-1" class="slider-control prev control-2">‹</label>
+               <label for="slide-3" class="slider-control next control-2">›</label>
+               <label for="slide-2" class="slider-control prev control-3">‹</label>
+               <label for="slide-1" class="slider-control next control-3">›</label>
             </div>
          </div>
-      </main>
-     
-       
+      </div>
+      <!--End Slider-->
+      <div class="join-tour">
+         <h3>DISCOVER BRASOV WITH US!</h3>
+         <a href="events.html" class="join-btn">TOURS</a>
+      </div>
+      <div class="footer">
+         <canvas id="myCanvas2" width="500" height="50"></canvas>
       </div>
    </body>
    <script src='https://kit.fontawesome.com/a076d05399.js'></script>

@@ -28,7 +28,7 @@ echo '<div class="navbar">';
   echo '<a '.  $myActivehome  . 'href="home.php?procedure=home"><i class="fa fa-fw fa-home"></i> Home</a>';
   echo '<a '.  $myActiveTour  . 'href="home.php?procedure=tours"><i class="fa fa-fw fa-search"></i> Tours</a>';
   echo '<a '.  $myActiveGuide . 'href="home.php?procedure=tourguides"><i class="fa fa-user-circle-o" aria-hidden="true"></i> Tour Guides</a>';
-  echo '<a '.  $myActiveComms . 'href="commision.php?procedure=commission"><i class="fa fa-handshake-o" aria-hidden="true"></i> Comms Levels</a>';
+  echo '<a '.  $myActiveComms . 'href="commission.php?procedure=commission"><i class="fa fa-handshake-o" aria-hidden="true"></i> Comms Levels</a>';
   echo '<a '.  $myActiveBook  . 'href="home.php?procedure=bookings"><i class="fa fa-book" aria-hidden="true"></i> Bookings</a>';
   echo '<a '.  $myActivePayroll . 'href="home.php?procedure=payroll"><i class="fa fa-money" aria-hidden="true"></i></i> Payroll</a>';
   echo '<a '.  $myActiveAdmin  . 'href="home.php?procedure=admin"><i class="fa fa-fw fa-user"></i> Admin</a>';

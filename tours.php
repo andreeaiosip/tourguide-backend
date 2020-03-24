@@ -9,12 +9,7 @@ $saveme = $_REQUEST["saveme"];
 
 
 $procedure = $_REQUEST["procedure"] ;
-define('HOSTNAME','dedi750.jnb2.host-h.net');
-define('DATABASE', 'andregyhyb_db1');
-DEFINE('USERNAME', 'andregyhyb_1');
-define('PASSWORD', 'Knn8fGC3tp5UQMmiJaA8');
- $dbConn = mysqli_connect(HOSTNAME, USERNAME, PASSWORD, DATABASE);
-
+include('myDBConnection.php');
 
  ?>
  
@@ -80,40 +75,11 @@ define('PASSWORD', 'Knn8fGC3tp5UQMmiJaA8');
  </style>
  <body>
  
- 
- 
  <div class="navbar">
  <?php
  
- if ($procedure=="home"){
-	  $myActivehome = "class='active'";
-	 }
- if ($procedure=="tours"){
-	  $myActiveTour = "class='active'";
-	 }
- if ($procedure=="tourguides"){
-	  $myActiveGuide = "class='active'";
-	 }
- if ($procedure=="comms"){
-	  $myActiveComms = "class='active'";
-	 }
+ include('menuTabs.php');
  
- if ($procedure=="bookings"){
-	  $myActiveBook = "class='active'";
-	 }
- 
- // For you to code!
- // try and add the Payroll link as the active when you click or select it
- 
- 
-   echo '<a '.  $myActivehome  . 'href="home.php?procedure=home"><i class="fa fa-fw fa-home"></i>Home</a>';
-   echo '<a '.  $myActiveTour  . 'href="home.php?procedure=tours"><i class="fa fa-fw fa-search"></i>Tours</a>';
-   echo '<a '.  $myActiveGuide . 'href="home.php?procedure=tourguides"><i class="fa fa-fw fa-envelope"></i> Tour Guides</a>';
-   echo '<a '.  $myActiveComms . 'href="home.php?procedure=comms"><i class="fa fa-fw fa-envelope"></i> Comms Levels</a>';
-   echo '<a '.  $myActiveBook  . 'href="home.php?procedure=bookings"><i class="fa fa-fw fa-envelope"></i> Bookings</a>';
-   echo '<a '.  $myActive      . 'href="home.php?procedure=payroll"><i class="fa fa-fw fa-envelope"></i> Payroll</a>';
-   echo '<a '.  $myActive      . 'href="home.php?procedure=admin"><i class="fa fa-fw fa-envelope"></i> Admin</a>';
-   echo '<a '.  $myActive      . 'href="index.php"><i class="fa fa-fw fa-user"></i> Logout</a>';
  
  ?>
  </div>
@@ -146,9 +112,9 @@ define('PASSWORD', 'Knn8fGC3tp5UQMmiJaA8');
 		 $query = "SELECT * FROM tours WHERE uid='".$tuid."'";
 		 $result = mysqli_query($dbConn, $query);
 		 while($Arrayline = mysqli_fetch_assoc($result)) {
-			 $Tname = $Arrayline["name"];
-			 $Desc  = $Arrayline["description"];
-			 $price = $Arrayline["price"];
+			 $Tname = $Arrayline["TourName"];
+			 $Desc  = $Arrayline["Description"];
+			 $price = $Arrayline["Price"];
 			 }
  
 		 }else{
@@ -228,9 +194,9 @@ define('PASSWORD', 'Knn8fGC3tp5UQMmiJaA8');
 		  echo '<td>';
 			  echo $Arrayline['uid'];
 		  echo '</td>';
-		  echo '<td>'.strtoupper($Arrayline['name']).'</td>';
-		  echo '<td>'.ucwords($Arrayline['description']).'</td>';
-		  echo '<td>'.$Arrayline['price'].'</td>';
+		  echo '<td>'.strtoupper($Arrayline['TourName']).'</td>';
+		  echo '<td>'.ucwords($Arrayline['Description']).'</td>';
+		  echo '<td>'.$Arrayline['Price'].'</td>';
 		  echo '<td>';
 		   echo '<a href="home.php?procedure=deleteme&tuid='.$Arrayline['uid'].'" title="This will delete me"><i class="fa fa-trash fa fa-2x" aria-hidden="true"></i></a>';
 		   echo '<a href="home.php?procedure=editme&tuid='.$Arrayline['uid'].'" title="This will Edit me"><i class="fa fa-pencil-square fa-2x" aria-hidden="true"></i></a>';
@@ -256,8 +222,8 @@ define('PASSWORD', 'Knn8fGC3tp5UQMmiJaA8');
  echo '<table>
    <tr>
 	 <th>Book Ref</th>
-	 <th>Customer name & Surname</th>
-	 <th>Tour booked</th>
+	 <th>Customer Name & Surname</th>
+	 <th>Tour Booked</th>
 	 <th>No of People</th>
    </tr>';
  
@@ -269,9 +235,9 @@ define('PASSWORD', 'Knn8fGC3tp5UQMmiJaA8');
  
 		  echo '<tr>
 			 <td>'.$Arrayline['bookref'].'</td>
-			 <td>'.$Arrayline['customerFName']." ".$Arrayline['customerSName'].'</td>
-			 <td>'.$Arrayline['description'].'</td>
-			 <td>'.$Arrayline['people'].'</td>
+			 <td>'.$Arrayline['customerName']." ".$Arrayline['customerName'].'</td>
+			 <td>'.$Arrayline['Description'].'</td>
+			 <td>'.$Arrayline['Pax'].'</td>
 		   </tr>';
  
  
@@ -324,7 +290,7 @@ define('PASSWORD', 'Knn8fGC3tp5UQMmiJaA8');
  
  if ($myerror=="" && $wasiposted <> ""){
  
-	  $query = "INSERT INTO tours (name,description,price) VALUES (".
+	  $query = "INSERT INTO tours (TourName,Description,Price) VALUES (".
 				 "'".$Tname."',".
 				 "'".$Desc."',".
 				 "'".$price."')";

@@ -73,35 +73,10 @@ tr:nth-child(even) {
 <div class="navbar">
 <?php
 
-if ($procedure=="home"){
-	 $myActivehome = "class='active'";
-	}
-if ($procedure=="tours"){
-	 $myActiveTour = "class='active'";
-	}
-if ($procedure=="tourguides"){
-	 $myActiveGuide = "class='active'";
-	}
-if ($procedure=="comms"){
-	 $myActiveComms = "class='active'";
-	}
-
-if ($procedure=="bookings"){
-	 $myActiveBook = "class='active'";
-	}
+include('menuTabs.php');
 
 // For you to code!
 // try and add the Payroll link as the active when you click or select it
-
-
-  echo '<a '.  $myActivehome  . 'href="home.php?procedure=home"><i class="fa fa-fw fa-home"></i>Home</a>';
-  echo '<a '.  $myActiveTour  . 'href="home.php?procedure=tours"><i class="fa fa-fw fa-search"></i>11Tours</a>';
-  echo '<a '.  $myActiveGuide . 'href="home.php?procedure=tourguides"><i class="fa fa-fw fa-envelope"></i> Tour Guides</a>';
-  echo '<a '.  $myActiveComms . 'href="home.php?procedure=comms"><i class="fa fa-fw fa-envelope"></i> Comms Levels</a>';
-  echo '<a '.  $myActiveBook  . 'href="home.php?procedure=bookings"><i class="fa fa-fw fa-envelope"></i> Bookings</a>';
-  echo '<a '.  $myActive      . 'href="home.php?procedure=payroll"><i class="fa fa-fw fa-envelope"></i> Payroll</a>';
-  echo '<a '.  $myActive      . 'href="home.php?procedure=admin"><i class="fa fa-fw fa-envelope"></i> Admin</a>';
-  echo '<a '.  $myActive      . 'href="index.php"><i class="fa fa-fw fa-user"></i> Logout</a>';
 
 ?>
 </div>
@@ -179,11 +154,40 @@ if ($myerror=="" && $fromDB <> ""){
 
 
 
-
-
-
  }
+ if ($procedure=="bookings"){
 
+
+	echo '<table>
+	  <tr>
+		<th>Book Ref</th>
+		<th>Customer Name & Surname</th>
+		<th>Tour booked</th>
+		<th>No of People</th>
+	  </tr>';
+	
+		$query = "SELECT *
+					FROM bookings
+					LEFT JOIN tours ON tours.uid = bookings.touruid ";
+		$result = mysqli_query($dbConn, $query);
+		while($Arrayline = mysqli_fetch_assoc($result)) {
+	
+			 echo '<tr>
+				<td>'.$Arrayline['bookref'].'</td>
+				<td>'.$Arrayline['customerName']." ".$Arrayline['customerSurname'].'</td>
+				<td>'.$Arrayline['TourName'].'</td>
+				<td>'.$Arrayline['Pax'].'</td>
+			  </tr>';
+	
+	
+	
+		}
+	
+	  echo '</table>';
+	
+	
+	
+		}
 
 if ($procedure=="home"){
 echo '
@@ -238,39 +242,7 @@ echo '<table>
 	}
 
 
-if ($procedure=="bookings"){
 
-
-echo '<table>
-  <tr>
-    <th>Book Ref</th>
-    <th>Customer name & Surname</th>
-    <th>Tour booked</th>
-    <th>No of People</th>
-  </tr>';
-
-	$query = "SELECT *
-				FROM bookings
-				LEFT JOIN tours ON tours.uid = bookings.touruid ";
-	$result = mysqli_query($dbConn, $query);
-	while($Arrayline = mysqli_fetch_assoc($result)) {
-
-		 echo '<tr>
-		    <td>'.$Arrayline['bookref'].'</td>
-		    <td>'.$Arrayline['customerFName']." ".$Arrayline['customerSName'].'</td>
-		    <td>'.$Arrayline['description'].'</td>
-		    <td>'.$Arrayline['people'].'</td>
-		  </tr>';
-
-
-
-	}
-
-  echo '</table>';
-
-
-
-	}
 
 
 if ($procedure=="addnewtour"){
