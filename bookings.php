@@ -131,9 +131,6 @@ echo '<table>
 	}
  
 
- 
-
-
 if (isset($_REQUEST["showSnack"])){
 	echo '<div id="snackbar">'.$_REQUEST["showSnack"].'</div>';
 	}
