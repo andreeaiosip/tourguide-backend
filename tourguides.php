@@ -21,12 +21,12 @@ include('myDBConnection.php');
  
  
  
- <div class="navbar">
+ 
  <?php
  
  include('menuTabs.php');
  ?>
- </div>
+ 
  
  <?php
  
