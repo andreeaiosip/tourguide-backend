@@ -24,7 +24,10 @@ if ($procedure=="payroll"){
 // For you to code!
 // try and add the Payroll link as the active when you click or select it
 
-echo '<div class="navbar">';
+echo '<div class="navbar">
+<span class="navbar-toggle" id="js-navbar-toggle">
+<i class="fas fa fa-bars"></i>
+</span>';
   echo '<a '.  $myActivehome  . 'href="home.php?procedure=home"><i class="fa fa-fw fa-home"></i> Home</a>';
   echo '<a '.  $myActiveTour  . 'href="home.php?procedure=tours"><i class="fa fa-fw fa-search"></i> Tours</a>';
   echo '<a '.  $myActiveGuide . 'href="home.php?procedure=tourguides"><i class="fa fa-user-circle-o" aria-hidden="true"></i> Tour Guides</a>';

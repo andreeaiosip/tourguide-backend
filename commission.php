@@ -23,6 +23,7 @@ function myFunction() {
   x.className = "show";
   setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
 }
+
 </script>
 
 
@@ -250,6 +251,6 @@ if (isset($_REQUEST["showSnack"])){
 
 ?>
 
-
+<script src="./assets/js/app.js"></script>
 </body>
 
