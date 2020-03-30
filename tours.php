@@ -17,62 +17,9 @@ include('myDBConnection.php');
  <html>
  <meta name="viewport" content="width=device-width, initial-scale=1">
  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
- <style>
- body {font-family: Arial, Helvetica, sans-serif;}
+ <link rel="stylesheet" href="./assets/css/style.css">
+    
  
- .navbar {
-   width: 100%;
-   background-color: #555;
-   overflow: auto;
- }
- 
- .navbar a {
-   float: left;
-   padding: 12px;
-   color: white;
-   text-decoration: none;
-   font-size: 17px;
- }
- 
- .navbar a:hover {
-   background-color: #000;
- }
- 
- .active {
-   background-color: #4CAF50;
- }
- 
- .about-section {
-   padding: 50px;
-   text-align: center;
-   background-color: #474e5d;
-   color: white;
- }
- 
- @media screen and (max-width: 500px) {
-   .navbar a {
-	 float: none;
-	 display: block;
-   }
- }
- 
- table {
-   border-collapse: collapse;
-   border-spacing: 0;
-   width: 100%;
-   border: 1px solid #ddd;
- }
- 
- th, td {
-   text-align: left;
-   padding: 16px;
- }
- 
- tr:nth-child(even) {
-   background-color: #f2f2f2;
- }
- 
- </style>
  <body>
  
  <div class="navbar">
