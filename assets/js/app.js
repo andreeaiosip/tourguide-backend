@@ -48,44 +48,8 @@ ctx.textAlign = "center";
 ctx.fillText("Make your stay a wonderful stay at Brasov!", canvas.width / 2, canvas.height / 2);
 
 
-// Slider range  in the form
-// Code taken from https://www.w3schools.com/howto/howto_js_rangeslider.asp
-var slider = document.getElementById("myRange");
-var output = document.getElementById("mySlider");
-output.innerHTML = slider.value;
-
-slider.oninput = function() {
-    output.innerHTML = this.value;
-}
 
 
-// Slider range budget on contact page
-
-var slider = document.getElementById("myRange");
-var output = document.getElementById("mySlider");
-output.innerHTML = slider.value;
-
-slider.oninput = function() {
-    output.innerHTML = this.value;
-}
-
-// Geolocation
-
-var x = document.getElementById("myLocation");
-
-var position = null;
-
-function getLocation() {
-    if (navigator.geolocation && !position) {
-        navigator.geolocation.watchPosition(function(currentPosition) {
-            position = currentPosition;
-        }, function(error) {
-            alert(error)
-        });
-    }
-};
-
-getLocation();
 
 
 // First name field must be filled validation
