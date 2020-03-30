@@ -1,9 +1,9 @@
 <?php
-$fname = $_REQUEST["fname"];
-$lname = $_REQUEST["lname"];
-$email = $_REQUEST["email"];
+$fname = $_REQUEST["customerName"];
+$lname = $_REQUEST["customerSurname"];
+$email = $_REQUEST["customerEmail"];
 $Pax = $_REQUEST["Pax"];
-$date = $_REQUEST["date"];
+$date = $_REQUEST["dateTour"];
 $tours = $_REQUEST["mytourselected"];
 $saveme = $_REQUEST["saveme"];
 
@@ -17,12 +17,12 @@ include('myDBConnection.php');
  <html>
  <meta name="viewport" content="width=device-width, initial-scale=1">
  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
- <link rel="stylesheet" href="./assets/css/style.css">
+ <link rel="stylesheet" href="../assets/css/style.css">
     
  
  <body>
  
- <div class="navbar">
+
  <?php
  
  include('menuTabs.php');
@@ -157,9 +157,9 @@ include('myDBConnection.php');
  
  if ($procedure=="addnewtour"){
  
- $Tname 		= $_REQUEST["Tname"] ;
- $Desc  		= $_REQUEST["Desc"] ;
- $price 		= $_REQUEST["price"] ;
+ $Tname 		= $_REQUEST["TourName"] ;
+ $Desc  		= $_REQUEST["Description"] ;
+ $price 		= $_REQUEST["Price"] ;
  $wasiposted = $_REQUEST["wasiposted"] ;
  
  $myerror = "Please complete the below!";
@@ -182,11 +182,11 @@ include('myDBConnection.php');
  echo '
    <form action="home.php?procedure='.$procedure.'" method="post">
    <label for="fname">Tour name:</label><br>
-   <input type="text" id="Tname" name="Tname" required value="'.$Tname.'"><br>
+   <input type="text" id="Tname" name="TourName" required value="'.$Tname.'"><br>
    <label for="lname">Tour Description:</label><br>
-   <input type="text" id="Desc" size="150" name="Desc" required value="'.$Desc.'"><br><br>
+   <input type="text" id="Desc" size="150" name="Description" required value="'.$Desc.'"><br><br>
    <label for="lname">Tour Price:</label><br>
-   <input type="number" id="price" name="price" required value="'.$price.'"><br><br>
+   <input type="number" id="price" name="Price" required value="'.$price.'"><br><br>
    <input type="hidden" name="wasiposted" value="formposted">
    <input type="submit" value="Submit">
    </form>';
