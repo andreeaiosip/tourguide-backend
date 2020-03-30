@@ -1,3 +1,74 @@
+<?php
+
+include('myDBConnection.php');
+include('deleteFunction.php');
+include('commonFunctions.php');
+
+//$bookguid= $_REQUEST["guid"];
+$fname   = $_REQUEST["fname"];
+$lname   = $_REQUEST["lname"];
+$email   = $_REQUEST["email"];
+$Pax     = $_REQUEST["Pax"];
+$date    = $_REQUEST["date"];
+$tours   = $_REQUEST["mytourselected"];
+$saveme  = $_REQUEST["saveme"];
+$Andreea = $_REQUEST["Andreea"];
+
+
+$tours      = $_REQUEST["tours"];
+$tourguide  = $_REQUEST["tourguide"];
+$saveme     = $_REQUEST["saveme"];
+
+
+// field of db
+if ($tours=="NONE"){
+	echo "Please select a tour to attend!";
+	$saveme = "";
+   }
+   
+if ($saveme=="yesplease"){
+	$bookid = "BkRef:".generateRandomString(4);
+    $myNewDBguid = guid();
+    //$bookguid = "GuidREF-".rand(20, 45);
+    //https://www.php.net/manual/en/function.com-create-guid.php
+    //INSERT INTO bookings (bookid,numOfPeoples) VALUES ('4','3');
+    
+    //$myBookingSql = "SELECT *,bookings.uid AS bookingID_fromDB
+    //		FROM bookings
+    //  	LEFT JOIN tours ON tours.guid = bookings.toursguid 
+	//	 	LEFT JOIN tourguide ON tourguide.guid = bookings.tourguideguid";
+    
+	$myBookingSql = "INSERT INTO bookings (guid,bookid,numOfPeoples,dateoftour,timeoftour,toursguid,
+												tourguideguid,customerSurname,customername,
+												customeremail) VALUES (".
+         							        "'".$myNewDBguid."',".
+                                            "'".$bookid."',".
+											"'".$people."',".
+											"'".$date."',".
+											"'".$time."',".
+											"'".$tours."',".
+        								    "'".$tourguide."',".
+											"'".addslashes($sname)."',".
+											"'".addslashes($fname)."',".
+											"'".addslashes($email)."')";
+
+	 $laurenresult=mysqli_query($dbConn,$myBookingSql);
+	 if ($laurenresult) {
+	    echo "New record created successfully<hr>";
+         echo '<meta http-equiv="refresh" content="0;url=../thankyou.php?myBookid='.$bookid.'&myName='.$fname.'">';
+	 } else {
+	    echo "Error: " . $myBookingSql . " <hr> " . mysqli_error($dbConn);
+         die;
+	 }
+	
+   
+   }
+ 
+
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
    <head>
@@ -41,29 +112,46 @@
          <h2> BOOK A TOUR WITH US </h2>
          <div class="container container-form">
             <!-- Helpful code found here: https://www.w3schools.com/html/html_forms.asp -->
-            <form name="myForm" action="/action_page.php" onsubmit="return validateForm()" method="post">
+            <form name="myForm" action="tourBooking.php" onsubmit="return validateForm()" method="post">
                <label for="fname">First Name</label>
                <input type="text" name="fname" id="firstname" autofocus required placeholder="Your first name..">
                <label for="lname">Last Name</label>
-               <input type="text" id="lname" name="lastname" required placeholder="Your last name..">
+               <input type="text" name="lastname" id="lname" required placeholder="Your last name..">
                <div>
                   <label for="telephone">Phone number</label>
-                  <input type="tel" required placeholder="Your phone number">
+                  <input type="tel" name="tel" required placeholder="Your phone number">
                </div>
                <div>
                   <label for="email">Email address</label>
-                  <input type="email" id="email" required placeholder="Your email address">
+                  <input type="email"  name="email" id="email" required placeholder="Your email address">
                </div>
                <br>
-              
+               <div>
+
+
                <br>
-               <label for="query">Query type:</label>
+               <label for="query">Select a tour:</label>
                <select id="query">
-                  <option value="text">Walking Tours</option>
-                  <option value="text">Acommodation</option>
-                  <option value="text">Events</option>
-                  <option value="text">Other</option>
-               </select>
+
+<?php
+
+
+
+
+$query = "SELECT * FROM tours";
+$result = mysqli_query($dbConn, $query);
+while($Arrayline = mysqli_fetch_assoc($result)) {
+
+   echo "<option value=".$Arrayline["guid"].">".$Arrayline["TourName"]."</option>";
+
+}
+
+
+?>
+   </select>
+
+                  
+            
               
                <br>
                <div class="people">
@@ -80,6 +168,9 @@
                   <br>
                   <br>
                  
+                  <input type="hidden" name="saveme" value="yesplease">
+                  
+
                    <input type="submit" onClick="testEmpty()" value="Submit">
             </form>
             </div>

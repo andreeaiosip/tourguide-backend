@@ -85,7 +85,7 @@ include('myDBConnection.php');
 	   <label for="lname">Tour Price:</label><br>
 	   <input type="number" id="price" name="price" required value="'.$price.'"><br><br>
 	   <input type="hidden" name="fromDB" value="no">
-	   <input type="hidden" name="whoistheoldfart" value="miro">
+	   <input type="hidden" name="who" value="miro">
 	   <input type="submit" value="Submit">
 	   </form>';
  
@@ -110,17 +110,7 @@ include('myDBConnection.php');
   }
  
  
- if ($procedure=="home"){
- echo '
-	 <div class="about-section">
-	   <h1>Global Tours Payroll System</h1>
-	   <p>System to Manage payroll payments for tour guides</p>
-	   <p>Integrated with our cities website</p>
-	 </div>
- ';
- 
- 
-	 }
+	 
  
  if ($procedure=="tours"){
  
@@ -163,39 +153,6 @@ include('myDBConnection.php');
 	 }
  
  
- if ($procedure=="bookings"){
- 
- 
- echo '<table>
-   <tr>
-	 <th>Book Ref</th>
-	 <th>Customer Name & Surname</th>
-	 <th>Tour Booked</th>
-	 <th>No of People</th>
-   </tr>';
- 
-	 $query = "SELECT *
-				 FROM bookings
-				 LEFT JOIN tours ON tours.uid = bookings.touruid ";
-	 $result = mysqli_query($dbConn, $query);
-	 while($Arrayline = mysqli_fetch_assoc($result)) {
- 
-		  echo '<tr>
-			 <td>'.$Arrayline['bookref'].'</td>
-			 <td>'.$Arrayline['customerName']." ".$Arrayline['customerName'].'</td>
-			 <td>'.$Arrayline['Description'].'</td>
-			 <td>'.$Arrayline['Pax'].'</td>
-		   </tr>';
- 
- 
- 
-	 }
- 
-   echo '</table>';
- 
- 
- 
-	 }
  
  
  if ($procedure=="addnewtour"){
