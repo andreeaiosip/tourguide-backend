@@ -137,76 +137,6 @@ Footer
 HOME Page 
 =============================== 
 */
-/* SLIDER */
-
-
-.indexSlider {
-  position: relative;
-}
-
-.slider-inner {
-  position: relative;
-  overflow: hidden;
-  width: 100%
-}
-
-.slider-open:checked+.slider-item {
-  position: static;
-  opacity: 100;
-}
-
-.slider-item {
-  position: absolute;
-  opacity: 0;
-  -webkit-transition: opacity 0.6s ease-out;
-  transition: opacity 0.6s ease-out;
-}
-
-.slider-item img {
-  display: block;
-  height: auto;
-  width: 100%
-}
-
-.slider-control {
-  background: rgba(0, 0, 0, 0.4);
-  border-radius: 20%;
-  color: #fff;
-  cursor: pointer;
-  display: none;
-  font-size: 60px;
-  height: 4%;
-  line-height: 50%;
-  position: absolute;
-  top: 50%;
-  -webkit-transform: translate(0, -50%);
-  cursor: pointer;
-  -ms-transform: translate(0, -50%);
-  transform: translate(0, -50%);
-  text-align: center;
-  width: 3%;
-  z-index: 10
-}
-
-.slider-control.prev {
-  left: 3%;
-}
-
-.slider-control.next {
-  right: 3%;
-}
-
-.slider-control:hover {
-  background: rgba(0, 0, 0, 0.8);
-  color: #aaaaaa;
-}
-
-#slide-1:checked~.control-1,
-#slide-2:checked~.control-2,
-#slide-3:checked~.control-3 {
-  display: block;
-}
-
 
 
 .heading-section {
@@ -255,26 +185,7 @@ HOME Page
 	top:1px;
 }
 
-/* 
-=============================== 
-HISTORY Page
-=============================== 
-*/
 
-
-
-
-ul {
-   
-    overflow: hidden;
-    overflow-y:auto;
-    max-height: 369px;
-    margin:0;
-}
-
-li {
-    margin-bottom: 10px;
-}
 
 
 /*

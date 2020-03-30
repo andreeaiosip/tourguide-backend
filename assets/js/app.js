@@ -5,9 +5,7 @@ navBarToggle.addEventListener("click", function() {
     mainNav.classList.toggle("active");
 });
 
-function myFunction(x) {
-    x.classList.toggle("change");
-  }
+
 // Canvas 
 
 // Helpful code found at this video https://www.youtube.com/watch?v=FWB7SF9TM-A
