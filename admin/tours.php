@@ -34,7 +34,7 @@ include('myDBConnection.php');
  <?php
  
  
- echo $procedure;
+ /*echo $procedure;*/
  
  if ($procedure=="deleteme"){
  
@@ -178,12 +178,12 @@ include('myDBConnection.php');
  
  echo '
    <form action="home.php?procedure='.$procedure.'" method="post">
-   <label for="fname">Tour name:</label><br>
+   <label for="TourName">Tour name:</label><br>
    <input type="text" id="Tname" name="TourName" required value="'.$Tname.'"><br>
-   <label for="lname">Tour Description:</label><br>
+   <label for="Description">Tour Description:</label><br>
    <input type="text" id="Desc" size="150" name="Description" required value="'.$Desc.'"><br><br>
-   <label for="lname">Tour Price:</label><br>
-   <input type="number" id="price" name="Price" required value="'.$price.'"><br><br>
+   <label for="Price">Tour Price:</label><br>
+   <input type="text" id="Price" name="Price" required value="'.$price.'"><br><br>
    <input type="hidden" name="wasiposted" value="formposted">
    <input type="submit" value="Submit">
    </form>';
