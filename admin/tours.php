@@ -157,7 +157,7 @@ include('myDBConnection.php');
  $Tname 		= $_REQUEST["TourName"] ;
  $Desc  		= $_REQUEST["Description"] ;
  $price 		= $_REQUEST["Price"] ;
- $wasiposted = $_REQUEST["wasiposted"] ;
+ $wasiposted 	= $_REQUEST["wasiposted"] ;
  
  $myerror = "Please complete the below!";
  

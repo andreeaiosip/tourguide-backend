@@ -140,7 +140,7 @@ if ($myerror=="" && $wasiposted <> ""){
    // debugging info
    //echo "Fourth<HR>";
 
-    $myNewGuid = guid();
+    $myNewGuid = uid();
 
     // added the `` around value and im worried it a reserved word in SQL, i dont take chances with such words.rather
     // safe then a SQL error

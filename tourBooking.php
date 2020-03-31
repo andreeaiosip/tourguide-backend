@@ -5,18 +5,18 @@ include('deleteFunction.php');
 include('commonFunctions.php');
 
 //$bookguid= $_REQUEST["guid"];
-$fname   = $_REQUEST["fname"];
-$lname   = $_REQUEST["lname"];
-$email   = $_REQUEST["email"];
+$fname   = $_REQUEST["customerName"];
+$lname   = $_REQUEST["customerSurname"];
+$email   = $_REQUEST["customerEmail"];
 $Pax     = $_REQUEST["Pax"];
-$date    = $_REQUEST["date"];
-$tours   = $_REQUEST["mytourselected"];
+$date    = $_REQUEST["dateTour"];
+$tours   = $_REQUEST["TourName"];
 $saveme  = $_REQUEST["saveme"];
-$Andreea = $_REQUEST["Andreea"];
+
 
 
 $tours      = $_REQUEST["tours"];
-$tourguide  = $_REQUEST["tourguide"];
+$tourguide  = $_REQUEST["tourGuide"];
 $saveme     = $_REQUEST["saveme"];
 
 
@@ -28,7 +28,7 @@ if ($tours=="NONE"){
    
 if ($saveme=="yesplease"){
 	$bookid = "BkRef:".generateRandomString(4);
-    $myNewDBguid = guid();
+    $myNewDBuid = uid();
     //$bookguid = "GuidREF-".rand(20, 45);
     //https://www.php.net/manual/en/function.com-create-guid.php
     //INSERT INTO bookings (bookid,numOfPeoples) VALUES ('4','3');
@@ -38,10 +38,10 @@ if ($saveme=="yesplease"){
     //  	LEFT JOIN tours ON tours.guid = bookings.toursguid 
 	//	 	LEFT JOIN tourguide ON tourguide.guid = bookings.tourguideguid";
     
-	$myBookingSql = "INSERT INTO bookings (guid,bookid,numOfPeoples,dateoftour,timeoftour,toursguid,
-												tourguideguid,customerSurname,customername,
-												customeremail) VALUES (".
-         							        "'".$myNewDBguid."',".
+	$myBookingSql = "INSERT INTO bookings (uid,bookid,Pax,dateTour,time,toursUid,
+												tourGuideUid,customerName,customerSurname,
+												customerEmail) VALUES (".
+         							        "'".$myNewDBuid."',".
                                             "'".$bookid."',".
 											"'".$people."',".
 											"'".$date."',".
@@ -52,8 +52,8 @@ if ($saveme=="yesplease"){
 											"'".addslashes($fname)."',".
 											"'".addslashes($email)."')";
 
-	 $laurenresult=mysqli_query($dbConn,$myBookingSql);
-	 if ($laurenresult) {
+	 $myResult=mysqli_query($dbConn,$myBookingSql);
+	 if ($myResult) {
 	    echo "New record created successfully<hr>";
          echo '<meta http-equiv="refresh" content="0;url=../thankyou.php?myBookid='.$bookid.'&myName='.$fname.'">';
 	 } else {
@@ -99,7 +99,7 @@ if ($saveme=="yesplease"){
             </li>
             
             <li>
-               <a href="events.html" class="nav-links" target="_blank"><i class="fas fa-bus" style='margin-right:5px'></i>TOURS</a>
+               <a href="tourBooking.php" class="nav-links" target="_blank"><i class="fas fa-bus" style='margin-right:5px'></i>TOURS</a>
             </li>
           
             <li>
@@ -142,7 +142,7 @@ $query = "SELECT * FROM tours";
 $result = mysqli_query($dbConn, $query);
 while($Arrayline = mysqli_fetch_assoc($result)) {
 
-   echo "<option value=".$Arrayline["guid"].">".$Arrayline["TourName"]."</option>";
+   echo "<option value=".$Arrayline["uid"].">".$Arrayline["TourName"]."</option>";
 
 }
 
