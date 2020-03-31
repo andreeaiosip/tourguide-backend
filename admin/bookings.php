@@ -46,10 +46,15 @@ if ($procedure=="bookings"){
 
 echo '<table>
   <tr>
-    <th>Book Ref</th>
+	<th>Book Ref</th>
+	<th>Tour Date</th>
     <th>Customer Name & Surname</th>
     <th>Tour Name</th>
-    <th>Pax</th>
+	<th>Pax</th>
+	<th>Assigned Guide</th>
+	<th>Done</th>
+	<th>Action</th>
+	
   </tr>';
 
 	$query = "SELECT *
@@ -59,10 +64,14 @@ echo '<table>
 	while($Arrayline = mysqli_fetch_assoc($result)) {
 
 		 echo '<tr>
-		    <td>'.$Arrayline['bookref'].'</td>
+			<td>'.$Arrayline['bookref'].'</td>
+			<td>'.$Arrayline['dateTour'].'</td>
 		    <td>'.$Arrayline['customerName']." ".$Arrayline['customerSurname'].'</td>
 		    <td>'.$Arrayline['TourName'].'</td>
-		    <td>'.$Arrayline['Pax'].'</td>
+			<td>'.$Arrayline['Pax'].'</td>
+			<td>'.$Arrayline['guideName'].'</td>
+			<td>'.$Arrayline[''].'</td>
+			<td>'.$Arrayline[''].'</td>
 		  </tr>';
 
 
