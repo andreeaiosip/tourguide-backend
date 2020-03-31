@@ -8,12 +8,5 @@ function Delete_A_record($dbConn,$Tablenamed,$recordID){
 	}
 
 
-/*function callmymom(){
 
-	echo "Hello Mom, how are you?";
-	}
-
-,$PageToReturnTo
-
-*/
 ?>
