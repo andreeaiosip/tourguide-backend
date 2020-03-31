@@ -47,22 +47,22 @@ if ($procedure=="bookings"){
 echo '<table>
   <tr>
     <th>Book Ref</th>
-    <th>Customer name & Surname</th>
-    <th>Tour booked</th>
-    <th>No of People</th>
+    <th>Customer Name & Surname</th>
+    <th>Tour Name</th>
+    <th>Pax</th>
   </tr>';
 
 	$query = "SELECT *
 				FROM bookings
-				LEFT JOIN tours ON tours.uid = bookings.touruid ";
+				LEFT JOIN tours ON tours.uid = bookings.tourUid ";
 	$result = mysqli_query($dbConn, $query);
 	while($Arrayline = mysqli_fetch_assoc($result)) {
 
 		 echo '<tr>
 		    <td>'.$Arrayline['bookref'].'</td>
-		    <td>'.$Arrayline['customerFName']." ".$Arrayline['customerSName'].'</td>
-		    <td>'.$Arrayline['description'].'</td>
-		    <td>'.$Arrayline['people'].'</td>
+		    <td>'.$Arrayline['customerName']." ".$Arrayline['customerSurname'].'</td>
+		    <td>'.$Arrayline['TourName'].'</td>
+		    <td>'.$Arrayline['Pax'].'</td>
 		  </tr>';
 
 

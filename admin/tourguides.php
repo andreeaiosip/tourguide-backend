@@ -8,6 +8,8 @@ $active 	= $_REQUEST["active"];
 
 $procedure = $_REQUEST["procedure"] ;
 include('myDBConnection.php');
+include('commonFunctions.php');
+
 
 
  ?>
@@ -30,6 +32,44 @@ include('myDBConnection.php');
  
  
  echo $procedure;
+
+ if ($procedure=="tourguides"){
+
+	echo '<table>
+	  <tr>
+		<th>Tour Guide ID</th>
+		<th>Guide Name</th>
+		<th>Tour Name</th>
+		<th>Tour Price</th>
+		<th>Action</th>
+	  </tr>';
+	
+		$query = "SELECT * FROM tourGuides";
+		$result = mysqli_query($dbConn, $query);
+		while($Arrayline = mysqli_fetch_assoc($result)) {
+			 echo '<tr>';
+			   echo '<td>';
+			   echo $Arrayline['uid'];
+			   echo '</td>';
+			   echo '<td>'.strtoupper($Arrayline['guideName']).'</td>';
+			   echo '<td>'.ucwords($Arrayline['TourName']).'</td>';
+			   echo '<td>'.$Arrayline['Price'].'</td>';
+			   echo '<td>';
+			   // the guideuid is for PHP
+			   // the uid is from the record set and im getting that from the DB!
+			   echo '<a href="home.php?procedure=guides_deleteme&guideuid='.$Arrayline['uid'].'" title="This will delete me"><i class="fa fa-trash fa fa-2x" aria-hidden="true"></i></a>';
+			   echo '<a href="home.php?procedure=guides_editme&guideuid='.$Arrayline['uid'].'" title="This will Edit me"><i class="fa fa-pencil-square fa-2x" aria-hidden="true"></i></a>';
+			   echo '</td>';
+			 echo '</tr>';
+		}
+	
+	  echo '</table>';
+	
+	//  echo '<button class="btn success">Add Guide</button>'; / started with this...
+	  echo '<button class="btn success"><a href="home.php?procedure=addnewguide"><i class="fa fa-user-circle-o" aria-hidden="true"></i> Add Guide</a></button>';
+	
+	
+	 }
  
  if ($procedure=="deleteme"){
  
@@ -70,7 +110,7 @@ include('myDBConnection.php');
 
  if ($myerror=="" && $fromDB <> ""){
  
-	  $query = "UPDATE tourGuide SET guideName='".addslashes($fName)."',guideSurname='".addslashes($lName)."'commLevel='".addslashes($commLevel)."',active='".$active."' WHERE uid='".$tuid."'";
+	  $query = "UPDATE tourGuide SET guideName='".addslashes($fName)."',guideSurname='".addslashes($lName)."'commLevel='".addslashes($commLevel)."',active='".$active."' WHERE uid='".$uid."'";
 	 $result = mysqli_query($dbConn, $query);
  
 	 echo "Record updated successfully...";
