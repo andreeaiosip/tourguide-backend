@@ -1,11 +1,11 @@
 <?php
-$fname = $_REQUEST["customerName"];
-$lname = $_REQUEST["customerSurname"];
-$email = $_REQUEST["customerEmail"];
-$Pax = $_REQUEST["Pax"];
-$date = $_REQUEST["dateTour"];
-$tours = $_REQUEST["mytourselected"];
-$saveme = $_REQUEST["saveme"];
+$fname 	 = $_REQUEST["customerName"];
+$lname	 = $_REQUEST["customerSurname"];
+$email	 = $_REQUEST["customerEmail"];
+$Pax	 = $_REQUEST["Pax"];
+$date 	 = $_REQUEST["dateTour"];
+$tours   = $_REQUEST["mytourselected"];
+$saveme  = $_REQUEST["saveme"];
 
 
 $procedure = $_REQUEST["procedure"] ;
@@ -38,7 +38,7 @@ include('myDBConnection.php');
  
  if ($procedure=="deleteme"){
  
-	 $tuid 	  = $_REQUEST["tuid"] ;
+	 $tuid 	  = $_REQUEST["uid"] ;
  
 	 $query    = "DELETE FROM tours WHERE uid='".$tuid."'";
 	 $result   = mysqli_query($dbConn, $query);
@@ -50,7 +50,7 @@ include('myDBConnection.php');
  
  if ($procedure=="editme"){
  
-	 $tuid 	  	= $_REQUEST["tuid"] ;
+	 $tuid 	  	= $_REQUEST["uid"] ;
 	 $fromDB 	= $_REQUEST["fromDB"] ;
 	 $myerror    = ""; // use this for any validation we need!
  
@@ -66,9 +66,9 @@ include('myDBConnection.php');
  
 		 }else{
  
-			 $Tname = $_REQUEST["Tname"];
-			 $Desc  = $_REQUEST["Desc"];
-			 $price = $_REQUEST["price"];
+			$Tname = $Arrayline["TourName"];
+			$Desc  = $Arrayline["Description"];
+			$price = $Arrayline["Price"];
 			 }
  
  
@@ -77,13 +77,13 @@ include('myDBConnection.php');
  
  
  echo '
-	   <form action="home.php?procedure='.$procedure.'&tuid='.$tuid.'" method="post">
-	   <label for="fname">Tour name:</label><br>
-	   <input type="text" id="Tname" name="Tname" required value="'.$Tname.'"><br>
-	   <label for="lname">Tour Description:</label><br>
-	   <input type="text" id="Desc" size="150" name="Desc" required value="'.$Desc.'"><br><br>
-	   <label for="lname">Tour Price:</label><br>
-	   <input type="number" id="price" name="price" required value="'.$price.'"><br><br>
+	   <form action="home.php?procedure='.$procedure.'&uid='.$tuid.'" method="post">
+	   <label for="TourName">Tour name:</label><br>
+	   <input type="text" id="Tname" name="TourName" required value="'.$Tname.'"><br>
+	   <label for="tourDescription">Tour Description:</label><br>
+	   <input type="text" id="Desc" size="150" name="Description" required value="'.$Desc.'"><br><br>
+	   <label for="tourPrice">Tour Price:</label><br>
+	   <input type="number" id="price" name="Price" required value="'.$price.'"><br><br>
 	   <input type="hidden" name="fromDB" value="no">
 	   <input type="hidden" name="who" value="miro">
 	   <input type="submit" value="Submit">
@@ -93,20 +93,16 @@ include('myDBConnection.php');
  
  if ($myerror=="" && $fromDB <> ""){
  
-	  $query = "UPDATE tours SET name='".addslashes($Tname)."',description='".addslashes($Desc)."',price='".$price."' WHERE uid='".$tuid."'";
+	$query   = "UPDATE tours SET TourName='".addslashes($Tname)."',Description='".addslashes($Desc)."',Price='".$price."' WHERE uid='".$tuid."'";
 	 $result = mysqli_query($dbConn, $query);
  
 	 echo "Record updated successfully...";
  
-	 echo '<meta http-equiv="refresh" content="0;url=home.php?procedure=tours" />';
+	 echo '<meta http-equiv="refresh" content="0;url=tours.php?procedure=tours" />';
  
 	 }
  
- 
- 
- 
- 
- 
+
   }
  
  
@@ -114,7 +110,8 @@ include('myDBConnection.php');
  
  if ($procedure=="tours"){
  
- echo '<table>
+ echo '
+ <table>
    <tr>
 	 <th>Tour ID</th>
 	 <th>Tour Name</th>
@@ -194,7 +191,7 @@ include('myDBConnection.php');
  
  if ($myerror=="" && $wasiposted <> ""){
  
-	  $query = "INSERT INTO tours (TourName,Description,Price) VALUES (".
+	  $query = "INSERT INTO tours (TourName, Description, Price) VALUES (".
 				 "'".$Tname."',".
 				 "'".$Desc."',".
 				 "'".$price."')";
@@ -208,24 +205,11 @@ include('myDBConnection.php');
  
 	 }
  
- 
- 
- 
- 
- 
- 
- 
- 
   }
- 
- 
- 
- 
+
  ?>
  
- 
- 
- 
+
  </body>
  
  
