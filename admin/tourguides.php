@@ -44,7 +44,7 @@ include('commonFunctions.php');
 		<th>Action</th>
 	  </tr>';
 	
-		$query = "SELECT * FROM tourGuides";
+		$query = "SELECT * FROM tourGuide";
 		$result = mysqli_query($dbConn, $query);
 		while($Arrayline = mysqli_fetch_assoc($result)) {
 			 echo '<tr>';
@@ -81,6 +81,13 @@ include('commonFunctions.php');
  
 	 }
  
+	/* if ($procedure=="guide_deleteme"){
+
+		$guideuid = $_REQUEST["guideUid"];
+		// connecttion, tourgide table, the Record i want to remove, which page after i have deleted
+		Delete_A_record($dbConn,"tourguide",$guideUid,"guides");
+	
+		}*/
  
  if ($procedure=="editme"){
  
