@@ -57,9 +57,10 @@ echo '<table>
 	
   </tr>';
 
-	$query = "SELECT *
+	$query = "SELECT *,bookings.guid AS bguid
 				FROM bookings
-				LEFT JOIN tours ON tours.uid = bookings.tourUid ";
+				LEFT JOIN tours ON tours.uid = bookings.tourUid 
+				LEFT JOIN tourGuide ON tourGuide.uid =  bookings.tourGuideUid";
 	$result = mysqli_query($dbConn, $query);
 	while($Arrayline = mysqli_fetch_assoc($result)) {
 
@@ -69,10 +70,20 @@ echo '<table>
 		    <td>'.$Arrayline['customerName']." ".$Arrayline['customerSurname'].'</td>
 		    <td>'.$Arrayline['TourName'].'</td>
 			<td>'.$Arrayline['Pax'].'</td>
-			<td>'.$Arrayline['guideName'].'</td>
-			<td>'.$Arrayline[''].'</td>
-			<td>'.$Arrayline[''].'</td>
-		  </tr>';
+			<td>'.$Arrayline['guideName'].'</td>';
+			if ($Arrayline['completed']=="0"){
+				echo '<td> X </td>';
+			}else {
+				echo '<td> (; </td>';
+				}
+			
+			
+
+			echo '<td>';
+		    echo '<a href="bookings.php?procedure=assignbooking&bguid='.$Arrayline['buid'].'" title="Assign to a guide!!"><i class="fa fa-trash fa fa-2x" aria-hidden="true"></i></a>';
+		    echo '<a href="bookings.php?procedure=isComplete&bguid='.$Arrayline['buid'].'" title="whatever u want to show"><i class="fa fa-pencil-square fa-2x" aria-hidden="true"></i></a>';
+		    echo '</td>';
+		  echo '</tr>';
 
 
 
@@ -85,11 +96,30 @@ echo '<table>
 	}
  
 
+	if ($procedure=="isComplete"){
+
+
+	$buid = $_REQUEST["bguid"];
+
+	echo $buid;
+
+
+
+	}
+	
+
+
+
+
 if (isset($_REQUEST["showSnack"])){
 	echo '<div id="snackbar">'.$_REQUEST["showSnack"].'</div>';
 	}
 
+
+	//include('assignBooking.php');
+
 ?>
+
 
 
 </body>

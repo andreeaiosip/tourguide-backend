@@ -1,7 +1,7 @@
 <?php
 
-function uid(){
-    if (function_exists('com_create_uid')){
+function guid(){
+    if (function_exists('com_create_guid')){
         return com_create_guid();
     }else{
         mt_srand((double)microtime()*10000);//optional for php 4.2.0 and up.
