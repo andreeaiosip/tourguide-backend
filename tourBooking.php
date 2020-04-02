@@ -1,10 +1,10 @@
 <?php
 
 include('admin/myDBConnection.php');
-include('admin/deleteFunction.php');
-include('admin/commonFunctions.php');
+//include('admin/deleteFunction.php');
+//include('admin/commonFunctions.php');
 
-//$bookguid= $_REQUEST["guid"];
+$bookguid= $_REQUEST["guid"];
 $fname   = $_REQUEST["customerName"];
 $lname   = $_REQUEST["customerSurname"];
 $email   = $_REQUEST["customerEmail"];
@@ -28,8 +28,8 @@ if ($tours=="NONE"){
    
 if ($saveme=="yesplease"){
 	$bookid = "BkRef:".generateRandomString(4);
-    $myNewDBuid = guid();
-    //$bookguid = "GuidREF-".rand(20, 45);
+    //$myNewDBguid = guid();
+    $bookguid = "GuidREF-".rand(20, 45);
     //https://www.php.net/manual/en/function.com-create-guid.php
     //INSERT INTO bookings (bookid,numOfPeoples) VALUES ('4','3');
     
@@ -38,15 +38,15 @@ if ($saveme=="yesplease"){
     //  	LEFT JOIN tours ON tours.guid = bookings.toursguid 
 	//	 	LEFT JOIN tourguide ON tourguide.guid = bookings.tourguideguid";
     
-	$myBookingSql = "INSERT INTO bookings (uid,bookref,tourUid,Pax,dateTour,
+	$myBookingSql = "INSERT INTO bookings (guid,bookref,tourUid,Pax,dateTour,
 												tourGuideUid,customerName,customerSurname,
 												customerEmail) 
                                     VALUES (".
-         							   "'".$myNewDBuid."',".
+         							   "'".$bookguid."',".
                                  "'".$bookid."',".
+                                 "'".$tours."',".
 											"'".$Pax."',".
 											"'".$date."',".
-											"'".$tours."',".
         								   "'".$tourguide."',".
 											"'".addslashes($sname)."',".
 											"'".addslashes($fname)."',".
