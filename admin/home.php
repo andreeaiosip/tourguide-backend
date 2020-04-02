@@ -18,7 +18,7 @@ include('myDBConnection.php');
 include('menuTabs.php');
 
 
-echo $procedure;
+/*echo $procedure;*/
 
 
 if ($procedure=="home"){

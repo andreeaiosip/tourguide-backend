@@ -5,19 +5,14 @@ include('admin/myDBConnection.php');
 //include('admin/commonFunctions.php');
 
 $bookguid= $_REQUEST["guid"];
-$fname   = $_REQUEST["customerName"];
-$lname   = $_REQUEST["customerSurname"];
-$email   = $_REQUEST["customerEmail"];
+$fname   = $_REQUEST["fname"];
+$lname   = $_REQUEST["lname"];
+$email   = $_REQUEST["email"];
 $Pax     = $_REQUEST["Pax"];
-$date    = $_REQUEST["dateTour"];
-$tours   = $_REQUEST["TourName"];
+$date    = $_REQUEST["trip-start"];
+$tours   = $_REQUEST["query"];
 $saveme  = $_REQUEST["saveme"];
 
-
-
-$tours      = $_REQUEST["tours"];
-$tourguide  = $_REQUEST["tourGuide"];
-$saveme     = $_REQUEST["saveme"];
 
 
 // field of db
@@ -26,8 +21,8 @@ if ($tours=="NONE"){
 	$saveme = "";
    }
    
-if ($saveme=="yesplease"){
-	$bookid = "BkRef:".generateRandomString(4);
+ if ($saveme=="yesplease"){
+	$bookid = "BkRef:".rand(1000,9999);
     //$myNewDBguid = guid();
     $bookguid = "GuidREF-".rand(20, 45);
     //https://www.php.net/manual/en/function.com-create-guid.php
@@ -48,22 +43,21 @@ if ($saveme=="yesplease"){
 											"'".$Pax."',".
 											"'".$date."',".
         								   "'".$tourguide."',".
-											"'".addslashes($sname)."',".
 											"'".addslashes($fname)."',".
+											"'".addslashes($lname)."',".
 											"'".addslashes($email)."')";
-
-	 $myResult=mysqli_query($dbConn,$myBookingSql);
-	 if ($myResult) {
+   echo $myBookingSql;
+   $myResult=mysqli_query($dbConn,$myBookingSql);
+	if ($myResult) {
 	    echo "New record created successfully<hr>";
-         echo '<meta http-equiv="refresh" content="0;url=../thankyou.php?myBookid='.$bookid.'&myName='.$fname.'">';
+         //echo '<meta http-equiv="refresh" content="0;url=../thankyou.php?myBookid='.$bookid.'&myName='.$fname.'">';
 	 } else {
 	    echo "Error: " . $myBookingSql . " <hr> " . mysqli_error($dbConn);
          die;
 	 }
-	
-   
-   }
  
+}
+
 
 ?>
 
@@ -112,15 +106,11 @@ if ($saveme=="yesplease"){
          <h2> BOOK A TOUR WITH US </h2>
          <div class="container container-form">
             <!-- Helpful code found here: https://www.w3schools.com/html/html_forms.asp -->
-            <form name="myForm" action="tourBooking.php" onsubmit="return validateForm()" method="post">
+            <form name="myForm" action="tourBooking.php" onsubmit="return validateForm()">
                <label for="fname">First Name</label>
                <input type="text" name="fname" id="firstname" autofocus required placeholder="Your first name..">
                <label for="lname">Last Name</label>
-               <input type="text" name="lastname" id="lname" required placeholder="Your last name..">
-               <div>
-                  <label for="telephone">Phone number</label>
-                  <input type="tel" name="tel" required placeholder="Your phone number">
-               </div>
+               <input type="text" name="lname" id="lastname" required placeholder="Your last name..">
                <div>
                   <label for="email">Email address</label>
                   <input type="email"  name="email" id="email" required placeholder="Your email address">
@@ -129,7 +119,7 @@ if ($saveme=="yesplease"){
                <div>
                <br>
                <label for="query">Select a tour:</label>
-               <select id="query">
+               <select id="query" name="query">
 
 <?php
 
@@ -154,7 +144,7 @@ while($Arrayline = mysqli_fetch_assoc($result)) {
                <br>
                <div class="people">
                   <label for="people">Number of people:</label>
-                  <input type="number" min="1" step="1" required>
+                  <input type="number" name="Pax" min="1" step="1" required>
                </div>
                <br>
                <div class="people">
@@ -169,7 +159,7 @@ while($Arrayline = mysqli_fetch_assoc($result)) {
                   <input type="hidden" name="saveme" value="yesplease">
                   
 
-                   <input type="submit" onClick="testEmpty()" value="Submit">
+                   <input type="submit" onClick="testEmptyt()" value="Submit">
             </form>
             </div>
          </div>
