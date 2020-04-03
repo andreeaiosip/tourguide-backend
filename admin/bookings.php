@@ -91,7 +91,6 @@ echo '<table>
   echo '</table>';
 
 
-
 	}
  
 
@@ -109,16 +108,12 @@ echo '<table>
 	if ($procedure=="deleteBooking"){
 
 		$bookingGuid = $_REQUEST["bguid"];
-		// connecttion, tourgide table, the Record i want to remove, which page after i have deleted
-		
 
 			$query    = "DELETE FROM bookings WHERE guid='".$bookingGuid."'";
 			$result   = mysqli_query($dbConn, $query);
 			echo '<meta http-equiv="refresh" content="0;url=bookings.php?procedure=bookings&showSnack=Record Deleted! successfully..." />';
-		
 
 		}
-
 
 if (isset($_REQUEST["showSnack"])){
 	echo '<div id="snackbar">'.$_REQUEST["showSnack"].'</div>';
@@ -128,7 +123,6 @@ if (isset($_REQUEST["showSnack"])){
 	//include('assignBooking.php');
 
 ?>
-
 
 
 </body>
