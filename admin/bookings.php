@@ -8,6 +8,7 @@
 //Delete_A_record($dbConn,"tours",$tuid,"tours");
 
   include('commonFunctions.php');
+  include('deleteFunction.php');
 
 ?>
 <!DOCTYPE html>
@@ -80,12 +81,10 @@ echo '<table>
 			
 
 			echo '<td>';
-		    echo '<a href="bookings.php?procedure=assignbooking&bguid='.$Arrayline['buid'].'" title="Assign to a guide!!"><i class="fa fa-trash fa fa-2x" aria-hidden="true"></i></a>';
-		    echo '<a href="bookings.php?procedure=isComplete&bguid='.$Arrayline['buid'].'" title="whatever u want to show"><i class="fa fa-pencil-square fa-2x" aria-hidden="true"></i></a>';
+		    echo '<a href="bookings.php?procedure=deleteBooking&bguid='.$Arrayline['bguid'].'" title="Delete Booking!!"><i class="fa fa-trash fa fa-2x" aria-hidden="true"></i></a>';
+		    echo '<a href="bookings.php?procedure=isComplete&bguid='.$Arrayline['bguid'].'" title="Assign a tour guide"><i class="fa fa-pencil-square fa-2x" aria-hidden="true"></i></a>';
 		    echo '</td>';
 		  echo '</tr>';
-
-
 
 	}
 
@@ -99,16 +98,26 @@ echo '<table>
 	if ($procedure=="isComplete"){
 
 
-	$buid = $_REQUEST["bguid"];
+	$buid = $_REQUEST["buid"];
 
 	echo $buid;
 
 
 
 	}
-	
 
+	if ($procedure=="deleteBooking"){
 
+		$bookingGuid = $_REQUEST["bguid"];
+		// connecttion, tourgide table, the Record i want to remove, which page after i have deleted
+		
+
+			$query    = "DELETE FROM bookings WHERE guid='".$bookingGuid."'";
+			$result   = mysqli_query($dbConn, $query);
+			echo '<meta http-equiv="refresh" content="0;url=bookings.php?procedure=bookings&showSnack=Record Deleted! successfully..." />';
+		
+
+		}
 
 
 if (isset($_REQUEST["showSnack"])){
