@@ -140,6 +140,11 @@ include('myDBConnection.php');
  
  
 	 }
+	
+
+		$tourUid = $_REQUEST["tours.uid"];
+		Delete_A_record($dbConn,"tours",$tourUid);
+	
  
    echo '</table>';
  
@@ -201,7 +206,7 @@ include('myDBConnection.php');
  
 	 echo "Record added successfully...";
  
-	 echo '<meta http-equiv="refresh" content="0;url=home.php?procedure=tours" />';
+	 echo '<meta http-equiv="refresh" content="0;url=tours.php?procedure=tours" />';
  
 	 }
  
