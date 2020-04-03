@@ -122,7 +122,7 @@ include('commonFunctions.php');
  
 	 echo "Record updated successfully...";
  
-	 echo '<meta http-equiv="refresh" content="0;url=home.php?procedure=tourguides" />';
+	 echo '<meta http-equiv="refresh" content="0;url=tourguides.php?procedure=tourguides" />';
  
 	 }
  
