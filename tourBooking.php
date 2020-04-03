@@ -11,17 +11,17 @@ $email   = $_REQUEST["email"];
 $Pax     = $_REQUEST["Pax"];
 $date    = $_REQUEST["trip-start"];
 $tours   = $_REQUEST["query"];
-$saveme  = $_REQUEST["saveme"];
+$addrecord  = $_REQUEST["addrecord"]; //saveme
 
 
 
 // field of db
 if ($tours=="NONE"){
 	echo "Please select a tour to attend!";
-	$saveme = "";
+	$addrecord = "";
    }
    
- if ($saveme=="yesplease"){
+ if ($addrecord=="confirmRecord"){
 	$bookid = "BkRef:".rand(1000,9999);
     //$myNewDBguid = guid();
     $bookguid = "GuidREF-".rand(20, 45);
@@ -156,7 +156,7 @@ while($Arrayline = mysqli_fetch_assoc($result)) {
                   <br>
                   <br>
                  
-                  <input type="hidden" name="saveme" value="yesplease">
+                  <input type="hidden" name="addrecord" value="confirmRecord">
                   
 
                    <input type="submit" onClick="testEmptyt()" value="Submit">
