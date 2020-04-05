@@ -6,10 +6,17 @@ $Pax	 = $_REQUEST["Pax"];
 $date 	 = $_REQUEST["dateTour"];
 $tours   = $_REQUEST["mytourselected"];
 $saveme  = $_REQUEST["saveme"];
+$tuid 	 = $_REQUEST["tuid"];
+$fromDB  = $_REQUEST["fromDB"] ;
+$price 	 = $_REQUEST["price"];
+$Tname   = $_REQUEST["TourName"];
+$Desc	 = $_REQUEST["Description"];
+$fromDB  = $_REQUEST["fromDB"];
 
 
-$procedure = $_REQUEST["procedure"] ;
+$procedure = $_REQUEST["procedure"];
 include('myDBConnection.php');
+include('deleteFunction.php');
 
  ?>
  
@@ -34,65 +41,62 @@ include('myDBConnection.php');
  <?php
  
  
- /*echo $procedure;*/
+ /*echo $procedure;
  
- if ($procedure=="deleteme"){
+ if ($procedure=="deleteTour"){
  
 	 $tuid 	  = $_REQUEST["uid"] ;
  
 	 $query    = "DELETE FROM tours WHERE uid='".$tuid."'";
 	 $result   = mysqli_query($dbConn, $query);
  
-	 echo '<meta http-equiv="refresh" content="0;url=home.php?procedure=tours" />';
+	 echo '<meta http-equiv="refresh" content="0;url=tours.php?procedure=tours" />';
  
 	 }
+ */
+
+if ($procedure=="deleteTour"){
+
+	
+	Delete_A_record($dbConn,"tours",$tuid);
+
+	echo '<meta http-equiv="refresh" content="0;url=tours.php?procedure=tours&showSnack=Record Deleted! successfully..." />';
+
+	}
+
+ // EDIT TOUR------------------------
+
+ if ($procedure=="editTour"){
  
+	 //$tuid 	  	= $_REQUEST["tuid"] ;
+	
+	 //$myerror    = ""; // use this for any validation we need!
  
- if ($procedure=="editme"){
- 
-	 $tuid 	  	= $_REQUEST["uid"] ;
-	 $fromDB 	= $_REQUEST["fromDB"] ;
-	 $myerror    = ""; // use this for any validation we need!
- 
-	 if ($fromDB==""){
+	 /*if ($fromDB==""){
  
 		 $query = "SELECT * FROM tours WHERE uid='".$tuid."'";
 		 $result = mysqli_query($dbConn, $query);
-		 while($Arrayline = mysqli_fetch_assoc($result)) {
-			 $Tname = $Arrayline["TourName"];
-			 $Desc  = $Arrayline["Description"];
-			 $price = $Arrayline["Price"];
-			 }
- 
-		 }else{
- 
-			$Tname = $Arrayline["TourName"];
-			$Desc  = $Arrayline["Description"];
-			$price = $Arrayline["Price"];
-			 }
+	 }*/
  
  
- 
- 
- 
- 
+
  echo '
-	   <form action="home.php?procedure='.$procedure.'&uid='.$tuid.'" method="post">
+	   <form action="tours.php">
+	   <input type="hidden" name="procedure" value= '.$procedure.'>
+	   <input type="hidden" name="tuid" value='.$tuid.'>
 	   <label for="TourName">Tour name:</label><br>
 	   <input type="text" id="Tname" name="TourName" required value="'.$Tname.'"><br>
 	   <label for="tourDescription">Tour Description:</label><br>
 	   <input type="text" id="Desc" size="150" name="Description" required value="'.$Desc.'"><br><br>
 	   <label for="tourPrice">Tour Price:</label><br>
-	   <input type="number" id="price" name="Price" required value="'.$price.'"><br><br>
+	   <input type="number" id="price" name="price" required value="'.$price.'"><br><br>
 	   <input type="hidden" name="fromDB" value="no">
-	   <input type="hidden" name="who" value="miro">
 	   <input type="submit" value="Submit">
 	   </form>';
  
+ if ($fromDB <> ""){
  
- 
- if ($myerror=="" && $fromDB <> ""){
- 
+
 	$query   = "UPDATE tours SET TourName='".addslashes($Tname)."',Description='".addslashes($Desc)."',Price='".$price."' WHERE uid='".$tuid."'";
 	 $result = mysqli_query($dbConn, $query);
  
@@ -106,11 +110,11 @@ include('myDBConnection.php');
   }
  
  
-	 
+	/*SHOW TOURS ----------------------*/ 
  
  if ($procedure=="tours"){
  
- echo '
+ echo ' <form>
  <table>
    <tr>
 	 <th>Tour ID</th>
@@ -124,44 +128,32 @@ include('myDBConnection.php');
 	 $result = mysqli_query($dbConn, $query);
 	 while($Arrayline = mysqli_fetch_assoc($result)) {
  
-		 echo '<tr>';
+	 echo '<tr>';
 		  echo '<td>';
-			  echo $Arrayline['uid'];
+		  echo $Arrayline['uid'];
 		  echo '</td>';
-		  echo '<td>'.strtoupper($Arrayline['TourName']).'</td>';
-		  echo '<td>'.ucwords($Arrayline['Description']).'</td>';
-		  echo '<td>'.$Arrayline['Price'].'</td>';
+		  echo '<td name="TourName">'.strtoupper($Arrayline['TourName']).'</td>';
+		  echo '<td name="Description">'.ucwords($Arrayline['Description']).'</td>';
+		  echo '<td name="price">'.$Arrayline['Price'].'</td>';
 		  echo '<td>';
-		   echo '<a href="home.php?procedure=deleteme&tuid='.$Arrayline['uid'].'" title="This will delete me"><i class="fa fa-trash fa fa-2x" aria-hidden="true"></i></a>';
-		   echo '<a href="home.php?procedure=editme&tuid='.$Arrayline['uid'].'" title="This will Edit me"><i class="fa fa-pencil-square fa-2x" aria-hidden="true"></i></a>';
+		   echo '<a href="tours.php?procedure=deleteTour&tuid='.$Arrayline['uid'].'" title="This will delete me"><i class="fa fa-trash fa fa-2x" aria-hidden="true"></i></a>';
+		   echo '<a href="tours.php?procedure=editTour&tuid='.$Arrayline['uid'].'" title="This will Edit me"><i class="fa fa-pencil-square fa-2x" aria-hidden="true"></i></a>';
 		  echo '</td>';
 		 echo '</tr>';
- 
- 
- 
 	 }
-	
 
-		$tourUid = $_REQUEST["tours.uid"];
-		Delete_A_record($dbConn,"tours",$tourUid);
-	
- 
    echo '</table>';
- 
- 
-   echo '<a href="home.php?procedure=addnewtour"><i class="fa fa-fw fa-user"></i>Add tour</a>';
+   echo '</form>';
+   echo '<a href="tours.php?procedure=addnewtour"><i class="fa fa-fw fa-user"></i>Add tour</a>';
  
  
 	 }
  
- 
+// ADD NEW TOUR------------------
  
  
  if ($procedure=="addnewtour"){
  
- $Tname 		= $_REQUEST["TourName"] ;
- $Desc  		= $_REQUEST["Description"] ;
- $price 		= $_REQUEST["Price"] ;
  $wasiposted 	= $_REQUEST["wasiposted"] ;
  
  $myerror = "Please complete the below!";
@@ -182,25 +174,27 @@ include('myDBConnection.php');
  
  
  echo '
-   <form action="home.php?procedure='.$procedure.'" method="post">
+   <form action="tours.php">
+   <input type="hidden" name="procedure" value= '.$procedure.'>
    <label for="TourName">Tour name:</label><br>
    <input type="text" id="Tname" name="TourName" required value="'.$Tname.'"><br>
    <label for="Description">Tour Description:</label><br>
    <input type="text" id="Desc" size="150" name="Description" required value="'.$Desc.'"><br><br>
    <label for="Price">Tour Price:</label><br>
-   <input type="text" id="Price" name="Price" required value="'.$price.'"><br><br>
+   <input type="text" id="Price" name="price" required value="'.$price.'"><br><br>
    <input type="hidden" name="wasiposted" value="formposted">
    <input type="submit" value="Submit">
    </form>';
  
  
- if ($myerror=="" && $wasiposted <> ""){
+ if ($wasiposted <> ""){
  
 	  $query = "INSERT INTO tours (TourName, Description, Price) VALUES (".
 				 "'".$Tname."',".
 				 "'".$Desc."',".
 				 "'".$price."')";
  
+	
 	 $result = mysqli_query($dbConn, $query);
  
  

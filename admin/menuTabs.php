@@ -35,7 +35,7 @@ echo '<div class="navbar">';
   echo '<a '.  $myActiveLogout  . 'href="index.php"><i class="fa fa-lock" aria-hidden="true"></i> LOGOUT</a>';
 echo '</div><br>';
 //echo "<hr>";
-echo '<div class="headerBar" align="right"><span class="label success"><i class="fa fa-map-signs" aria-hidden="true"></i> Your are here |  '.strtoupper($procedure).'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></div><br>';
+//echo '<div class="headerBar" align="right"><span class="label success"><i class="fa fa-map-signs" aria-hidden="true"></i> Your are here |  '.strtoupper($procedure).'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></div><br>';
 
 
 ?>
