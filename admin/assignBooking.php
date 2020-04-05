@@ -6,22 +6,22 @@ if ($procedure=="assign_a_booking"){
 $myBookingID = $_REQUEST["myBKID_in_php"];
 
 
-$query = "SELECT *,bookings.uid AS bookingID_fromDB
-				FROM booking
+$query = "SELECT * bookings.guid AS bookingID_fromDB
+				FROM bookings
 				LEFT JOIN tours ON tours.uid = bookings.tourUid
 				LEFT JOIN tourGuide ON tourGuide.uid = bookings.tourGuideUid
-				WHERE bookings.uid='".$myBookingID."'";
+				WHERE bookings.guid='".$myBookingID."'";
 	$result = mysqli_query($dbConn, $query);
 	while($Arrayline = mysqli_fetch_assoc($result)) {
 		$myBookingRef 		= $Arrayline["bookref"];
-        $myBookingPerson    = $Arrayline['customerName']." ".$Arrayline['customerSurname'];
+        $myCustomer    = $Arrayline['customerName']." ".$Arrayline['customerSurname'];
         $myTourBooked       = $Arrayline["tourName"];
         $tourselect         = $Arrayline["tourUid"];
 		}
 
 
 echo "<H1>My Booking Reference: ".$myBookingRef."</H1>";
-echo "<H5>Booking Person: ".$myBookingPerson."</H5>";
+echo "<H5>Booking Person: ".$myCustomer."</H5>";
 echo "<H5>Tour Booked: ".$myTourBooked."</H5>";
 
 $tourguide   = $_REQUEST["tourGuide"];
@@ -31,14 +31,12 @@ if ($wasiposted <>""){
 
 	$tourselect = $_REQUEST["tourselect"];
 
-	$mySQLUPD = "UPDATE booking SET tourguideuid='".$tourguide."',touruid='".$tourselect."' WHERE uid='".$myBookingID."'";
+	$mySQLUPD = "UPDATE bookings SET tourGuideUid='".$tourguide."',tourUid='".$tourselect."' WHERE guid='".$myBookingID."'";
     $result = mysqli_query($dbConn, $mySQLUPD);
 
     echo "Record Updated successfully...";
 
-	echo '<meta http-equiv="refresh" content="0;url=home.php?procedure=bookings&showSnack=Booking Updated successfully..." />';
-
-
+	echo '<meta http-equiv="refresh" content="0;url=bookings.php?procedure=bookings&showSnack=Booking Updated successfully..." />';
 
 
  // update the booking Table with the Tour guide ID
@@ -47,19 +45,14 @@ if ($wasiposted <>""){
 
    }
 
-
-
-
-
-
 echo '
   <form action="home.php?procedure='.$procedure.'&myBKID_in_php='.$myBookingID.'" method="post">
   <label for="tourguide">Tour guide:</label><br>';
 
-	echo '<SELECT name="tourguide">';
+	echo '<SELECT name="tourGuide">';
 	echo "<OPTION value='NONE'>NONE SELECTED</OPTION>\n";
 
-	$query = "SELECT * FROM tourguide WHERE active=1";
+	$query = "SELECT * FROM tourGuide WHERE active=1";
 	$result = mysqli_query($dbConn, $query);
 	while($Arrayline = mysqli_fetch_assoc($result)) {
 
@@ -85,13 +78,11 @@ echo '
 		echo "<OPTION value='".$Arrayline["uid"]."'";
 		// uid is from the DB!
 		if ($tourselect == $Arrayline["uid"] ) {echo " SELECTED"; }
-		echo ">".$Arrayline["name"] ."</OPTION>\n";
+		echo ">".$Arrayline["tourName"] ."</OPTION>\n";
 
 		}
 
     echo "</SELECT><br>";
-
-
 
 
 echo '

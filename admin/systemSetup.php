@@ -4,9 +4,6 @@
 
   include('myDBConnection.php');
 
-// down below deck i called !
-//Delete_A_record($dbConn,"tours",$tuid,"tours");
-
   include('commonFunctions.php');
 
 ?>
@@ -40,42 +37,45 @@ if (isset($_REQUEST["showSnack"])){
 
  include('menuTabs.php');
 
-if ($procedure=="commission"){
+if ($procedure=="systemSetup"){
 
 echo '<table>
   <tr>
-    <th>Commission ID</th>
-    <th>Comms Description</th>
-    <th>Commission Rate</th>
+    <th>User ID</th>
+    <th>Name</th>
+    <th>Password</th>
+    <th>Tour Guide</th>
+    <th>User Role</th>
     <th>Action</th>
   </tr>';
 
-	$query = "SELECT * FROM commLevel";
+	$query = "SELECT *,user.uid AS userUid 
+    FROM user
+    LEFT JOIN tourGuide ON tourGuide.uid = user.tourGuideUid";
 	$result = mysqli_query($dbConn, $query);
 	while($Arrayline = mysqli_fetch_assoc($result)) {
 
 		echo '<tr>';
 	     echo '<td>';
-		     echo $Arrayline['uid'];
-		 echo '</td>';
-		 echo '<td>'.ucwords($Arrayline['description']).'</td>';
+             echo $Arrayline['uuserUid'];
+          echo '</td>';
+         
+		 echo '<td>'.$Arrayline['username'].'</td>';
+         echo '<td>'.$Arrayline['password'].'</td>';
+         echo '<td>'.$Arrayline['guideName'].' '.$Arrayline['guideSurname'].'</td>';
+         echo '<td>'.$Arrayline['accessRole'].'</td>';
+		 
 
-		 if ($Arrayline['commPercent'] > 0 ) {
-			 echo '<td>'.$Arrayline['commPercent'].'% </td>';
-		 }else {
-			 echo '<td bgcolor="orange"><big>Please edit and update me</big></td>';
-		 	}
-
-
+//Check action column!
 		 echo '<td>';
-		  echo '<a href="commission.php?procedure=comms_deleteme&cuid='.$Arrayline['uid'].'" title="This will delete me"><i class="fa fa-trash fa fa-2x" aria-hidden="true"></i></a>';
-		  echo '<a href="commission.php?procedure=comms_editme&cuid='.$Arrayline['uid'].'" title="This will Edit me"><i class="fa fa-pencil-square fa-2x" aria-hidden="true"></i></a>';
+		  echo '<a href="systemSetup.php?procedure= //comms_deleteme&cuid='.$Arrayline['userUid'].'" title="This will delete me"><i class="fa fa-trash fa fa-2x" aria-hidden="true"></i></a>';
+		  echo '<a href="systemSetup.php?procedure=//comms_editme&cuid='.$Arrayline['userUid'].'" title="This will Edit me"><i class="fa fa-pencil-square fa-2x" aria-hidden="true"></i></a>';
 		 echo '</td>';
 		echo '</tr>';
 
-
-
 	}
+
+	
 
   echo '</table>';
 
@@ -88,7 +88,7 @@ echo '<table>
 
 
 
-if ($procedure=="addnewcommlevel"){
+if ($procedure=="addNewUser"){
 
 $Commname 		= $_REQUEST["Commname"] ;
 $cpercentage 	= $_REQUEST["cpercentage"] ;
@@ -101,9 +101,9 @@ if ($wasiposted <> ""){
 
 	$myerror ="";
 
-	if ($cpercentage > 50){
+	if ($cpercentage == " "){
 
-	  $myerror .= "<br><br><br><BIG><BIG><BIG>Commision can NOT be bigger then 50% of the tour price</BIG></BIG></BIG>";
+	  $myerror .= "<br><br><br><BIG><BIG><BIG>Please enter a username</BIG></BIG></BIG>";
 
         }
         

@@ -45,7 +45,7 @@ if (isset($_REQUEST["showSnack"])){
 if ($procedure=="bookings"){
 
 
-echo '<table>
+echo '<table >
   <tr>
 	<th>Book Ref</th>
 	<th>Tour Date</th>
