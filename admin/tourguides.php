@@ -4,7 +4,7 @@ $guideSurname 	= $_REQUEST["guideSurname"];
 $commLevel  	= $_REQUEST["commLevel"];
 $active 		= $_REQUEST["active"];
 $guideUid		= $_REQUEST["guideUid"];
-
+$fromDB  		= $_REQUEST["fromDB"];
 
 $procedure = $_REQUEST["procedure"] ;
 include('myDBConnection.php');
@@ -57,7 +57,7 @@ include('deleteFunction.php');
 			   echo '<td>'.$Arrayline['Price'].'</td>';
 			   echo '<td>';
 			   echo '<a href="tourguides.php?procedure=deleteTourGuide&guideUid='.$Arrayline['uid'].'" title="This will delete me"><i class="fa fa-trash fa fa-2x" aria-hidden="true"></i></a>';
-			   echo '<a href="tourguides.php?procedure=guides_editme&guideUid='.$Arrayline['uid'].'" title="This will Edit me"><i class="fa fa-pencil-square fa-2x" aria-hidden="true"></i></a>';
+			   echo '<a href="tourguides.php?procedure=editTourGuide&guideUid='.$Arrayline['uid'].'" title="This will Edit me"><i class="fa fa-pencil-square fa-2x" aria-hidden="true"></i></a>';
 			   echo '</td>';
 			 echo '</tr>';
 		}
@@ -68,6 +68,9 @@ include('deleteFunction.php');
 	
 	
 	 }
+
+	 // DELETE TOUR GUIDE-----------------
+	 
 	 if ($procedure=="deleteTourGuide"){
 
 	
@@ -79,7 +82,7 @@ include('deleteFunction.php');
 
 
  
-// ADD NEW TOUR------------------
+// ADD NEW TOUR GUIDE------------------
  
  
 if ($procedure=="addnewtourguide"){
@@ -107,7 +110,7 @@ if ($procedure=="addnewtourguide"){
 	  <form action="tourguides.php">
 	  <input type="hidden" name="procedure" value= '.$procedure.'>
 	  <label for="guideName">Guide Name:</label><br>
-	  <input type="text" id="guideName" name="guideName" required value="'.$guideSurname.'"><br>
+	  <input type="text" id="guideName" name="guideName" required value="'.$guideName.'"><br>
 	  <label for="guideSurname">Guide Surname:</label><br>
 	  <input type="text" id="guideSurname" size="30" name="guideSurname" required value="'.$guideSurname.'"><br><br>
 	  <label for="commLevel">Comm Level:</label><br>
@@ -137,46 +140,38 @@ if ($procedure=="addnewtourguide"){
 	 }
 
  
- 
- if ($procedure=="editme"){
- 
-	 $uid 	  = $_REQUEST["uid"] ;
-	 $fromDB  = $_REQUEST["fromDB"] ;
-	 $myerror = ""; // use this for any validation we need!
- 
-	 if ($fromDB==""){
- 
-		 $query = "SELECT * FROM tourGuide WHERE uid='".$uid."'";
-		 $result = mysqli_query($dbConn, $query);
-		 while($Arrayline = mysqli_fetch_assoc($result)) {
-			 $guideName 	= $Arrayline["guideName"];
-			 $guideSurname 	= $Arrayline["guideSurname"];
-             $commLevel = $Arrayline["commLevel"];
-             $active 	= $Arrayline["active"];
-			 }
- 
-		 }else{
- 
-			 $guideName 	= $_REQUEST["guideName"];
-			 $guideSurname	= $_REQUEST["guideSurname"];
-             $commLevel = $_REQUEST["commLevel"];
-             $active	= $_REQUEST["active"];
-			 }
- 
 
- if ($myerror=="" && $fromDB <> ""){
+	 // EDIT TOUR GUIDE------------------------
+
+ if ($procedure=="editTourGuide"){
  
-	  $query = "UPDATE tourGuide SET guideName='".addslashes($guideName)."',guideSurname='".addslashes($guideSurname)."'commLevel='".addslashes($commLevel)."',active='".$active."' WHERE uid='".$uid."'";
-	 $result = mysqli_query($dbConn, $query);
+	echo '
+	<form action="tourguides.php">
+	   <input type="hidden" name="procedure" value= '.$procedure.'>
+	   <input type="hidden" name="guideUid" value='.$guideUid.'>
+	   <label for="guideName">Guide Name:</label><br>
+	   <input type="text" id="guideName" name="guideName" required value="'.$guideName.'"><br>
+	   <label for="guideSurname">Guide Surname:</label><br>
+	   <input type="text" id="guideSurname" size="20" name="guideSurname" required value="'.$guideSurname.'"><br><br>
+	   <label for="commLevel">Comm Level:</label><br>
+	   <input type="text" id="commLevel" name="commLevel" required value="'.$commLevel.'"><br><br>
+	   <input type="hidden" name="fromDB" value="no">
+	   <input type="submit" value="Submit">
+	   </form>';
+	
+	if ($fromDB <> ""){
  
-	 echo "Record updated successfully...";
- 
-	 echo '<meta http-equiv="refresh" content="0;url=tourguides.php?procedure=tourguides" />';
- 
+		$query   = "UPDATE tourGuide SET guideName='".addslashes($guideName)."',guideSurname='".addslashes($guideSurname)."',commLevel='".$commLevel."' WHERE guideUid='".$guideUid."'";
+		 $result = mysqli_query($dbConn, $query);
+	 
+		 echo "Record updated successfully...";
+	 
+		 echo '<meta http-equiv="refresh" content="0;url=tourguides.php?procedure=tourguides" />';
+	 
+		 }
 	 }
- 
-  }
- 
+	
+
 
  ?>
 

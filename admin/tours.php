@@ -1,17 +1,13 @@
 <?php
-$fname 	 = $_REQUEST["customerName"];
-$lname	 = $_REQUEST["customerSurname"];
-$email	 = $_REQUEST["customerEmail"];
-$Pax	 = $_REQUEST["Pax"];
 $date 	 = $_REQUEST["dateTour"];
 $tours   = $_REQUEST["mytourselected"];
 $saveme  = $_REQUEST["saveme"];
 $tuid 	 = $_REQUEST["tuid"];
 $fromDB  = $_REQUEST["fromDB"] ;
-$price 	 = $_REQUEST["price"];
+$Price 	 = $_REQUEST["Price"];
 $Tname   = $_REQUEST["TourName"];
 $Desc	 = $_REQUEST["Description"];
-$fromDB  = $_REQUEST["fromDB"];
+
 
 
 $procedure = $_REQUEST["procedure"];
@@ -40,20 +36,6 @@ include('deleteFunction.php');
  
  <?php
  
- 
- /*echo $procedure;
- 
- if ($procedure=="deleteTour"){
- 
-	 $tuid 	  = $_REQUEST["uid"] ;
- 
-	 $query    = "DELETE FROM tours WHERE uid='".$tuid."'";
-	 $result   = mysqli_query($dbConn, $query);
- 
-	 echo '<meta http-equiv="refresh" content="0;url=tours.php?procedure=tours" />';
- 
-	 }
- */
 
 if ($procedure=="deleteTour"){
 
@@ -68,18 +50,6 @@ if ($procedure=="deleteTour"){
 
  if ($procedure=="editTour"){
  
-	 //$tuid 	  	= $_REQUEST["tuid"] ;
-	
-	 //$myerror    = ""; // use this for any validation we need!
- 
-	 /*if ($fromDB==""){
- 
-		 $query = "SELECT * FROM tours WHERE uid='".$tuid."'";
-		 $result = mysqli_query($dbConn, $query);
-	 }*/
- 
- 
-
  echo '
 	   <form action="tours.php">
 	   <input type="hidden" name="procedure" value= '.$procedure.'>
@@ -89,15 +59,14 @@ if ($procedure=="deleteTour"){
 	   <label for="tourDescription">Tour Description:</label><br>
 	   <input type="text" id="Desc" size="150" name="Description" required value="'.$Desc.'"><br><br>
 	   <label for="tourPrice">Tour Price:</label><br>
-	   <input type="number" id="price" name="price" required value="'.$price.'"><br><br>
+	   <input type="number" id="Price" name="Price" required value="'.$Price.'"><br><br>
 	   <input type="hidden" name="fromDB" value="no">
 	   <input type="submit" value="Submit">
 	   </form>';
  
  if ($fromDB <> ""){
  
-
-	$query   = "UPDATE tours SET TourName='".addslashes($Tname)."',Description='".addslashes($Desc)."',Price='".$price."' WHERE uid='".$tuid."'";
+	$query   = "UPDATE tours SET TourName='".addslashes($Tname)."',Description='".addslashes($Desc)."',Price='".$Price."' WHERE uid='".$tuid."'";
 	 $result = mysqli_query($dbConn, $query);
  
 	 echo "Record updated successfully...";
@@ -105,12 +74,10 @@ if ($procedure=="deleteTour"){
 	 echo '<meta http-equiv="refresh" content="0;url=tours.php?procedure=tours" />';
  
 	 }
- 
-
   }
  
  
-	/*SHOW TOURS ----------------------*/ 
+/*SHOW TOURS ----------------------*/ 
  
  if ($procedure=="tours"){
  
@@ -134,7 +101,7 @@ if ($procedure=="deleteTour"){
 		  echo '</td>';
 		  echo '<td name="TourName">'.strtoupper($Arrayline['TourName']).'</td>';
 		  echo '<td name="Description">'.ucwords($Arrayline['Description']).'</td>';
-		  echo '<td name="price">'.$Arrayline['Price'].'</td>';
+		  echo '<td name="Price">'.$Arrayline['Price'].'</td>';
 		  echo '<td>';
 		   echo '<a href="tours.php?procedure=deleteTour&tuid='.$Arrayline['uid'].'" title="This will delete me"><i class="fa fa-trash fa fa-2x" aria-hidden="true"></i></a>';
 		   echo '<a href="tours.php?procedure=editTour&tuid='.$Arrayline['uid'].'" title="This will Edit me"><i class="fa fa-pencil-square fa-2x" aria-hidden="true"></i></a>';
@@ -181,7 +148,7 @@ if ($procedure=="deleteTour"){
    <label for="Description">Tour Description:</label><br>
    <input type="text" id="Desc" size="150" name="Description" required value="'.$Desc.'"><br><br>
    <label for="Price">Tour Price:</label><br>
-   <input type="text" id="Price" name="price" required value="'.$price.'"><br><br>
+   <input type="number" id="Price" name="Price" required value="'.$Price.'"><br><br>
    <input type="hidden" name="wasiposted" value="formposted">
    <input type="submit" value="Submit">
    </form>';
@@ -192,7 +159,7 @@ if ($procedure=="deleteTour"){
 	  $query = "INSERT INTO tours (TourName, Description, Price) VALUES (".
 				 "'".$Tname."',".
 				 "'".$Desc."',".
-				 "'".$price."')";
+				 "'".$Price."')";
  
 	
 	 $result = mysqli_query($dbConn, $query);
