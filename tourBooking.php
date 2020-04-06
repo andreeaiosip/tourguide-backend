@@ -22,9 +22,9 @@ if ($tours=="NONE"){
    }
    
  if ($addrecord=="confirmRecord"){
-	$bookid = "BkRef:".rand(1000,9999);
-    //$myNewDBguid = guid();
-    $bookguid = "GuidREF-".rand(20, 45);
+	$bookid = "BkRef".rand(1000,9999);
+ 
+    $bookguid = bin2hex(random_bytes(16));
     //https://www.php.net/manual/en/function.com-create-guid.php
     //INSERT INTO bookings (bookid,numOfPeoples) VALUES ('4','3');
     
