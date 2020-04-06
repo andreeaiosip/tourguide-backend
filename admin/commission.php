@@ -140,21 +140,14 @@ echo '
   <input type="submit" value="Submit">
   </form>';
 
-// debugging info
-//echo "Third<HR>";
-// debugging informtion
-//echo "<BR><BIG>my Errr : ".$myerror."</BIG>";
-//echo "<BR><BIG>my Was posted : ".$wasiposted."</BIG>";
+
 
 if ($myerror=="" && $wasiposted <> ""){
 
-   // debugging info
-   //echo "Fourth<HR>";
+ 
 
     $newCommUid = generateUid();
 
-    // added the `` around value and im worried it a reserved word in SQL, i dont take chances with such words.rather
-    // safe then a SQL error
      $query = "INSERT INTO commLevel (uid,commDescription,commPercent) VALUES (".
                 "'".$newCommUid."',".     
 				"'".$commDescription."',".
@@ -170,20 +163,13 @@ if ($myerror=="" && $wasiposted <> ""){
 	}
 
 
-    // debugging info
-  //echo "End of Procedure<HR>";
-
-
  }
 
 
 if ($procedure=="editComm"){
 
 	
-	$myerror    = ""; // use this for any validation we need!
-
-    // debugging information
-   ////echo "<H1>".$tuid."</H1>";
+	$myerror    = ""; 
 
 
 	if ($fromDB==""){
@@ -239,20 +225,6 @@ echo '
 	   </form>';
 
 
-/*
-echo '
-
-  /*<form action="commission.php?procedure=editComm&cuid='.$cuid.'" method="post">
-  <label for="commDescription">Commission Level </label><br>
-  <input type="text" id="commDescription" name="commDescription" required value="'.$commDescription.'"><br>
-  <label for="commPercent">Commission Percentage:</label><br>
-  <input type="number" min="1" max="100" step="any" id="commPercent" name="commPercent" required value="'.$commPercent.'"><br><br>
-  <input type="hidden" name="fromDB" value="no">
-  <input type="hidden" name="wasiposted" value="yes">
-  <input type="submit" value="Submit">
-  </form>';
-
-*/
 
    if ($myerror=="" && $fromDB <> ""){
 
