@@ -1,7 +1,10 @@
 <?php
 session_start();
-
+$fromDate = $_REQUEST["fromDate"];
 $procedure = $_REQUEST["procedure"];
+$EndDate = $_REQUEST["EndDate"];
+$tourguide = $_REQUEST["tourguide"];
+
 include('myDBConnection.php');
 include('commonFunctions.php');
 
@@ -95,10 +98,6 @@ echo '
 
 if ($procedure=="genpayrollView"){
 
-$tourguide = $_REQUEST["tourGuide"];
-$EndDate   = $_REQUEST["EndDate"];
-$fromDate  = $_REQUEST["fromDate"];
-
 	$query = "SELECT *
 				FROM tourGuide
 	            LEFT JOIN commLevel ON commLevel.uid = tourGuide.commLevel
@@ -159,7 +158,7 @@ echo '<table>
 
 	$query = "SELECT *,bookings.uid AS bookingID_fromDB,MONTH(bookings.dateTour) AS monthNo
 				FROM bookings
-				LEFT JOIN tours ON tours.uid = bookings.touruid
+				LEFT JOIN tours ON tours.uid = bookings.tourUid
 				LEFT JOIN tourGuide ON tourGuide.uid = bookings.tourGuideUid
 				WHERE 1=1
 				".$mySQLFilter."
