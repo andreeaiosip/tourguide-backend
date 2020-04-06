@@ -135,7 +135,7 @@ echo '
   <label for="fname">Commission Level </label><br>
   <input type="text" id="commDescription" name="commDescription" required value="'.$commDescription.'"><br>
   <label for="lname">Commission Percentage:</label><br>
-  <input type="number" id="commPercent" name="commPercent" required value="'.$commPercent.'"><br><br>
+  <input type="number" min="1" max="100" step="any" id="commPercent" name="commPercent" required value="'.$commPercent.'"><br><br>
   <input type="hidden" name="wasiposted" value="formposted">
   <input type="submit" value="Submit">
   </form>';
