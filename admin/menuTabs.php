@@ -1,8 +1,8 @@
 <?php
-
+/*
 if ($procedure=="home"){
 	 $myActivehome = "class='active'";
-	}
+	} */
 if ($procedure=="tours"){
 	 $myActiveTour = "class='active'";
 	}
@@ -21,12 +21,11 @@ if ($procedure=="payroll"){
         $myActivePayroll = "class='active'";
        }
 
-// For you to code!
-// try and add the Payroll link as the active when you click or select it
+
 
 echo '<div class="navbar">';
-  echo '<a '.  $myActivehome    . 'href="home.php?procedure=home"><i class="fa fa-fw fa-home"></i> HOME</a>';
-  echo '<a '.  $myActiveTour    . 'href="tours.php?procedure=tours"><i class="fa fa-fw fa-search"></i> TOURS</a>';
+  //echo '<a '.  $myActivehome    . 'href="home.php?procedure=home"><i class="fa fa-fw fa-home"></i> HOME</a>';
+  echo '<a '.  $myActiveTour    . 'href="tours.php?procedure=tours"><i class="fa fa-fw fa-bus"></i> TOURS</a>';
   echo '<a '.  $myActiveGuide   . 'href="tourguides.php?procedure=tourguides"><i class="fa fa-user-circle-o" aria-hidden="true"></i> TOUR GUIDES</a>';
   echo '<a '.  $myActiveComms   . 'href="commission.php?procedure=commission"><i class="fa fa-handshake-o" aria-hidden="true"></i> COMM LEVEL</a>';
   echo '<a '.  $myActiveBook    . 'href="bookings.php?procedure=bookings"><i class="fa fa-book" aria-hidden="true"></i> BOOKINGS</a>';
