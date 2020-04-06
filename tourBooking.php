@@ -149,9 +149,7 @@ while($Arrayline = mysqli_fetch_assoc($result)) {
                <br>
                <div class="people">
                   <label for="people">Date of the tour:</label>
-                  <input type="date" id="inputDate" name="trip-start"
-                     value="2020-01-26"
-                     min="2020-01-26">
+                  <input type="date" value="<?php echo date('Y-m-d'); ?>" />
                      </div>
                   <br>
                   <br>
