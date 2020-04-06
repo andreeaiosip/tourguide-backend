@@ -42,6 +42,8 @@ if (isset($_REQUEST["showSnack"])){
 
  include('menuTabs.php');
 
+
+ // SHOW COMMISSION TABLE
 if ($procedure=="commission"){
 
 echo '<table>
@@ -70,8 +72,8 @@ echo '<table>
 
 
 		 echo '<td>';
-		  echo '<a href="commission.php?procedure=deleteCommLevel&cuid='.$Arrayline['uid'].'" title="Delete me"><i class="fa fa-trash fa fa-2x" aria-hidden="true"></i></a>';
-		  echo '<a href="commission.php?procedure=editCommLevel&cuid='.$Arrayline['uid'].'" title="Edit me"><i class="fa fa-pencil-square fa-2x" aria-hidden="true"></i></a>';
+		  echo '<a href="commission.php?procedure=deleteComm&cuid='.$Arrayline['uid'].'" title="Delete me"><i class="fa fa-trash fa fa-2x" aria-hidden="true"></i></a>';
+		  echo '<a href="commission.php?procedure=editComm&cuid='.$Arrayline['uid'].'" title="Edit me"><i class="fa fa-pencil-square fa-2x" aria-hidden="true"></i></a>';
 		 echo '</td>';
 		echo '</tr>';
 
@@ -82,13 +84,22 @@ echo '<table>
   echo '</table>';
 
 
-    //echo '<a href="commission.php?procedure=addCommLevel"><i class="fa fa-fw fa-plus fa-2x"></i>Add Commission Level</a>';
-    //echo '<button class="btn success"><a href="commission.php?procedure=editCommLevel"><i class="fa fa-handshake-o fa-lg" aria-hidden="true"></i> Edit Commission Level</a></button>';
+    echo '<a href="commission.php?procedure=addComm"><i class="fa fa-fw fa-plus fa-2x"></i>Add Commission Level</a>';
+    //echo '<button class="btn success"><a href="commission.php?procedure=editComm"><i class="fa fa-handshake-o fa-lg" aria-hidden="true"></i> Edit Commission Level</a></button>';
 
 
 	}
 
+	// DELETE COMMISION RECORD
 
+	if ($procedure=="deleteComm"){
+
+	
+		Delete_A_record($dbConn,"commLevel",$cuid);
+	
+		echo '<meta http-equiv="refresh" content="0;url=commission.php?procedure=commission&showSnack=Record Deleted! successfully..." />';
+	
+		}
 
 if ($procedure=="addCommLevel"){
 
@@ -166,7 +177,7 @@ if ($myerror=="" && $wasiposted <> ""){
  }
 
 
-if ($procedure=="editCommLevel"){
+if ($procedure=="editComm"){
 
 	
 	$myerror    = ""; // use this for any validation we need!
@@ -212,12 +223,26 @@ if ($wasiposted <> ""){
 
 }
 
-echo $myerror." - Hey maybe add some styling here... to make it a little more pretty....";
-
-
 
 echo '
-  <form action="commission.php?procedure=editCommLevel&cuid='.$cuid.'" method="post">
+
+
+	   <form action="commission.php">
+	   <input type="hidden" name="procedure" value= '.$procedure.'>
+	   <input type="hidden" name="cuid" value='.$cuid.'>
+	   <label for="commDescription">Commission</label><br>
+	   <input type="text" id="commDescription" name="commDescription" required value="'.$commDescription.'"><br>
+	   <label for="commPercent">Comm Percentage:</label><br>
+	   <input type="number" id="commPercent" name="commPercent" required value="'.$commPercent.'"><br><br>
+	   <input type="hidden" name="fromDB" value="no">
+	   <input type="submit" value="Submit">
+	   </form>';
+
+
+/*
+echo '
+
+  /*<form action="commission.php?procedure=editComm&cuid='.$cuid.'" method="post">
   <label for="commDescription">Commission Level </label><br>
   <input type="text" id="commDescription" name="commDescription" required value="'.$commDescription.'"><br>
   <label for="commPercent">Commission Percentage:</label><br>
@@ -227,14 +252,12 @@ echo '
   <input type="submit" value="Submit">
   </form>';
 
-
+*/
 
    if ($myerror=="" && $fromDB <> ""){
 
- 	$query = "UPDATE commission SET commDescription='".addslashes($commDescription)."',value='".addslashes($commPercent)."' WHERE uid='".$cuid."'";
+ 	$query = "UPDATE commLevel SET commDescription='".addslashes($commDescription)."',commPercent='".addslashes($commPercent)."' WHERE uid='".$cuid."'";
 	$result = mysqli_query($dbConn, $query);
-
-    echo "Commission record updated successfully...";
 
 	echo '<meta http-equiv="refresh" content="0;url=commission.php?procedure=commission&showSnack='.$commDescription.'- Record updated successfully..." />';
 
