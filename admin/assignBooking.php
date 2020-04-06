@@ -6,7 +6,7 @@ if ($procedure=="assign_a_booking"){
 $myBookingID = $_REQUEST["myBKID_in_php"];
 
 
-$query = "SELECT * bookings.guid AS bookingID_fromDB
+$query = "SELECT * bookings.guid AS bookingsDB
 				FROM bookings
 				LEFT JOIN tours ON tours.uid = bookings.tourUid
 				LEFT JOIN tourGuide ON tourGuide.uid = bookings.tourGuideUid
