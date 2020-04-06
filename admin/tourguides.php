@@ -39,9 +39,9 @@ include('deleteFunction.php');
 	echo '<table>
 	  <tr>
 		<th>Tour Guide ID</th>
-		<th>Guide Name</th>
-		<th>Tour Name</th>
-		<th>Tour Price</th>
+		<th>Guide Name & Surname</th>
+		<th>Experience Level</th>
+		
 		<th>Action</th>
 	  </tr>';
 	
@@ -52,9 +52,10 @@ include('deleteFunction.php');
 			   echo '<td>';
 			   echo $Arrayline['uid'];
 			   echo '</td>';
-			   echo '<td>'.strtoupper($Arrayline['guideName']).'</td>';
-			   echo '<td>'.ucwords($Arrayline['TourName']).'</td>';
-			   echo '<td>'.$Arrayline['Price'].'</td>';
+			   
+			   echo '<td>'.ucwords($Arrayline['guideName']." ".$Arrayline['guideSurname']).'</td>';
+			   echo '<td>'.strtoupper($Arrayline['commLevel']).'</td>'; 
+			
 			   echo '<td>';
 			   echo '<a href="tourguides.php?procedure=deleteTourGuide&guideUid='.$Arrayline['uid'].'" title="This will delete me"><i class="fa fa-trash fa fa-2x" aria-hidden="true"></i></a>';
 			   echo '<a href="tourguides.php?procedure=editTourGuide&guideUid='.$Arrayline['uid'].'" title="This will Edit me"><i class="fa fa-pencil-square fa-2x" aria-hidden="true"></i></a>';
