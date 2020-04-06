@@ -79,7 +79,7 @@ echo '<table >
 			<td>'.$Arrayline['Pax'].'</td>
 			<td>'.$Arrayline['guideName'].'</td>';
 			if ($Arrayline['completed']=="0"){
-				echo '<td><i style="color: #323232bf" class="fa fa-dot-circle-o fa-2x" aria-hidden="true"></i></td>';
+				echo '<td><i style="color: #323232bf" class="fa fa-times-circle fa-2x" aria-hidden="true"></i></td>';
 			}else {
 				echo '<td> <i style="color: #323232bf" class="fa fa-check-circle-o fa-2x" aria-hidden="true"></i></td>';
 				}
