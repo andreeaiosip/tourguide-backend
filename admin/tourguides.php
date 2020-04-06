@@ -70,7 +70,7 @@ include('deleteFunction.php');
 	 }
 
 	 // DELETE TOUR GUIDE-----------------
-	 
+
 	 if ($procedure=="deleteTourGuide"){
 
 	
@@ -161,7 +161,7 @@ if ($procedure=="addnewtourguide"){
 	
 	if ($fromDB <> ""){
  
-		$query   = "UPDATE tourGuide SET guideName='".addslashes($guideName)."',guideSurname='".addslashes($guideSurname)."',commLevel='".$commLevel."' WHERE guideUid='".$guideUid."'";
+		$query   = "UPDATE tourGuide SET guideName='".addslashes($guideName)."',guideSurname='".addslashes($guideSurname)."',commLevel='".$commLevel."' WHERE tourGuide.uid='".$guideUid."'";
 		 $result = mysqli_query($dbConn, $query);
 	 
 		 echo "Record updated successfully...";
