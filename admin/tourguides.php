@@ -20,7 +20,7 @@ include('deleteFunction.php');
  <meta name ="viewport" content="width=device-width, initial-scale=1">
  <link rel  ="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
  <link rel  ="stylesheet" href="../assets/css/style.css">
- <body>
+ <body class="body-height">
  
  
  <?php
@@ -30,9 +30,7 @@ include('deleteFunction.php');
  
  
  <?php
- 
- 
- echo $procedure;
+
 
  if ($procedure=="tourguides"){
 
@@ -65,7 +63,7 @@ include('deleteFunction.php');
 	  echo '</table>';
 	
 
-	  echo '<button class="btn success"><a href="tourguides.php?procedure=addnewtourguide"><i class="fa fa-user-circle-o" aria-hidden="true"></i> Add Guide</a></button>';
+	  echo '<button class="btn success" style="border-radius:4px"><a href="tourguides.php?procedure=addnewtourguide" style="text-decoration:none;"><i class="fa fa-user-circle-o fa-2x" aria-hidden="true"></i> NEW</a></button>';
 	
 	
 	 }

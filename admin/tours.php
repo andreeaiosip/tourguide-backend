@@ -1,4 +1,5 @@
 <?php
+
 $date 	 = $_REQUEST["dateTour"];
 $tours   = $_REQUEST["mytourselected"];
 $saveme  = $_REQUEST["saveme"];
@@ -86,7 +87,7 @@ if ($procedure=="deleteTour"){
    <tr>
 	 <th>Tour ID</th>
 	 <th>Tour Name</th>
-	 <th>Tour Descrip</th>
+	 <th>Tour Description</th>
 	 <th>Tour Price</th>
 	 <th>Action</th>
    </tr>';
@@ -112,7 +113,7 @@ if ($procedure=="deleteTour"){
    echo '</table>';
    echo '</form>';
 
-   echo '<button style="border-radius:4px" class="btn success"><a href="tours.php?procedure=addnewtour"><i  class="fa fa-fw fa-bus fa-2x" aria-hidden="true"></i> Add Tour</a></button>';
+   echo '<button style="border-radius:4px; text-decoration: none;" class="btn success"><a href="tours.php?procedure=addnewtour" style="text-decoration:none;><i class="fa fa-fw fa-bus fa-2x" aria-hidden="true"></i> NEW</a></button>';
 	
  
 	 }
