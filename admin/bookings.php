@@ -2,11 +2,13 @@
 
 session_start();
 
-$show 		 = $_REQUEST["show"];
-$mySQLFilter = "";
-$bguid 		 = $_REQUEST["bguid"];
-$procedure   = $_REQUEST["procedure"] ;
-
+$show 		  = $_REQUEST["show"];
+$mySQLFilter  = "";
+$bguid 		  = $_REQUEST["bguid"];
+$procedure    = $_REQUEST["procedure"] ;
+$tourGuideUid = $_REQUEST["tourGuideUid"];
+$completed    = $_REQUEST["completed"];
+$fromDB		  = $_REQUEST["fromDB"];
 
   include('myDBConnection.php');
   include('deleteFunction.php');
@@ -86,7 +88,7 @@ echo '<table >
 
 			echo '<td>';
 		    echo '<a href="bookings.php?procedure=deleteBooking&bguid='.$Arrayline['bguid'].'" title="Delete Booking"><i style="color: #323232bf" class="fa fa-trash fa fa-2x" aria-hidden="true"></i></a>';
-		    echo '<a href="bookings.php?procedure=isComplete&bguid='.$Arrayline['bguid'].'" title="Assign a tour guide"><i style="color:#323232bf" class="fa fa-pencil-square fa-2x" aria-hidden="true"></i></a>';
+		    echo '<a href="bookings.php?procedure=editBooking&bguid='.$Arrayline['bguid'].'" title="Assign a tour guide"><i style="color:#323232bf" class="fa fa-pencil-square fa-2x" aria-hidden="true"></i></a>';
 		    echo '</td>';
 		  echo '</tr>';
 
@@ -107,6 +109,58 @@ echo '<table >
 
 
 	}
+
+
+
+	if ($procedure=="editBooking"){
+
+		$query = "SELECT * FROM tourGuide";
+		$result = mysqli_query($dbConn, $query);
+		
+
+		echo '
+			  <form action="bookings.php">
+			  <input type="hidden" name="procedure" value= '.$procedure.'>
+			  <input type="hidden" name="bguid" value='.$bguid.'>
+			  <label for="TourGuide">Tour Guide:</label><br>
+			  <select name="tourGuideUid">
+			  
+			 <option value="">NONE</option>';
+			  while($Arrayline = mysqli_fetch_assoc($result)){
+				echo '<option value="'.$Arrayline['uid'].'">'.$Arrayline['guideName']." ".$Arrayline['guideSurname'].'</option>';
+			  }
+
+			  echo'</select><br>
+
+			  <label for="completed">Completed:</label><br>
+			  <select name="completed">
+			     <option value="1">Completed</option>
+				 <option value="0">Not completed</option>
+			  </select>
+			  <input type="hidden" name="fromDB" value="no">
+			  <input type="submit" value="Submit">
+			  </form>';
+		
+		if ($fromDB <> "" && !($completed == 1 && $tourGuideUid == "")){
+		
+		   $query   = "UPDATE bookings SET tourGuideUid='".addslashes($tourGuideUid)."',completed='".addslashes($completed)."' WHERE guid='".$bguid."'";
+			$result = mysqli_query($dbConn, $query);
+		
+			echo "Record updated successfully...";
+		
+			echo '<meta http-equiv="refresh" content="0;url=bookings.php?procedure=bookings" />';
+		
+			}
+
+			else {
+				echo "Please assign a tour guide before marking the booking as being complete.";
+			}
+
+	}
+
+
+
+	// DELETE BOOKING----------------
 
 	if ($procedure=="deleteBooking"){
 
