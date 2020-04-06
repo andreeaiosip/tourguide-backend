@@ -72,8 +72,8 @@ echo '<table>
 
 
 		 echo '<td>';
-		  echo '<a href="commission.php?procedure=deleteComm&cuid='.$Arrayline['uid'].'" title="Delete me"><i class="fa fa-trash fa fa-2x" aria-hidden="true"></i></a>';
-		  echo '<a href="commission.php?procedure=editComm&cuid='.$Arrayline['uid'].'" title="Edit me"><i class="fa fa-pencil-square fa-2x" aria-hidden="true"></i></a>';
+		  echo '<a href="commission.php?procedure=deleteComm&cuid='.$Arrayline['uid'].'" title="Delete me"><i style="color:#323232bf" class="fa fa-trash fa fa-2x" aria-hidden="true"></i></a>';
+		  echo '<a href="commission.php?procedure=editComm&cuid='.$Arrayline['uid'].'" title="Edit me"><i style="color:#323232bf" class="fa fa-pencil-square fa-2x" aria-hidden="true"></i></a>';
 		 echo '</td>';
 		echo '</tr>';
 

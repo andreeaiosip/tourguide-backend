@@ -103,16 +103,17 @@ if ($procedure=="deleteTour"){
 		  echo '<td name="Description">'.ucwords($Arrayline['Description']).'</td>';
 		  echo '<td name="Price">'.$Arrayline['Price'].' €</td>';
 		  echo '<td>';
-		   echo '<a href="tours.php?procedure=deleteTour&tuid='.$Arrayline['uid'].'" title="This will delete me"><i class="fa fa-trash fa fa-2x" aria-hidden="true"></i></a>';
-		   echo '<a href="tours.php?procedure=editTour&tuid='.$Arrayline['uid'].'" title="This will Edit me"><i class="fa fa-pencil-square fa-2x" aria-hidden="true"></i></a>';
+		   echo '<a href="tours.php?procedure=deleteTour&tuid='.$Arrayline['uid'].'" title="Delete me"><i style="color: #323232bf" class="fa fa-trash fa fa-2x" aria-hidden="true"></i></a>';
+		   echo '<a href="tours.php?procedure=editTour&tuid='.$Arrayline['uid'].'" title="Edit me"><i style="color:#323232bf" class="fa fa-pencil-square fa-2x" aria-hidden="true"></i></a>';
 		  echo '</td>';
 		 echo '</tr>';
 	 }
 
    echo '</table>';
    echo '</form>';
-   echo '<a href="tours.php?procedure=addnewtour"><i class="fa fa-fw fa-user"></i>Add tour</a>';
- 
+
+   echo '<button style="border-radius:4px" class="btn success"><a href="tours.php?procedure=addnewtour"><i  class="fa fa-fw fa-bus fa-2x" aria-hidden="true"></i> Add Tour</a></button>';
+	
  
 	 }
  

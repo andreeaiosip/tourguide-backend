@@ -57,8 +57,8 @@ include('deleteFunction.php');
 			   echo '<td>'.strtoupper($Arrayline['commLevel']).'</td>'; 
 			
 			   echo '<td>';
-			   echo '<a href="tourguides.php?procedure=deleteTourGuide&guideUid='.$Arrayline['uid'].'" title="This will delete me"><i class="fa fa-trash fa fa-2x" aria-hidden="true"></i></a>';
-			   echo '<a href="tourguides.php?procedure=editTourGuide&guideUid='.$Arrayline['uid'].'" title="This will Edit me"><i class="fa fa-pencil-square fa-2x" aria-hidden="true"></i></a>';
+			   echo '<a href="tourguides.php?procedure=deleteTourGuide&guideUid='.$Arrayline['uid'].'" title="Delete me"><i style="color:#323232bf" class="fa fa-trash fa fa-2x" aria-hidden="true"></i></a>';
+			   echo '<a href="tourguides.php?procedure=editTourGuide&guideUid='.$Arrayline['uid'].'" title="Edit me"><i style="color:#323232bf" class="fa fa-pencil-square fa-2x" aria-hidden="true"></i></a>';
 			   echo '</td>';
 			 echo '</tr>';
 		}
