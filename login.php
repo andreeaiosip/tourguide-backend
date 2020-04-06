@@ -1,3 +1,35 @@
+
+<?php
+
+session_start();
+include('myDBConnection.php');
+ 
+$uid	       = $_REQUEST["uid"];
+$password	 = $_REQUEST["password"];
+$username	 = $_REQUEST["username"];
+ 
+extract($_POST);
+
+if(isset($submit))
+{
+   $query=mysqli_query($dbConn,"SELECT * FROM user where username= '$username' and password= '$password'");
+   echo $query;
+	if(mysqli_num_rows($rs)<1)
+	{
+		$found="N";
+	}
+	else
+	{
+		$_SESSION["login"]=$uid;
+	}
+}
+if (isset($_SESSION["login"]))
+{
+echo "<h1 align=center>Hye you are sucessfully login!!!</h1>";
+exit;
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
    <head>
@@ -32,7 +64,7 @@
             </li>
           
             <li>
-               <a href="login.html" class="nav-links" target="_blank"><i class="fa fa-fw fa-user-cog" style='margin-right:5px'></i>LOGIN</a>
+               <a href="login.php" class="nav-links" target="_blank"><i class="fa fa-fw fa-user-cog" style='margin-right:5px'></i>LOGIN</a>
             </li>
          </ul>
       </nav>
@@ -40,21 +72,47 @@
       <main class="main-contact">
          <h2>LOGIN </h2>
          <div class="container container-form">
-            <!-- Helpful code found here: https://www.w3schools.com/html/html_forms.asp -->
-            <form name="myForm" action="/home.php" onsubmit="return validateForm()" method="post">
+
+        
+<div class="floating-box">
+
+<form action="login.php" method="post">
+
+
+   <label for="username">User Name</label>
+   <input type="text" id="username" name="username"><br><br>
+
+   <label for="password">Password</label>
+   <input type="password" id="password" name="password"><br><br>
+   <input name="submit" type="submit" id="submit" value="Login"><br>
+
+
+<?php
+		  if(isset($found))
+		  {
+		  	echo '<p class="w3-center w3-text-red">Invalid user id or password<br><a href="login.php">Please try again</p>';
+		  }
+		  ?>
+ 
+</form>
+
+</div>
+
+            <!-- Helpful code found here: https://www.w3schools.com/html/html_forms.asp 
+            <form name="myForm" action="/admin/tours.php" onsubmit="return validateForm()" method="post">
                
                <div>
-                  <label for="email">Username</label>
-                  <input type="email" id="email" required>
+                  <label for="username">Username</label>
+                  <input name="username" type="text" id="username" class="form-control" value="required>
                </div>
                <br>
                <div>
                   <label for="password">Password</label>
-                  <input type="password" id="password" required >
+                  <input name="password" type="password" id="password" class="form-control" value" required >
                </div>
                <br>
                   <input type="submit" onClick="testEmpty()" value="Submit">
-            </form>
+            </form>-->
             </div>
          </div>
       </main>
