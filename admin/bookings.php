@@ -1,15 +1,17 @@
 <?php
 
-  $procedure = $_REQUEST["procedure"] ;
+session_start();
+
+$show 		 = $_REQUEST["show"];
+$mySQLFilter = "";
+$bguid 		 = $_REQUEST["bguid"];
+$procedure   = $_REQUEST["procedure"] ;
+
 
   include('myDBConnection.php');
-
-// down below deck i called !
-//Delete_A_record($dbConn,"tours",$tuid,"tours");
-
-  include('commonFunctions.php');
   include('deleteFunction.php');
-
+  include('commonFunctions.php');
+ 
 ?>
 <!DOCTYPE html>
 <html>
@@ -33,27 +35,28 @@ function myFunction() {
 
 
 if (isset($_REQUEST["showSnack"])){
-	echo '<body onload="myFunction()">';
+	echo '<body class="body-height" onload="myFunction()">';
 }else {
-	echo '<body>';
+	echo '<body class="body-height">';
 	}
 
  include('menuTabs.php');
 
 
-
+// SHOW BOOKINGS ON THE PAGE ----------------
 if ($procedure=="bookings"){
 
 
 echo '<table >
   <tr>
+    <th>Book ID</th>
 	<th>Book Ref</th>
 	<th>Tour Date</th>
     <th>Customer Name & Surname</th>
-    <th>Tour Name</th>
+    <th>Tour Booked</th>
 	<th>Pax</th>
 	<th>Assigned Guide</th>
-	<th>Done</th>
+	<th>Completed</th>
 	<th>Action</th>
 	
   </tr>';
@@ -66,16 +69,17 @@ echo '<table >
 	while($Arrayline = mysqli_fetch_assoc($result)) {
 
 		 echo '<tr>
-			<td>'.$Arrayline['bookref'].'</td>
+		    <td>'.$Arrayline['tourUid'].'</td>
+		    <td>'.$Arrayline['bookref'].'</td>
 			<td>'.$Arrayline['dateTour'].'</td>
 		    <td>'.$Arrayline['customerName']." ".$Arrayline['customerSurname'].'</td>
 		    <td>'.$Arrayline['TourName'].'</td>
 			<td>'.$Arrayline['Pax'].'</td>
 			<td>'.$Arrayline['guideName'].'</td>';
 			if ($Arrayline['completed']=="0"){
-				echo '<td> X </td>';
+				echo '<td><i style="color: #323232bf" class="fa fa-dot-circle-o fa-2x" aria-hidden="true"></i></td>';
 			}else {
-				echo '<td> (; </td>';
+				echo '<td> <i style="color: #323232bf" class="fa fa-check-circle-o fa-2x" aria-hidden="true"></i></td>';
 				}
 			
 			
@@ -97,9 +101,8 @@ echo '<table >
 	if ($procedure=="isComplete"){
 
 
-	$buid = $_REQUEST["buid"];
-
-	echo $buid;
+	
+	echo $bguid;
 
 
 
