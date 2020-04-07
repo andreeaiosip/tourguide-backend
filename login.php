@@ -1,127 +1,115 @@
-
 <?php
-
 session_start();
-include('myDBConnection.php');
- 
-$uid	       = $_REQUEST["uid"];
-$password	 = $_REQUEST["password"];
-$username	 = $_REQUEST["username"];
- 
-extract($_POST);
+include('myDBconnection.php');
 
-if(isset($submit))
-{
-   $query=mysqli_query($dbConn,"SELECT * FROM user where username= '$username' and password= '$password'");
-   echo $query;
-	if(mysqli_num_rows($rs)<1)
-	{
-		$found="N";
-	}
-	else
-	{
-		$_SESSION["login"]=$uid;
-	}
+$action = $_REQUEST["action"];
+
+if ($action=="logout"){
+	session_unset();
+	session_destroy();
 }
-if (isset($_SESSION["login"]))
-{
-echo "<h1 align=center>Hye you are sucessfully login!!!</h1>";
-exit;
-}
+
+// if(!isset($_SESSION['login_user'])){
+// 	echo "<script type='text/javascript'> document.location = 'Login.php'; </script>";
+// 	exit();
+// 	}
+
+
 ?>
-
 <!DOCTYPE html>
-<html lang="en">
-   <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta http-equiv="X-UA-Compatible" content="ie=edge">
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-      <link rel="stylesheet" href="./assets/css/indexstyle.css">
-      <style>
-         h2 {
-         text-align: center;
-         }
-         .fa, .fa-fw, .fa-lg, .fa-home {
-         margin-right:5px;
-         }
-      </style>
-      <title>Brasov City</title>
-   </head>
-   <body>
-      <nav class="navbar">
-         <span class="navbar-toggle" id="js-navbar-toggle">
-         <i class="fas fa fa-bars"></i>
-         </span>
-         <a href="index.html" class="logo grow">BRASOV CITY</a>
-         <ul class="main-nav" id="js-menu">
+<html>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+ <link rel="stylesheet" href="../assets/css/indexstyle.css">
+    
+ 
+
+	<body>
+   <nav class="navbar">
+          <span class="navbar-toggle" id="js-navbar-toggle">
+          <i class="fas fa fa-bars"></i>
+          </span>
+          <a href="#" class="logo grow">BRASOV CITY</a>
+          <ul class="main-nav" id="js-menu">
             <li>
                <a href="index.html" class="nav-links"><i class="fa fa-fw fa-lg fa-home"></i>HOME</a>
             </li>
             
             <li>
-               <a href="tourBooking.php" class="nav-links" target="_blank"><i class="fas fa-bus" style='margin-right:5px'></i>TOURS</a>
+               <a href="tourBooking.php" class="nav-links"><i class="fas fa-bus" style='margin-right:5px'></i>TOURS</a>
             </li>
           
             <li>
-               <a href="login.php" class="nav-links" target="_blank"><i class="fa fa-fw fa-user-cog" style='margin-right:5px'></i>LOGIN</a>
+               <a href="login.php" class="nav-links"><i class="fa fa-fw fa-user-cog" style='margin-right:5px'></i>LOGIN</a>
             </li>
-         </ul>
-      </nav>
-      <!--End Navbar-->
-      <main class="main-contact">
-         <h2>LOGIN </h2>
-         <div class="container container-form">
-
-        
-<div class="floating-box">
-
-<form action="login.php" method="post">
-
-
-   <label for="username">User Name</label>
-   <input type="text" id="username" name="username"><br><br>
-
-   <label for="password">Password</label>
-   <input type="password" id="password" name="password"><br><br>
-   <input name="submit" type="submit" id="submit" value="Login"><br>
-
-
+          </ul>
+       </nav>
+<center>
 <?php
-		  if(isset($found))
-		  {
-		  	echo '<p class="w3-center w3-text-red">Invalid user id or password<br><a href="login.php">Please try again</p>';
-		  }
-		  ?>
- 
-</form>
 
-</div>
 
-            <!-- Helpful code found here: https://www.w3schools.com/html/html_forms.asp 
-            <form name="myForm" action="/admin/tours.php" onsubmit="return validateForm()" method="post">
-               
-               <div>
-                  <label for="username">Username</label>
-                  <input name="username" type="text" id="username" class="form-control" value="required>
-               </div>
-               <br>
-               <div>
-                  <label for="password">Password</label>
-                  <input name="password" type="password" id="password" class="form-control" value" required >
-               </div>
-               <br>
-                  <input type="submit" onClick="testEmpty()" value="Submit">
-            </form>-->
-            </div>
-         </div>
-      </main>
-     
-       
-      </div>
-   </body>
-   <script src='https://kit.fontawesome.com/a076d05399.js'></script>
-   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-   <script src="./assets/js/app.js"></script>
- 
+$uname 					= $_REQUEST["uname"];
+$upass 					= $_REQUEST["upass"];
+$wasaloginattempted     = $_REQUEST["wasaloginattempted"];
+$mymessage 				= "";
+
+if ($wasaloginattempted=="yes"){
+
+	$_SESSION["User_ID"] = "";
+
+	$query = "SELECT *,user.uid AS USERuid
+					FROM user
+					LEFT JOIN tourGuide ON tourGuide.uid = user.tourGuideUid
+					WHERE user.username='".$uname."' AND user.password='".$upass."'";
+	$result = mysqli_query($dbConn, $query);
+	while($ArrayofUserinfo = mysqli_fetch_assoc($result)) {
+		$_SESSION["User_ID"] 	= $ArrayofUserinfo["USERuid"];
+		$_SESSION["User_Name"] 	= $ArrayofUserinfo["username"];
+		$_SESSION["AccessRole"] = $ArrayofUserinfo["accessRole"];
+		$_SESSION["TG_uid"] 	= $ArrayofUserinfo["tourGuideUid"];
+		$_SESSION["TG_name"] 	= $ArrayofUserinfo["guideName"];
+		}
+
+
+	if ($_SESSION["User_ID"]<>""){
+
+		echo '<meta http-equiv="refresh" content="0;url=login.php?procedure=login" />';
+
+	} else {
+		$uname 					= "";
+		$upass 					= "";
+		$mymessage              = "Your Username or password are not correct!!! please try again!";
+
+		}
+
+
+
+
+   }
+
+
+
+echo $mymessage;
+
+echo "<hr>".$query."<hr>";
+
+echo '<form  action="login.php" method="post">';
+
+echo '<label for="uname">User Name:</label><br>';
+echo '	  <input type="text" id="Tname" name="uname" size="5" required value="'.$uname.'"><br>';
+echo '	  <label for="lname">Password:</label><br>';
+echo '	  <input type="text" id="Desc" size="5" name="upass" required value="'.$upass.'"><br><br>';
+echo '	  <input type="hidden" name="wasaloginattempted" value="yes">';
+echo '	  <input type="submit" value="Login">';
+echo '	</form>';
+
+?>
+
+</center>
+
+
+
+
+	</body>
+
 </html>
