@@ -1,4 +1,3 @@
-
 <?php
 session_start();
 
@@ -24,8 +23,10 @@ function myFunction() {
 }
 </script>
 
-<?php 
 
+
+
+<?php
 include('menuTabs.php');
 
 if (isset($_REQUEST["showSnack"])){
@@ -34,73 +35,72 @@ if (isset($_REQUEST["showSnack"])){
 	echo '<body>';
 	}
 
+
 // if ($_SESSION["AccessRole"]=="Adm"){
-    echo  ' <a href="payrolltest.php?procedure=genpayroll"><button class="btn success" >Generate Payroll (Admin Side)</button></a>';
-    // }else {
-    echo  ' <a href="payrolltest.php?procedure=showmypay"><button class="btn success" >Calculate Pay (Tour Guide Side)</button></a>';
-    // }
-    //echo  ' <button class="btn success" ></button>';
-    
-    
-    if (isset($_REQUEST["showSnack"])){
-        echo '<div id="snackbar">'.$_REQUEST["showSnack"].'</div>';
-     }
-    
-	 if ($procedure=="genpayroll"){
+echo  ' <a href="payroll.php?procedure=genpayroll"><button class="btn success" >Generate Payroll (Admin Side)</button></a>';
+// }else {
+echo  ' <a href="payroll.php?procedure=showmypay"><button class="btn success" >Calculate Pay (Tour Guide Side)</button></a>';
+// }
+//echo  ' <button class="btn success" ></button>';
+
+
+if (isset($_REQUEST["showSnack"])){
+	echo '<div id="snackbar">'.$_REQUEST["showSnack"].'</div>';
+ }
 
 
 
-		echo '<br /><br /><br /><br />
-		  <form action="payrolltest.php?procedure=genpayrollView" method="post">
-		  <label for="FromDate">Start Payroll Date:(Inclusive)</label><br>
-		  <input type="date" id="FromDate" name="FromDate" required value="'.$FromDate.'"><br>
-		  <label for="lname">End Payroll Date:(Inclusive)</label><br>
-		  <input type="date" id="EndDate" name="EndDate" required value="'.$EndDate.'"><br><br>
-		  <label for="tourGuide">Tour guide:</label><br>';
-			echo '<SELECT name="tourGuide" required>';
-			echo "<OPTION value='NONE'>NONE SELECTED</OPTION>\n";
-		
-			$query = "SELECT * FROM tourGuide ORDER BY guideName";
-			$result = mysqli_query($dbConn, $query);
-			while($Arrayline = mysqli_fetch_assoc($result)) {
-		
-				echo "<OPTION value='".$Arrayline["uid"]."'";
-				// uid is from the DB!
-				if ($tourGuide == $Arrayline["uid"] ) {echo " SELECTED"; }
-				echo ">".$Arrayline["guideName"] ."</OPTION>\n";
-		
-				}
-		
-			echo "</SELECT><br>";
-		
-		echo '
-		  <input type="hidden" name="wasiposted" value="formposted">
-		  <input type="submit" value="Submit">
-		  </form>';
-		
-			}
+if ($procedure=="genpayroll"){
 
+
+
+echo '<br /><br /><br /><br />
+  <form action="payroll.php?procedure=genpayrollView" method="post">
+  <label for="FromDate">Start Payroll Date:(Inclusive)</label><br>
+  <input type="date" id="FromDate" name="FromDate" required value="'.$FromDate.'"><br>
+  <label for="lname">End Payroll Date:(Inclusive)</label><br>
+  <input type="date" id="EndDate" name="EndDate" required value="'.$EndDate.'"><br><br>
+  <label for="tourGuide">Tour guide:</label><br>';
+	echo '<SELECT name="tourGuide" required>';
+	echo "<OPTION value='NONE'>NONE SELECTED</OPTION>\n";
+
+	$query = "SELECT * FROM tourGuide ORDER BY guideName";
+	$result = mysqli_query($dbConn, $query);
+	while($Arrayline = mysqli_fetch_assoc($result)) {
+
+		echo "<OPTION value='".$Arrayline["uid"]."'";
+		// uid is from the DB!
+		if ($tourguide == $Arrayline["uid"] ) {echo " SELECTED"; }
+		echo ">".$Arrayline["guideName"] ."</OPTION>\n";
+
+		}
+
+    echo "</SELECT><br>";
+
+echo '
+  <input type="hidden" name="wasiposted" value="formposted">
+  <input type="submit" value="Submit">
+  </form>';
+
+	}
 
 if ($procedure=="genpayrollView"){
 
-$tourGuide = $_REQUEST["tourGuide"];
+$tourguide = $_REQUEST["tourGuide"];
 $EndDate   = $_REQUEST["EndDate"];
-$FromDate  = $_REQUEST["FromDate"];
-
-// get the commision rate for the Guide and their Name.
+$fromDate  = $_REQUEST["FromDate"];
 
 	$query = "SELECT *
 				FROM tourGuide
 	            LEFT JOIN commLevel ON commLevel.uid = tourGuide.commLevel
-				WHERE tourGuide.uid='".$tourGuide."'";
+				WHERE tourGuide.uid='".$tourguide."'";
 	$result = mysqli_query($dbConn, $query);
 	while($Arrayline = mysqli_fetch_assoc($result)) {
 		$myGuideName   = $Arrayline["guideName"];
-		$myCommisValue = $Arrayline["commPercent"];
+		$myCommisValue = $Arrayline["value"];
 		}
 
 
-// Get the Main values/Parameters in the part that gets calucualted
 	$query = "SELECT *
 				FROM systemSetup";
 	$result = mysqli_query($dbConn, $query);
@@ -108,10 +108,6 @@ $FromDate  = $_REQUEST["FromDate"];
 		$mySetupFlatRate = $Arrayline["flatRate"];
 		$mySetupTAXRate  = $Arrayline["taxRate"];
 		}
-
-// Tourguide, dates for the Payroll, Commision , Name of Guide and we just for the LFAT and TAx rates.
-
-
 
 
 	$queryTwo = "SELECT * FROM surcharges";
@@ -129,7 +125,7 @@ $FromDate  = $_REQUEST["FromDate"];
 
 $mySQLFilter = "";
 
-$mySQLFilter = " AND `dateTour` >= '".$FromDate."'  AND `dateTour` <= '".$EndDate."' AND completed=1";
+$mySQLFilter = " AND `date` >= '".$FromDate."'  AND `date` <= '".$EndDate."' AND completed=1";
 //$mySQLFilter = " BETWEEN  ".$fromDate."   AND ".$EndDate."";
 
 
@@ -141,9 +137,8 @@ echo '<table>
   <tr>
     <th>Book Ref</th>
     <th>Dated</th>
-    <th>Customer Details</th>
-    <th>No of Guests</th>
-    <th>Tour Total</th>
+    <th>Customer Name & Surname</th>
+    <th>Price of Tour</th>
     <th>Surcharge Fee</th>
     <th>Price+Surch</th>
     <th>Commission Calc</th>
@@ -153,15 +148,15 @@ echo '<table>
   </tr>';
 
 
-	$query = "SELECT *,bookings.guid AS bookingID_fromDB,MONTH(bookings.dateTour) AS monthNum
+	$query = "SELECT *,bookings.tourUid AS bookingID_fromDB,MONTH(bookings.dateTour) AS monthNo
 				FROM bookings
-				LEFT JOIN tours ON tours.uid = bookings.tourUid
+				LEFT JOIN tours ON tours.uid = bookings.guid
 				LEFT JOIN tourGuide ON tourGuide.uid = bookings.tourGuideUid
 				WHERE 1=1
 				".$mySQLFilter."
 				ORDER BY dateTour DESC";
 
-echo $query;
+
 
 	$result = mysqli_query($dbConn, $query);
 
@@ -174,59 +169,42 @@ echo $query;
 	$myTotalValueComms 		= 0;
 	$myTotalFlatRateValues  = 0;
 	$myTotalSurchargeValues = 0;
-	$myTotalGuestServed     = 0;
 	while($Arrayline = mysqli_fetch_assoc($result)) {
 
 		 $ThislineTotal = 0;
-		 $TotalofTour   = 0;
-         // total number of Tours - FOR THE DATE RANGE
+
 		 $myNumberofrecs++;
 		 echo '<tr>';
-		 echo '<td><b>'.$Arrayline['bookref'].'</b></td>';
+		 echo '<td>'.$Arrayline['bookRef'].'</td>';
 		 echo '   </td>';
 		 echo '   <td>'.$Arrayline['dateTour'].'</td>';
 		 echo '   <td>'.$Arrayline['customerName']." ".$Arrayline['customerSurname'].'</td>';
-		 echo '   <td>'.$Arrayline['Pax']." @&euro;&nbsp; ".number_format($Arrayline['Price'],2).'</td>';
-		 // total number of Persons served - FOR THE DATE RANGE
-		 $myTotalGuestServed	+= $Arrayline['Pax'];
-		 // Total of Tour - Number of persons * Price of the Tour
-		 $TotalofTour = $Arrayline['numPersons']*$Arrayline['Price'];
-		 echo '   <td align="right">&euro;&nbsp;'.number_format($TotalofTour,2).'</td>';
+		 echo '   <td align="right">&euro;&nbsp;'.number_format($Arrayline['Price'],2).'</td>';
 
 		 echo '   <td align="right">';
-         // work out the surcharge
-         // Total of the tour * array element that matches the Month of the Date of the actual tour
-         $mySurch =  $TotalofTour * ($myMonSurcharge[$Arrayline['monthNum']]/100);
 
-
+         $mySurch =  $Arrayline['Price'] * ($myMonSurcharge[$Arrayline['monthNo']]/100);
          if ($mySurch>0){
-             // print the surcharge and then show the user the percentage Surchage due for this month related
-             // to the booking date
-	         echo "&euro;&nbsp;".$mySurch . "   (". $myMonSurcharge[$Arrayline['monthNum']]." %) ";
-	         // add this lines surchage to the bigger tally
+	         echo "&euro;&nbsp;".$mySurch . "   (". $myMonSurcharge[$Arrayline['monthNo']]." %) ";
 			$myTotalSurchargeValues +=  $mySurch;
 			}
 
 
 		 echo '   </td>';
 
-         // show the TotalTour price and the added surch for the tour
-		 echo '   <td>'.number_format($TotalofTour+$mySurch,2).'</td>';
-         // add this to the tally of the tours
-		 $myTotalValueofTours += $TotalofTour;
-         // calculate the Commision based on TotalTour Price + Surcharge * Commision Rate
-         $myComm =  ( $TotalofTour + $mySurch) * ($myCommisValue/100);
 
-		 // total this for the big total at the bottom
+		 echo '   <td>'.number_format($Arrayline['Price']+$mySurch,2).'</td>';
+
+		 $myTotalValueofTours += $Arrayline['Price'];
+         $myComm =  ($Arrayline['Price'] + $mySurch) * ($myCommisValue/100);
+
 		 $myTotalValueComms  +=  $myComm;
 
-         // Total up the Flat rate paid for each tour
 		 $myTotalFlatRateValues += $mySetupFlatRate;
 
 		 echo '   <td align="right">&euro;&nbsp;'.number_format($myComm,2).'</td>';
 		 echo '   <td align="right">&euro;&nbsp;'.$mySetupFlatRate.'</td>';
-         // Tally up this lines values to show what it works out to be
-         // COmmision calc plus the flat rate
+
 		 $ThislineTotal = $myComm + $mySetupFlatRate;
 
  		 echo '   <td align="right">&euro;&nbsp;'.number_format($ThislineTotal,2).'</td>';
@@ -234,14 +212,13 @@ echo $query;
 
 	}
 
-    // Addition of the TotalCOmmisions plus the total of the flat rates
+
 	$myPayis = $myTotalValueComms + $myTotalFlatRateValues;
 
 	echo'  <tr>
     <th></th>
     <th></th>
     <th>Tours : '.$myNumberofrecs.'</th>
-    <th>'.$myTotalGuestServed.'</th>
     <th>&euro;&nbsp;'.number_format($myTotalValueofTours,2).'</th>
     <th>&euro;&nbsp;'.number_format($myTotalSurchargeValues,2).'</th>
     <th>&euro;&nbsp;'.number_format($myTotalValueofTours+$myTotalSurchargeValues,2).'</th>
@@ -277,12 +254,10 @@ echo '<hr><br><table width="50%">
 
  echo '</table>';
 
-
- echo  '<a href="payrollprt.php?tourguide='.$tourGuide.'&EndDate='.$EndDate.'&FromDate='.$FromDate.'" target="_blank"><button class="btn success" >Print Payslip</button></a>';
-
-
-
  }
 
+
 ?>
+
 </body>
+
