@@ -1,3 +1,7 @@
+/* 
+FIT ICT AP Software Developer (Baldoyle)
+Student Name: Andreea Iosip C&G number: EBA7234 Date: 26/01/2020 */
+
 @import url('https://fonts.googleapis.com/css?family=Nunito+Sans|Righteous&display=swap');
 body, html{
     font-family:'Nunito Sans', sans-serif;
@@ -137,6 +141,76 @@ Footer
 HOME Page 
 =============================== 
 */
+/* SLIDER */
+
+
+.indexSlider {
+  position: relative;
+}
+
+.slider-inner {
+  position: relative;
+  overflow: hidden;
+  width: 100%
+}
+
+.slider-open:checked+.slider-item {
+  position: static;
+  opacity: 100;
+}
+
+.slider-item {
+  position: absolute;
+  opacity: 0;
+  -webkit-transition: opacity 0.6s ease-out;
+  transition: opacity 0.6s ease-out;
+}
+
+.slider-item img {
+  display: block;
+  height: auto;
+  width: 100%
+}
+
+.slider-control {
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 20%;
+  color: #fff;
+  cursor: pointer;
+  display: none;
+  font-size: 60px;
+  height: 4%;
+  line-height: 50%;
+  position: absolute;
+  top: 50%;
+  -webkit-transform: translate(0, -50%);
+  cursor: pointer;
+  -ms-transform: translate(0, -50%);
+  transform: translate(0, -50%);
+  text-align: center;
+  width: 3%;
+  z-index: 10
+}
+
+.slider-control.prev {
+  left: 3%;
+}
+
+.slider-control.next {
+  right: 3%;
+}
+
+.slider-control:hover {
+  background: rgba(0, 0, 0, 0.8);
+  color: #aaaaaa;
+}
+
+#slide-1:checked~.control-1,
+#slide-2:checked~.control-2,
+#slide-3:checked~.control-3 {
+  display: block;
+}
+
 
 
 .heading-section {
@@ -185,10 +259,265 @@ HOME Page
 	top:1px;
 }
 
+/* 
+=============================== 
+HISTORY Page
+=============================== 
+*/
+
+/* video ---------------*/
+
+.history-container>h2, .main-contact>h2, .main-attractions>h2, .events-header{
+ font-family:'Righteous', cursive;
+ color: #3b4f3f;
+}
+
+.brasov-video {
+  display: flex;
+  text-align: center;
+  padding-top:30px;
+  padding-bottom:30px;
+}
+
+video {
+  width: 60vw;
+  margin: auto;
+}
+
+/* Gallery */
+
+.gallery-row {
+    text-align: center;
+}
+
+.gallery-row figure {
+    height: 240px;
+    width: 240px;
+    margin:0;
+    background-size: cover;
+	  background-position: 50% 50%;
+    box-shadow:0 0 15px rgba(0, 0, 0, 0.7);
+    transition: all 1s ease-in-out;
+    background-repeat:no-repeat;
+    z-index:2;
+    display:inline-block;
+    position:relative;
+
+}
+
+.gallery-row a {
+    display: inline-block;
+    text-align: center;
+    margin:40px;
+    text-decoration:none;
+    color:white;
+}
+
+.gallery-row a p {
+    position:absolute;
+    opacity: 0;
+    font-size: 20px;
+    top:45%;
+    z-index:100;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+figure:hover p {
+    opacity:1;
+}
+
+figure:after {
+    content:"";
+    display:inline-block;
+    height:100%;
+    width:100%;
+    background-color:rgba(40, 44, 43, 0.74);
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    opacity:0;
+    transition: all 0.4s ease-in-out 0s;
+    z-index:99;
+}
+
+figure:hover:after {
+    opacity:0.7;
+}
+
+.photo01 {
+	background-image: url("https://www.zilesinopti.ro/media/1244319180570b72fc288858.47397812.jpg");
+}
+
+.photo02 {
+	background-image: url("https://www.zilesinopti.ro/media/uploads//republicii%20veche.jpg");
+}
+
+.photo03 {
+	background-image: url("https://i.redd.it/gji8rffm2gq01.jpg");
+}
+
+.photo04 {
+	background-image: url("https://static.playtech.ro/stiri/wp-content/uploads/2019/12/Cronologia-Revolu%C8%9Biei-Rom%C3%A2ne-din-1989.-Filmul-evenimentelor-pe-zile.-Ce-s-a-%C3%AEnt%C3%A2mplat-de-pe-14-decembrie-p%C3%A2n%C4%83-pe-25-1.jpg");
+}
+
+.photo05 {
+	background-image: url("https://images.squarespace-cdn.com/content/v1/5475c689e4b05a135b085d65/1516348598476-TKX36K70MJRGB67RXISV/ke17ZwdGBToddI8pDm48kHbiX_oRIAwjR2DjJTidV8IUqsxRUqqbr1mOJYKfIPR7LoDQ9mXPOjoJoqy81S2I8N_N4V1vUb5AoIIIbLZhVYy7Mythp_T-mtop-vrsUOmeInPi9iDjx9w8K4ZfjXt2dqOEsifexA3U0hOaW_x0nKBZBc_XQTtV8q0N2_MJvslZ3WUfc_ZsVm9Mi1E6FasEnQ/Peles+Castle+Brasov+Romania?format=1500w");
+}
+
+.photo06 {
+	background-image: url("http://static.trip101.com/paragraph_media/pictures/001/755/149/large/Biserica_Neagra_2C_Brasov_2C_Romania.jpg?1575969854");
+}
+
+.photo07 {
+	background-image: url("https://www.hotelambient.ro/wp-content/uploads/2016/12/Poiana-Brasov-1024x577.jpg");
+}
+
+.photo08 {
+	background-image: url("https://lp-cms-production.imgix.net/features/2016/03/Poiana-Brasov-Transylvania-ski-resort_CS.jpg?auto=format&fit=crop&q=40&sharp=10&vib=20&ixlib=react-8.6.4");
+}
+
+.photo09 {
+	background-image: url("https://c4.wallpaperflare.com/wallpaper/651/842/390/brasov-romania-snow-city-wallpaper-preview.jpg");
+}
+
+.photo10 {
+	background-image: url("https://cdn.ostrovok.ru/t/640x400/content/d6/e6/d6e6cf72e3b791bf6d7838ec0bbbbef4aedd6c66.jpeg");
+}
+
+.photo11 {
+	background-image: url("https://www.nicerightnow.com/wp-content/uploads/2018/10/Brasov-Romania-Tour-100-Catherines-Gate.jpg");
+}
+
+.photo12 {
+	background-image: url("https://www.nicerightnow.com/wp-content/uploads/2018/10/Brasov-Romania-Tour-100-roadside.jpg");
+}
+/* lightbox */
+
+.lightbox-target {
+  position: fixed;
+  top: -100%;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  width: 100%;
+  opacity: 0;
+  -webkit-transition: opacity .5s ease-in-out;
+  -moz-transition: opacity .5s ease-in-out;
+  -o-transition: opacity .5s ease-in-out;
+  transition: opacity .5s ease-in-out;
+  overflow: hidden;
+  z-index:300;
+}
+
+.lightbox-target .container-photos {
+  margin: auto;
+  position: absolute;
+  top: 50vh;
+  left: 50vw;
+  background-color: white;
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);
+  -webkit-transition: .5s ease-in-out;
+  -moz-transition: .5s ease-in-out;
+  -o-transition: .5s ease-in-out;
+  transition: .5s ease-in-out;
+  text-align:left;
+  transform: translate3d(-50%, -50%, 0);
+}
+
+
+.container-photos .elements {
+    display:inline-block;
+    width: 80%;
+    max-height: 425px;
+
+}
+
+ul {
+   
+    overflow: hidden;
+    overflow-y:auto;
+    max-height: 369px;
+    margin:0;
+}
+
+li {
+    margin-bottom: 10px;
+}
+
+a.lightbox-close {
+  display: block;
+  width: 50px;
+  height: 50px;
+  background: white;
+  color: black;
+  text-decoration: none;
+  position: absolute;
+  top: 0px;
+  right: 0;
+  margin: 0;
+  padding-top: 10px;
+}
+
+.lightbox-target:target {
+  opacity: 1;
+  top: 0;
+  bottom: 0;
+}
+
+.lightbox-target:target img {
+    height: auto;
+    width: 80vw;
+    vertical-align: top;
+}
+
+
+/* 
+=============================== 
+ATTRACTIONS Page
+=============================== 
+*/
+
+.attraction-1, .attraction-3 {
+  float:left;
+  width:50%;
+  padding:15px 20px 15px 15px;
+  margin-top: 7px;
+}
+.attraction-2, .attraction-4 {
+  float:left;
+  width:50%;
+  padding:15px;
+  margin-top:7px;
+  text-align:center;
+}
+
+.attraction-1, .attraction-4 {
+  background-color: #d1cdc8;
+  border-radius: 10px;
+}
 
 
 
-/*
+.attractions-container {
+   
+  overflow:auto;
+  padding-top: 15px;
+  text-align: center;
+}
+
+.attractions-container img {
+  width: 50%;
+  height: auto;
+} 
+.attractions-container>div>p {
+  padding: 10px;
+} 
+
+.attractions-container>div>h4 {
+  padding-top: 10px;
+}
+/* 
 =============================== 
 CONTACT Page
 =============================== 
@@ -208,7 +537,7 @@ CONTACT Page
 }
 /* Form */
 
-.container-form {
+.container-form , .myForm{
   text-align: center;
   width: 80vw;
   min-height: 80vh;
@@ -216,7 +545,9 @@ CONTACT Page
   padding-bottom: 15px;
 }
 
-input[type=text], input[type=password], select, textarea, input[type=email], input[type=tel] {
+
+
+input[type=text], input[name=upass], select, textarea, input[name=uname], #upass, #uname {
   width: 100%;
   padding: 13px;
   border: 1px solid #ccc;
@@ -254,6 +585,113 @@ input[type=submit]:hover {
   background-color: #f2f2f2;
   padding: 30px;
   margin-top: 30px;
+}
+
+
+.slidecontainer {
+  width: 100%;
+}
+
+.slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 15px;
+  border-radius: 5px;
+  background: #d3d3d3;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+}
+
+.slider:hover {
+  opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: #4CAF50;
+  cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: #4CAF50;
+  cursor: pointer;
+}
+
+
+/* 
+=============================== 
+EVENTS Page
+=============================== 
+*/
+
+.events-header {
+  text-align: center;
+  padding-bottom: 20px;
+}
+
+table {
+  /* Displayed at the top by default */
+  caption-side: bottom;
+  border-collapse: collapse;
+  margin: auto;
+  font-family:'Nunito Sans', sans-serif;
+}
+ 
+.myEvents {
+  overflow-x:auto;
+  padding-left:5px;
+  padding-right: 5px;
+}
+
+.main-events {
+  width: 80vw;
+  margin:auto;
+ 
+  /* Add border around the table */
+  border: 1px solid #000;
+ 
+  /* Eliminate space between cells */
+  border-collapse: collapse;
+}
+ 
+/* Add border around cells */
+.eventsDaily td, .eventsDaily th {
+  border: 1px solid #000;
+}
+ 
+/* Style table columns */
+.eventsDaily td {
+  text-align: center;
+  padding: 0.3em;
+  font-weight: bold;
+}
+ 
+/* Style table headings */
+.eventsDaily th {
+  font-weight: bold;
+  padding: 0.3em;
+  background-color: #008f7f;
+  color: #FFF;
+}
+ 
+/* Alternate colors on table rows */
+.eventsDaily tr:nth-child(odd){
+  background-color:#95c1c2;
+}
+ 
+/* Highlight table row on hover */
+.eventsDaily tr:hover {
+  background-color: rgb(50, 59, 53);
+  color: #FFF;
 }
 
 
@@ -299,12 +737,29 @@ MEDIA QUERIES
  footer {
    height: 25px;
  }
-
+ table {
+  font-size: 8px;
+}
 
 }
 
-
-
+@media only screen and (max-width: 700px) {
+  .attractions-container>div {  
+    width: 100%;  
+    height: 100%;  
+    object-fit: cover;  
+}
+}
+ 
+@media only screen and (min-width: 600px) {
+ 
+  .lightbox-target:target img {
+    height: auto;
+    width: 60vw;
+   
+  }
+  
+ }
 
 @media screen and (min-width: 1022px) {
   .navbar {
@@ -352,4 +807,9 @@ MEDIA QUERIES
     padding: 60px;
   }
 
+  .lightbox-target:target img {
+    height: auto;
+    width: 60vw;
+  }
 }
+

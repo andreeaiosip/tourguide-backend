@@ -20,11 +20,10 @@ if ($action=="logout"){
 <html>
 <meta name="viewport" content="width=device-width, initial-scale=1">
  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
- <link rel="stylesheet" href="../assets/css/indexstyle.css">
+ <link rel="stylesheet" href="./assets/css/indexstyle.css">
     
  
-
-	<body>
+<body>
    <nav class="navbar">
           <span class="navbar-toggle" id="js-navbar-toggle">
           <i class="fas fa fa-bars"></i>
@@ -78,7 +77,7 @@ if ($wasaloginattempted=="yes"){
 	} else {
 		$uname 					= "";
 		$upass 					= "";
-		$mymessage              = "Your Username or password are not correct!!! please try again!";
+		$mymessage              = "Your Username or password are not correct. Please try again.";
 
 		}
 
@@ -92,17 +91,17 @@ if ($wasaloginattempted=="yes"){
 echo $mymessage;
 
 echo "<hr>".$query."<hr>";
-
-echo '<form  action="login.php" method="post">';
+echo '<div class=" container container-form">';
+echo '<form   action="login.php" method="post">';
 
 echo '<label for="uname">User Name:</label><br>';
-echo '	  <input type="text" id="Tname" name="uname" size="5" required value="'.$uname.'"><br>';
-echo '	  <label for="lname">Password:</label><br>';
-echo '	  <input type="text" id="Desc" size="5" name="upass" required value="'.$upass.'"><br><br>';
+echo '	  <input type="text" id="uname" name="uname" size="5" required value="'.$uname.'"><br>';
+echo '<label for="password">Password:</label><br>';
+echo '	  <input type="text" id="upass" size="5" name="upass" required value="'.$upass.'"><br><br>';
 echo '	  <input type="hidden" name="wasaloginattempted" value="yes">';
 echo '	  <input type="submit" value="Login">';
 echo '	</form>';
-
+echo '<div>'; 
 ?>
 
 </center>
@@ -111,5 +110,7 @@ echo '	</form>';
 
 
 	</body>
-
+   <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+   <script src="./assets/js/app.js"></script>
 </html>
