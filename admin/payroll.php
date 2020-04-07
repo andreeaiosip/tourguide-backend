@@ -1,10 +1,7 @@
 <?php
 session_start();
-$fromDate = $_REQUEST["fromDate"];
-$procedure = $_REQUEST["procedure"];
-$EndDate = $_REQUEST["EndDate"];
-$tourguide = $_REQUEST["tourguide"];
 
+$procedure = $_REQUEST["procedure"];
 include('myDBConnection.php');
 include('commonFunctions.php');
 
@@ -39,11 +36,11 @@ if (isset($_REQUEST["showSnack"])){
 	}
 
 
-if ($_SESSION["AccessRole"]=="Adm"){
-	echo  ' <a href="payroll.php?procedure=genpayroll"><button class="btn success" >Generate Payroll (Admin Side)</button></a>';
-}else {
-	echo  ' <a href="payroll.php?procedure=showmypay"><button class="btn success" >Calculate Pay (Tour Guide Side)</button></a>';
-}
+// if ($_SESSION["AccessRole"]=="Adm"){
+echo  ' <a href="payroll.php?procedure=genpayroll"><button class="btn success" >Generate Payroll (Admin Side)</button></a>';
+// }else {
+echo  ' <a href="payroll.php?procedure=showmypay"><button class="btn success" >Calculate Pay (Tour Guide Side)</button></a>';
+// }
 //echo  ' <button class="btn success" ></button>';
 
 
@@ -59,12 +56,12 @@ if ($procedure=="genpayroll"){
 
 echo '<br /><br /><br /><br />
   <form action="payroll.php?procedure=genpayrollView" method="post">
-  <label for="fromDate">Start Payroll Date:(Inclusive)</label><br>
-  <input type="date" id="fromDate" name="fromDate" required value="'.$fromDate.'"><br>
+  <label for="FromDate">Start Payroll Date:(Inclusive)</label><br>
+  <input type="date" id="FromDate" name="FromDate" required value="'.$FromDate.'"><br>
   <label for="lname">End Payroll Date:(Inclusive)</label><br>
-  <input type="date" id="EndDate" size="150" name="EndDate" required value="'.$EndDate.'"><br><br>
-  <label for="tourguide">Tour guide:</label><br>';
-	echo '<SELECT name="tourguide" required>';
+  <input type="date" id="EndDate" name="EndDate" required value="'.$EndDate.'"><br><br>
+  <label for="tourGuide">Tour guide:</label><br>';
+	echo '<SELECT name="tourGuide" required>';
 	echo "<OPTION value='NONE'>NONE SELECTED</OPTION>\n";
 
 	$query = "SELECT * FROM tourGuide ORDER BY guideName";
@@ -80,23 +77,18 @@ echo '<br /><br /><br /><br />
 
     echo "</SELECT><br>";
 
-
-
 echo '
   <input type="hidden" name="wasiposted" value="formposted">
   <input type="submit" value="Submit">
   </form>';
 
-
-
-
-
-
 	}
 
-
-
 if ($procedure=="genpayrollView"){
+
+$tourguide = $_REQUEST["tourGuide"];
+$EndDate   = $_REQUEST["EndDate"];
+$fromDate  = $_REQUEST["FromDate"];
 
 	$query = "SELECT *
 				FROM tourGuide
@@ -133,13 +125,13 @@ if ($procedure=="genpayrollView"){
 
 $mySQLFilter = "";
 
-$mySQLFilter = " AND `date` >= '".$fromDate."'  AND `date` <= '".$EndDate."' AND completed=1";
+$mySQLFilter = " AND `date` >= '".$FromDate."'  AND `date` <= '".$EndDate."' AND completed=1";
 //$mySQLFilter = " BETWEEN  ".$fromDate."   AND ".$EndDate."";
 
 
-$mySQLFilter .= " AND tourGuideUid='".$tourguide."'";
+$mySQLFilter .= " AND tourGuideUid='".$tourGuide."'";
 
- echo "<h5> Bookings for ".$myGuideName." from ".$fromDate." to ".$EndDate." @ Commission rate of :".$myCommisValue."%</h5>";
+ echo "<h5> Bookings for ".$myGuideName." from ".$FromDate." to ".$EndDate." @ Commission rate of :".$myCommisValue."%</h5>";
 
 echo '<table>
   <tr>
@@ -156,7 +148,7 @@ echo '<table>
   </tr>';
 
 
-	$query = "SELECT *,bookings.uid AS bookingID_fromDB,MONTH(bookings.dateTour) AS monthNo
+	$query = "SELECT *,bookings.tourUid AS bookingID_fromDB,MONTH(bookings.dateTour) AS monthNo
 				FROM bookings
 				LEFT JOIN tours ON tours.uid = bookings.tourUid
 				LEFT JOIN tourGuide ON tourGuide.uid = bookings.tourGuideUid
@@ -183,7 +175,7 @@ echo '<table>
 
 		 $myNumberofrecs++;
 		 echo '<tr>';
-		 echo '<td>'.$Arrayline['bookref'].'</td>';
+		 echo '<td>'.$Arrayline['bookRef'].'</td>';
 		 echo '   </td>';
 		 echo '   <td>'.$Arrayline['dateTour'].'</td>';
 		 echo '   <td>'.$Arrayline['customerName']." ".$Arrayline['customerSurname'].'</td>';
@@ -204,7 +196,6 @@ echo '<table>
 		 echo '   <td>'.number_format($Arrayline['Price']+$mySurch,2).'</td>';
 
 		 $myTotalValueofTours += $Arrayline['Price'];
-
          $myComm =  ($Arrayline['Price'] + $mySurch) * ($myCommisValue/100);
 
 		 $myTotalValueComms  +=  $myComm;
@@ -263,17 +254,10 @@ echo '<hr><br><table width="50%">
 
  echo '</table>';
 
-
-
-
  }
 
 
-
 ?>
-
-
-
 
 </body>
 
