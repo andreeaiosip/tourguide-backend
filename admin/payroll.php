@@ -35,9 +35,9 @@ if (isset($_REQUEST["showSnack"])){
 	}
 
 // if ($_SESSION["AccessRole"]=="Adm"){
-    echo  ' <a href="payrolltest.php?procedure=genpayroll"><button class="btn success" >Generate Payroll (Admin Side)</button></a>';
+    echo  ' <a href="payroll.php?procedure=genpayroll"><button class="btn success" >Generate Payroll (Admin Side)</button></a>';
     // }else {
-    echo  ' <a href="payrolltest.php?procedure=showmypay"><button class="btn success" >Calculate Pay (Tour Guide Side)</button></a>';
+    echo  ' <a href="payroll.php?procedure=showmypay"><button class="btn success" >Calculate Pay (Tour Guide Side)</button></a>';
     // }
     //echo  ' <button class="btn success" ></button>';
     
@@ -51,7 +51,7 @@ if (isset($_REQUEST["showSnack"])){
 
 
 		echo '<br /><br /><br /><br />
-		  <form action="payrolltest.php?procedure=genpayrollView" method="post">
+		  <form action="payroll.php?procedure=genpayrollView" method="post">
 		  <label for="FromDate">Start Payroll Date:(Inclusive)</label><br>
 		  <input type="date" id="FromDate" name="FromDate" required value="'.$FromDate.'"><br>
 		  <label for="lname">End Payroll Date:(Inclusive)</label><br>
@@ -161,7 +161,7 @@ echo '<table>
 				".$mySQLFilter."
 				ORDER BY dateTour DESC";
 
-echo $query;
+
 
 	$result = mysqli_query($dbConn, $query);
 
