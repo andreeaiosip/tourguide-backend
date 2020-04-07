@@ -15,7 +15,7 @@ $addrecord  = $_REQUEST["addrecord"]; //saveme
 
 
 
-// field of db
+
 if ($tours=="NONE"){
 	echo "Please select a tour to attend!";
 	$addrecord = "";
@@ -26,12 +26,7 @@ if ($tours=="NONE"){
  
     $bookguid = bin2hex(random_bytes(16));
     //https://www.php.net/manual/en/function.com-create-guid.php
-    //INSERT INTO bookings (bookid,numOfPeoples) VALUES ('4','3');
-    
-    //$myBookingSql = "SELECT *,bookings.uid AS bookingID_fromDB
-    //		FROM bookings
-    //  	LEFT JOIN tours ON tours.guid = bookings.toursguid 
-	//	 	LEFT JOIN tourguide ON tourguide.guid = bookings.tourguideguid";
+
     
 	$myBookingSql = "INSERT INTO bookings (guid,bookref,tourUid,Pax,dateTour,
 												tourGuideUid,customerName,customerSurname,
@@ -93,11 +88,11 @@ if ($tours=="NONE"){
             </li>
             
             <li>
-               <a href="tourBooking.php" class="nav-links" target="_blank"><i class="fas fa-bus" style='margin-right:5px'></i>TOURS</a>
+               <a href="tourBooking.php" class="nav-links" ><i class="fas fa-bus" style='margin-right:5px'></i>TOURS</a>
             </li>
           
             <li>
-               <a href="login.html" class="nav-links" target="_blank"><i class="fa fa-fw fa-user-cog" style='margin-right:5px'></i>LOGIN</a>
+               <a href="login.php" class="nav-links"><i class="fa fa-fw fa-user-cog" style='margin-right:5px'></i>LOGIN</a>
             </li>
          </ul>
       </nav>
@@ -129,18 +124,14 @@ if ($tours=="NONE"){
 $query = "SELECT * FROM tours";
 $result = mysqli_query($dbConn, $query);
 while($Arrayline = mysqli_fetch_assoc($result)) {
-
+ 
    echo "<option value=".$Arrayline["uid"].">".$Arrayline["TourName"]."</option>";
-
+  //echo "<OPTION value='NONE'>NONE SELECTED</OPTION>\n";
 }
-
 
 ?>
    </select>
 
-                  
-            
-              
                <br>
                <div class="people">
                   <label for="people">Number of people:</label>
