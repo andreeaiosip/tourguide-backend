@@ -115,7 +115,7 @@ $FromDate  = $_REQUEST["FromDate"];
 
 
 	$queryTwo = "SELECT * FROM surcharges";
-	$resultTwo = mysqli_query($dbConn2, $queryTwo);
+	$resultTwo = mysqli_query($dbConn, $queryTwo);
 	$myMonSurcharge = array();
 	while($Surchline = mysqli_fetch_assoc($resultTwo)) {
 		$myMonSurcharge[$Surchline["monthNo"]] = $Surchline["surchargePercent"];
@@ -153,14 +153,13 @@ echo '<table>
   </tr>';
 
 
-	$query = "SELECT *,bookings.guid AS bookingID_fromDB,MONTH(bookings.dateTour) AS monthNum
+	$query = "SELECT *,bookings.guid AS bookingID_fromDB,MONTH(bookings.dateTour) AS monthNo
 				FROM bookings
 				LEFT JOIN tours ON tours.uid = bookings.tourUid
 				LEFT JOIN tourGuide ON tourGuide.uid = bookings.tourGuideUid
 				WHERE 1=1
 				".$mySQLFilter."
 				ORDER BY dateTour DESC";
-
 
 
 	$result = mysqli_query($dbConn, $query);
@@ -190,19 +189,19 @@ echo '<table>
 		 // total number of Persons served - FOR THE DATE RANGE
 		 $myTotalGuestServed	+= $Arrayline['Pax'];
 		 // Total of Tour - Number of persons * Price of the Tour
-		 $TotalofTour = $Arrayline['numPersons']*$Arrayline['Price'];
+		 $TotalofTour = $Arrayline['Pax']*$Arrayline['Price'];
 		 echo '   <td align="right">&euro;&nbsp;'.number_format($TotalofTour,2).'</td>';
 
 		 echo '   <td align="right">';
          // work out the surcharge
          // Total of the tour * array element that matches the Month of the Date of the actual tour
-         $mySurch =  $TotalofTour * ($myMonSurcharge[$Arrayline['monthNum']]/100);
+         $mySurch =  $TotalofTour * ($myMonSurcharge[$Arrayline['monthNo']]/100);
 
 
          if ($mySurch>0){
              // print the surcharge and then show the user the percentage Surchage due for this month related
              // to the booking date
-	         echo "&euro;&nbsp;".$mySurch . "   (". $myMonSurcharge[$Arrayline['monthNum']]." %) ";
+	         echo "&euro;&nbsp;".$mySurch . "   (". $myMonSurcharge[$Arrayline['dateTour']]." %) ";
 	         // add this lines surchage to the bigger tally
 			$myTotalSurchargeValues +=  $mySurch;
 			}
