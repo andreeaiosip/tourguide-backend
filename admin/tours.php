@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 $date 	 = $_REQUEST["dateTour"];
 $tours   = $_REQUEST["mytourselected"];
 $saveme  = $_REQUEST["saveme"];
@@ -24,7 +26,7 @@ include('deleteFunction.php');
  <link rel="stylesheet" href="../assets/css/style.css">
     
  
- <body class="body-height">
+ <body>
  
 
  <?php
@@ -180,4 +182,4 @@ if ($procedure=="deleteTour"){
 
  </body>
  
- 
+ </html>

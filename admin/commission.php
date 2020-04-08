@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 $commDescription = $_REQUEST["commDescription"] ;
 $commPercent 	 = $_REQUEST["commPercent"] ;
 $wasiposted 	 = $_REQUEST["wasiposted"] ;
@@ -247,4 +249,4 @@ if (isset($_REQUEST["showSnack"])){
 
 <script src="./assets/js/app.js"></script>
 </body>
-
+</html>
