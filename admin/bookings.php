@@ -87,8 +87,12 @@ echo '<table >
 			
 
 			echo '<td>';
-		    echo '<a href="bookings.php?procedure=deleteBooking&bguid='.$Arrayline['bguid'].'" title="Delete Booking"><i style="color: #323232bf" class="fa fa-trash fa fa-2x" aria-hidden="true"></i></a>';
-		    echo '<a href="bookings.php?procedure=editBooking&bguid='.$Arrayline['bguid'].'" title="Assign a tour guide"><i style="color:#323232bf" class="fa fa-pencil-square fa-2x" aria-hidden="true"></i></a>';
+			if ($_SESSION["AccessRole"]=="Adm"){
+				 echo '<a href="bookings.php?procedure=deleteBooking&bguid='.$Arrayline['bguid'].'" title="Delete Booking"><i style="color: #323232bf" class="fa fa-trash fa fa-2x" aria-hidden="true"></i></a>';
+			}else{
+				
+			}
+				 echo '<a href="bookings.php?procedure=editBooking&bguid='.$Arrayline['bguid'].'" title="Assign a tour guide"><i style="color:#323232bf" class="fa fa-pencil-square fa-2x" aria-hidden="true"></i></a>';
 		    echo '</td>';
 		  echo '</tr>';
 
@@ -161,7 +165,7 @@ echo '<table >
 
 
 	// DELETE BOOKING----------------
-if ($_SESSION["AccessRole"]=="Adm"){
+
 	if ($procedure=="deleteBooking"){
 
 		$bookingGuid = $_REQUEST["bguid"];
@@ -175,9 +179,7 @@ if ($_SESSION["AccessRole"]=="Adm"){
 		if (isset($_REQUEST["showSnack"])){
 			echo '<div id="snackbar">'.$_REQUEST["showSnack"].'</div>';
 											}
-}else {
 
-	}
 
 ?>
 
