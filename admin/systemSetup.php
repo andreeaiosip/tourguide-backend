@@ -57,7 +57,7 @@ echo '<table>
 
 		echo '<tr>';
 	     echo '<td>';
-             echo $Arrayline['uuserUid'];
+             echo $Arrayline['userUid'];
           echo '</td>';
          
 		 echo '<td>'.$Arrayline['username'].'</td>';
@@ -81,7 +81,7 @@ echo '<table>
 
 
     //echo '<a href="commission.php?procedure=addnewcommlevel"><i class="fa fa-fw fa-plus fa-2x"></i>Add Commission Level</a>';
-    echo '<button class="btn success"><a href="commission.php?procedure=addnewcommlevel"><i class="fa fa-handshake-o fa-lg" aria-hidden="true"></i> Add Commission Level</a></button>';
+    echo '<button class="btn success"><a href="systemSetup.php?procedure=addNewUser"><i class="fa fa-handshake-o fa-lg" aria-hidden="true"></i> Add Commission Level</a></button>';
 
 
 	}
@@ -90,9 +90,11 @@ echo '<table>
 
 if ($procedure=="addNewUser"){
 
-$Commname 		= $_REQUEST["Commname"] ;
-$cpercentage 	= $_REQUEST["cpercentage"] ;
-$wasiposted 	= $_REQUEST["wasiposted"] ;
+$username 		= $_REQUEST["username"] ;
+$password 	= $_REQUEST["password"] ;
+$accessRole 	= $_REQUEST["accessRole"] ;
+$tourGuide 	= $_REQUEST["tourGuide"];
+$wasiposted 	= $_REQUEST["wasiposted"];
 
 $myerror = "Please complete the below!";
 
@@ -120,7 +122,7 @@ echo $myerror;
 
 
 echo '
-  <form action="commission.php?procedure=addnewcommlevel" method="post">
+  <form action="systemSetup.php?procedure=addNewUser" method="post">
   <label for="fname">Commission Level </label><br>
   <input type="text" id="Commname" name="Commname" required value="'.$Commname.'"><br>
   <label for="lname">Commission Percentage:</label><br>
@@ -253,4 +255,5 @@ if (isset($_REQUEST["showSnack"])){
 
 <script src="./assets/js/app.js"></script>
 </body>
+</html>
 
