@@ -10,7 +10,7 @@ $fname   = $_REQUEST["fname"];
 $lname   = $_REQUEST["lname"];
 $email   = $_REQUEST["email"];
 $Pax     = $_REQUEST["Pax"];
-$date    = $_REQUEST["trip-start"];
+$date    = $_REQUEST["date"];
 $tours   = $_REQUEST["query"];
 $addrecord  = $_REQUEST["addrecord"]; //saveme
 
@@ -42,10 +42,10 @@ if ($tours=="NONE"){
 											"'".addslashes($fname)."',".
 											"'".addslashes($lname)."',".
 											"'".addslashes($email)."')";
-   echo $myBookingSql;
+  
    $myResult=mysqli_query($dbConn,$myBookingSql);
 	if ($myResult) {
-	    echo "New record created successfully<hr>";
+	   echo "Thank you for your booking<hr>";
          //echo '<meta http-equiv="refresh" content="0;url=../thankyou.php?myBookid='.$bookid.'&myName='.$fname.'">';
 	 } else {
 	    echo "Error: " . $myBookingSql . " <hr> " . mysqli_error($dbConn);
@@ -56,8 +56,6 @@ if ($tours=="NONE"){
 
 
 ?>
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -80,18 +78,16 @@ if ($tours=="NONE"){
    <body>
       <nav class="navbar">
          <span class="navbar-toggle" id="js-navbar-toggle">
-            <i class="fas fa fa-bars"></i>
-            </span>
+         <i class="fas fa fa-bars"></i>
+         </span>
          <a href="index.html" class="logo grow">BRASOV CITY</a>
          <ul class="main-nav" id="js-menu">
             <li>
                <a href="index.html" class="nav-links"><i class="fa fa-fw fa-lg fa-home"></i>HOME</a>
             </li>
-            
             <li>
                <a href="tourBooking.php" class="nav-links" ><i class="fas fa-bus" style='margin-right:5px'></i>TOURS</a>
             </li>
-          
             <li>
                <a href="login.php" class="nav-links"><i class="fa fa-fw fa-user-cog" style='margin-right:5px'></i>LOGIN</a>
             </li>
@@ -104,62 +100,46 @@ if ($tours=="NONE"){
             <!-- Helpful code found here: https://www.w3schools.com/html/html_forms.asp -->
             <form name="myForm" action="tourBooking.php" onsubmit="return validateForm()">
                <label for="fname">First Name</label>
-               <input type="text" name="fname" id="firstname" autofocus required placeholder="Your first name..">
+                  <input type="text" name="fname" id="firstname" autofocus required placeholder="Your first name..">
                <label for="lname">Last Name</label>
-               <input type="text" name="lname" id="lastname" required placeholder="Your last name..">
+                  <input type="text" name="lname" id="lastname" required placeholder="Your last name..">
                <div>
                   <label for="email">Email address</label>
-                  <input type="email"  name="email" id="email" required placeholder="Your email address">
+                     <input type="email"  name="email" id="email" required placeholder="Your email address">
                </div>
-               <br>
-               <div>
-               <br>
-               <label for="query">Select a tour:</label>
-               <select id="query" name="query">
-
-<?php
-
-
-
-
-$query = "SELECT * FROM tours";
-$result = mysqli_query($dbConn, $query);
-while($Arrayline = mysqli_fetch_assoc($result)) {
- 
-   echo "<option value=".$Arrayline["uid"].">".$Arrayline["TourName"]."</option>";
-  //echo "<OPTION value='NONE'>NONE SELECTED</OPTION>\n";
-}
-
-?>
-   </select>
-
-               <br>
-               <div class="people">
-                  <label for="people">Number of people:</label>
-                  <input type="number" name="Pax" min="1" step="1" required>
-               </div>
-               <br>
-               <div class="people">
-                  <label for="people">Date of the tour:</label>
-                  <input type="date" value="<?php echo date('Y-m-d'); ?>" />
+                 <br>
+                 <br>
+                  <label for="query">Select a tour:</label>
+                  <select id="query" name="query">
+                     <?php
+                        $query = "SELECT * FROM tours";
+                        $result = mysqli_query($dbConn, $query);
+                        while($Arrayline = mysqli_fetch_assoc($result)) 
+                        {
+                        echo "<option value=".$Arrayline["uid"].">".$Arrayline["TourName"]."</option>";
+                        //echo "<OPTION value='NONE'>NONE SELECTED</OPTION>\n";
+                        }
+                     ?>
+                  </select>
+                     <br>
+                     <div class="Pax">
+                        <label for="Pax">Number of people:</label>
+                        <input type="number" name="Pax" min="1" step="1" required>
                      </div>
                   <br>
-                  <br>
-                 
-                  <input type="hidden" name="addrecord" value="confirmRecord">
-                  
-
-                   <input type="submit" onClick="testEmptyt()" value="Submit">
-            </form>
+                  <div class="date">
+                        <label for="date">Date of the tour:</label>
+                        <input type="date" name="date" value="<?php echo date('Y-m-d'); ?>" />
+                  </div>
+                     <br>
+                     <br>
+                     <input type="hidden" name="addrecord" value="confirmRecord">
+                     <input type="submit" onClick="testEmptyt()" value="Submit">
+               </form>
             </div>
-         </div>
       </main>
-     
-       
-      </div>
    </body>
    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
    <script src="./assets/js/app.js"></script>
- 
 </html>
