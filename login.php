@@ -1,12 +1,18 @@
 <?php
+
+// ini_set('display_errors', 1);
+// ini_set('display_startup_errors', 1);
+// error_reporting(E_ALL);
+
 session_start();
-include('myDBconnection.php');
+
+include('admin/myDBConnection.php');
 
 $action = $_REQUEST["action"];
 
 if ($action=="logout"){
 	session_unset();
-	session_destroy();
+	// session_destroy();
 }
 
 // if(!isset($_SESSION['login_user'])){
@@ -60,6 +66,8 @@ if ($wasaloginattempted=="yes"){
 					FROM user
 					LEFT JOIN tourGuide ON tourGuide.uid = user.tourGuideUid
 					WHERE user.username='".$uname."' AND user.password='".$upass."'";
+
+				
 	$result = mysqli_query($dbConn, $query);
 	while($ArrayofUserinfo = mysqli_fetch_assoc($result)) {
 		$_SESSION["User_ID"] 	= $ArrayofUserinfo["USERuid"];
@@ -67,12 +75,13 @@ if ($wasaloginattempted=="yes"){
 		$_SESSION["AccessRole"] = $ArrayofUserinfo["accessRole"];
 		$_SESSION["TG_uid"] 	= $ArrayofUserinfo["tourGuideUid"];
 		$_SESSION["TG_name"] 	= $ArrayofUserinfo["guideName"];
+		
 		}
 
 
 	if ($_SESSION["User_ID"]<>""){
 
-		echo '<meta http-equiv="refresh" content="0;url=login.php?procedure=login" />';
+		echo '<meta http-equiv="refresh" content="0;url=admin/tours.php?procedure=tours" />';
 
 	} else {
 		$uname 					= "";
@@ -80,8 +89,6 @@ if ($wasaloginattempted=="yes"){
 		$mymessage              = "Your Username or password are not correct. Please try again.";
 
 		}
-
-
 
 
    }
@@ -92,7 +99,7 @@ echo $mymessage;
 
 echo "<hr>".$query."<hr>";
 echo '<div class=" container container-form">';
-echo '<form   action="login.php" method="post">';
+echo '<form  action="login.php" method="post">';
 
 echo '<label for="uname">User Name:</label><br>';
 echo '	  <input type="text" id="uname" name="uname" size="5" required value="'.$uname.'"><br>';
