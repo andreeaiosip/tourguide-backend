@@ -1,5 +1,6 @@
 <?php
 
+session_start();
 include('admin/myDBConnection.php');
 //include('admin/deleteFunction.php');
 //include('admin/commonFunctions.php');
