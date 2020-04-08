@@ -161,7 +161,7 @@ echo '<table >
 
 
 	// DELETE BOOKING----------------
-
+if ($_SESSION["AccessRole"]=="Adm"){
 	if ($procedure=="deleteBooking"){
 
 		$bookingGuid = $_REQUEST["bguid"];
@@ -172,12 +172,12 @@ echo '<table >
 
 		}
 
-if (isset($_REQUEST["showSnack"])){
-	echo '<div id="snackbar">'.$_REQUEST["showSnack"].'</div>';
+		if (isset($_REQUEST["showSnack"])){
+			echo '<div id="snackbar">'.$_REQUEST["showSnack"].'</div>';
+											}
+}else {
+
 	}
-
-
-	//include('assignBooking.php');
 
 ?>
 
@@ -185,5 +185,5 @@ if (isset($_REQUEST["showSnack"])){
 </body>
 
 
-
+</html>
 
