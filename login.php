@@ -72,7 +72,7 @@ if ($wasaloginattempted=="yes"){
 	while($ArrayofUserinfo = mysqli_fetch_assoc($result)) {
 		$_SESSION["User_ID"] 	= $ArrayofUserinfo["USERuid"];
 		$_SESSION["User_Name"] 	= $ArrayofUserinfo["username"];
-		$_SESSION["AccessRole"] = $ArrayofUserinfo["accessRole"];
+		$_SESSION["accessRole"] = $ArrayofUserinfo["accessRole"];
 		$_SESSION["TG_uid"] 	= $ArrayofUserinfo["tourGuideUid"];
 		$_SESSION["TG_name"] 	= $ArrayofUserinfo["guideName"];
 		

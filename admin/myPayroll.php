@@ -1,8 +1,8 @@
 <?php
 
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+// ini_set('display_errors', 1);
+// ini_set('display_startup_errors', 1);
+// error_reporting(E_ALL);
 
 session_start();
 
@@ -27,6 +27,8 @@ include('deleteFunction.php');
 
 include('menuTabs.php');
 
+
+
 if (isset($_REQUEST["showSnack"])){
 	echo '<body onload="myFunction()">';
 }else {
@@ -46,7 +48,7 @@ if ($_SESSION["accessRole"]=="Adm"){
     
 	 if ($procedure=="genpayroll"){
 
-
+     
 
 		echo '<br /><br /><br /><br />
 		  <form action="myPayroll.php?procedure=genpayrollView" method="post">
@@ -54,11 +56,14 @@ if ($_SESSION["accessRole"]=="Adm"){
 		  <input type="date" id="FromDate" name="FromDate" required value="'.$FromDate.'"><br>
 		  <label for="lname">End Payroll Date:(Inclusive)</label><br>
 		  <input type="date" id="EndDate" name="EndDate" required value="'.$EndDate.'"><br><br>';
-          if ($_SESSION["accessRole"]=="Adm"){
+          
+    if ($_SESSION["accessRole"]=="Adm"){
 
          echo '<label for="tourGuide">Tour guide:</label><br>';
 			echo '<SELECT name="tourGuide" required>';
             echo "<OPTION value='NONE'>NONE SELECTED</OPTION>\n";
+
+      
        
 			$query = "SELECT * FROM tourGuide ORDER BY guideName";
 			$result = mysqli_query($dbConn, $query);
@@ -72,8 +77,9 @@ if ($_SESSION["accessRole"]=="Adm"){
 				}
               
 			echo "</SELECT><br>";
-                }else {
-                    echo '<input type="hidden" name="guideName" value="'.$_SESSION["accessRole"]=="TG" .'">';
+                
+        }else {
+                    echo '<input type="hidden" name="tourGuide" value="'.$_SESSION["TG_uid"] .'">';
                 }
 		echo '
 		  <input type="hidden" name="wasiposted" value="formposted">
@@ -101,7 +107,7 @@ $FromDate  = $_REQUEST["FromDate"];
 		$myCommisValue = $Arrayline["commPercent"];
 		}
 
-echo $query;
+// echo $query;
 // Get the Main values/Parameters in the part that gets calucualted
 	$query = "SELECT *
 				FROM systemSetup";

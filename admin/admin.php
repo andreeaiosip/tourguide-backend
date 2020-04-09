@@ -8,6 +8,7 @@ $procedure		 = $_REQUEST["procedure"] ;
   include('myDBConnection.php');
   include('deleteFunction.php');
   include('commonFunctions.php');
+  include('/login.php');
 
 ?>
 <!DOCTYPE html>
