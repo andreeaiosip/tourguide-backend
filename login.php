@@ -10,15 +10,9 @@ include('admin/myDBConnection.php');
 
 $action = $_REQUEST["action"];
 
-if ($action=="logout"){
-	session_unset();
-	// session_destroy();
+if ($action == "logout") {
+    session_unset();
 }
-
-// if(!isset($_SESSION['login_user'])){
-// 	echo "<script type='text/javascript'> document.location = 'Login.php'; </script>";
-// 	exit();
-// 	}
 
 
 ?>
@@ -39,11 +33,9 @@ if ($action=="logout"){
             <li>
                <a href="index.html" class="nav-links"><i class="fa fa-fw fa-lg fa-home"></i>HOME</a>
             </li>
-            
             <li>
                <a href="tourBooking.php" class="nav-links"><i class="fas fa-bus" style='margin-right:5px'></i>TOURS</a>
             </li>
-          
             <li>
                <a href="login.php" class="nav-links"><i class="fa fa-fw fa-user-cog" style='margin-right:5px'></i>LOGIN</a>
             </li>
@@ -53,70 +45,62 @@ if ($action=="logout"){
 <?php
 
 
-$uname 					= $_REQUEST["uname"];
-$upass 					= $_REQUEST["upass"];
-$wasaloginattempted     = $_REQUEST["wasaloginattempted"];
-$mymessage 				= "";
+$uname              = $_REQUEST["uname"];
+$upass              = $_REQUEST["upass"];
+$wasaloginattempted = $_REQUEST["wasaloginattempted"];
+$mymessage          = "";
 
-if ($wasaloginattempted=="yes"){
+if ($wasaloginattempted == "yes") {
+    
+    $_SESSION["User_ID"] = "";
+    
+    $query = "SELECT *,user.uid AS USERuid
+                    FROM user
+                    LEFT JOIN tourGuide ON tourGuide.uid = user.tourGuideUid
+                    WHERE user.username='" . $uname . "' AND user.password='" . $upass . "'";
+    
+    
+    $result = mysqli_query($dbConn, $query);
+    while ($ArrayofUserinfo = mysqli_fetch_assoc($result)) {
+        $_SESSION["User_ID"]    = $ArrayofUserinfo["USERuid"];
+        $_SESSION["User_Name"]  = $ArrayofUserinfo["username"];
+        $_SESSION["accessRole"] = $ArrayofUserinfo["accessRole"];
+        $_SESSION["TG_uid"]     = $ArrayofUserinfo["tourGuideUid"];
+        $_SESSION["TG_name"]    = $ArrayofUserinfo["guideName"];
+        
+    }
+    
+    
+    if ($_SESSION["User_ID"] <> "") {  
+        echo '<meta http-equiv="refresh" content="0;url=admin/tours.php?procedure=tours" />';  
+    } else {
+        $uname     = "";
+        $upass     = "";
+        $mymessage = "Your Username or password are not correct. Please try again.";  
+    }
 
-	$_SESSION["User_ID"] = "";
-
-	$query = "SELECT *,user.uid AS USERuid
-					FROM user
-					LEFT JOIN tourGuide ON tourGuide.uid = user.tourGuideUid
-					WHERE user.username='".$uname."' AND user.password='".$upass."'";
-
-				
-	$result = mysqli_query($dbConn, $query);
-	while($ArrayofUserinfo = mysqli_fetch_assoc($result)) {
-		$_SESSION["User_ID"] 	= $ArrayofUserinfo["USERuid"];
-		$_SESSION["User_Name"] 	= $ArrayofUserinfo["username"];
-		$_SESSION["accessRole"] = $ArrayofUserinfo["accessRole"];
-		$_SESSION["TG_uid"] 	= $ArrayofUserinfo["tourGuideUid"];
-		$_SESSION["TG_name"] 	= $ArrayofUserinfo["guideName"];
-		
-		}
-
-
-	if ($_SESSION["User_ID"]<>""){
-
-		echo '<meta http-equiv="refresh" content="0;url=admin/tours.php?procedure=tours" />';
-
-	} else {
-		$uname 					= "";
-		$upass 					= "";
-		$mymessage              = "Your Username or password are not correct. Please try again.";
-
-		}
-
-
-   }
-
+}
 
 
 echo $mymessage;
 
-echo "<hr>".$query."<hr>";
+echo "<hr>" . $query . "<hr>";
 echo '<div class=" container container-form">';
 echo '<form  action="login.php" method="post">';
 
 echo '<label for="uname">User Name:</label><br>';
-echo '	  <input type="text" id="uname" name="uname" size="5" required value="'.$uname.'"><br>';
+echo '      <input type="text" id="uname" name="uname" size="5" required value="' . $uname . '"><br>';
 echo '<label for="password">Password:</label><br>';
-echo '	  <input type="text" id="upass" size="5" name="upass" required value="'.$upass.'"><br><br>';
-echo '	  <input type="hidden" name="wasaloginattempted" value="yes">';
-echo '	  <input type="submit" value="Login">';
-echo '	</form>';
-echo '<div>'; 
+echo '      <input type="text" id="upass" size="5" name="upass" required value="' . $upass . '"><br><br>';
+echo '      <input type="hidden" name="wasaloginattempted" value="yes">';
+echo '      <input type="submit" value="Login">';
+echo '    </form>';
+echo '<div>';
 ?>
 
 </center>
 
-
-
-
-	</body>
+    </body>
    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
    <script src="./assets/js/app.js"></script>

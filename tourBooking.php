@@ -12,7 +12,7 @@ $email   = $_REQUEST["email"];
 $Pax     = $_REQUEST["Pax"];
 $date    = $_REQUEST["date"];
 $tours   = $_REQUEST["query"];
-$addrecord  = $_REQUEST["addrecord"]; //saveme
+$addrecord  = $_REQUEST["addrecord"]; 
 
 
 
