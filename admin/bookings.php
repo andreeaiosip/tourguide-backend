@@ -89,11 +89,13 @@ echo '<table >
 			echo '<td>';
 			if ($_SESSION["accessRole"]=="Adm"){
 				 echo '<a href="bookings.php?procedure=deleteBooking&bguid='.$Arrayline['bguid'].'" title="Delete Booking"><i style="color: #323232bf" class="fa fa-trash fa fa-2x" aria-hidden="true"></i></a>';
-			}else{
-
-			}
 				 echo '<a href="bookings.php?procedure=editBooking&bguid='.$Arrayline['bguid'].'" title="Assign a tour guide"><i style="color:#323232bf" class="fa fa-pencil-square fa-2x" aria-hidden="true"></i></a>';
-		    echo '</td>';
+		  
+				}else{
+             echo '<a href="bookings.php?procedure=editBooking&bguid='.$Arrayline['bguid'].'" title="Assign a tour guide"><i style="color:#323232bf" class="fa fa-pencil-square fa-2x" aria-hidden="true"></i></a>';
+		  
+			}
+				  echo '</td>';
 		  echo '</tr>';
 
 	}
