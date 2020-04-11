@@ -41,11 +41,11 @@ if (isset($_REQUEST["showSnack"])) {
     echo '<body>';
 }
 
-if ($_SESSION["accessRole"] == "Adm") {
-    echo ' <a href="myPayroll.php?procedure=genpayroll"><button class="btn success" >Generate Payroll (Admin Side)</button></a>';
-} else {
-    echo ' <a href="myPayroll.php?procedure=genpayroll"><button class="btn success" >Calculate Pay (Tour Guide Side)</button></a>';
-}
+// if ($_SESSION["accessRole"] == "Adm") {
+//     echo ' <a href="myPayroll.php?procedure=genpayroll"><button class="btn success" >Generate Payroll (Admin Side)</button></a>';
+// } else {
+//     echo ' <a href="myPayroll.php?procedure=genpayroll"><button class="btn success" >Calculate Pay (Tour Guide Side)</button></a>';
+// }
 
 
 if (isset($_REQUEST["showSnack"])) {
