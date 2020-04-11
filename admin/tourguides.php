@@ -1,13 +1,19 @@
 <?php
 
 session_start();
+// ini_set('display_errors', 1);
+// ini_set('display_startup_errors', 1);
+// error_reporting(E_ALL);
+
+
 
 $guideName    = $_REQUEST["guideName"];
 $guideSurname = $_REQUEST["guideSurname"];
-$commLevel    = $_REQUEST["commLevel"];
+$commLevelUid    = $_REQUEST["commLevelUid"];
 $active       = $_REQUEST["active"];
 $guideUid     = $_REQUEST["guideUid"];
 $fromDB       = $_REQUEST["fromDB"];
+
 
 $procedure = $_REQUEST["procedure"];
 include('myDBConnection.php');
@@ -58,20 +64,21 @@ if ($procedure == "tourguides") {
         <th>Action</th>
       </tr>';
     
-    $query  = "SELECT * FROM tourGuide";
+    $query  = "SELECT *, tourGuide.uid AS tuid FROM tourGuide
+    LEFT JOIN commLevel ON commLevelUid=commLevel.uid";
     $result = mysqli_query($dbConn, $query);
     while ($Arrayline = mysqli_fetch_assoc($result)) {
         echo '<tr>';
         echo '<td>';
-        echo $Arrayline['uid'];
+        echo $Arrayline['tuid'];
         echo '</td>';
         
         echo '<td>' . ucwords($Arrayline['guideName'] . " " . $Arrayline['guideSurname']) . '</td>';
-        echo '<td>' . strtoupper($Arrayline['commLevel']) . '</td>';
+        echo '<td>' . strtoupper($Arrayline['commDescription']) . '</td>';
         
         echo '<td>';
-        echo '<a href="tourguides.php?procedure=deleteTourGuide&guideUid=' . $Arrayline['uid'] . '" title="Delete me"><i style="color:#323232bf" class="fa fa-trash fa fa-2x" aria-hidden="true"></i></a>';
-        echo '<a href="tourguides.php?procedure=editTourGuide&guideUid=' . $Arrayline['uid'] . '" title="Edit me"><i style="color:#323232bf" class="fa fa-pencil-square fa-2x" aria-hidden="true"></i></a>';
+        echo '<a href="tourguides.php?procedure=deleteTourGuide&guideUid=' . $Arrayline['tuid'] . '" title="Delete me"><i style="color:#323232bf" class="fa fa-trash fa fa-2x" aria-hidden="true"></i></a>';
+        echo '<a href="tourguides.php?procedure=editTourGuide&guideUid=' . $Arrayline['tuid'] . '" title="Edit me"><i style="color:#323232bf" class="fa fa-pencil-square fa-2x" aria-hidden="true"></i></a>';
         echo '</td>';
         echo '</tr>';
     }
@@ -132,7 +139,7 @@ if ($procedure == "addnewtourguide") {
       <label for="guideSurname">Guide Surname:</label><br>
       <input type="text" id="guideSurname" size="30" name="guideSurname" required value="' . $guideSurname . '"><br><br>
 	  <label for="commLevel">Commission Level:</label><br>';
-	  echo '<SELECT name="commLevel" required>';
+	  echo '<SELECT name="commLevelUid" required>';
 	  echo "<OPTION value='NONE'>NONE SELECTED</OPTION>\n";
 	  
 	  
@@ -164,7 +171,7 @@ if ($procedure == "addnewtourguide") {
     
     if ($wasiposted <> "") {
         
-        $query = "INSERT INTO tourGuide (guideName, guideSurname, commLevel) VALUES (" . "'" . $guideName . "'," . "'" . $guideSurname . "'," . "'" . $commLevel . "')";
+        $query = "INSERT INTO tourGuide (guideName, guideSurname, commLevelUid) VALUES (" . "'" . $guideName . "'," . "'" . $guideSurname . "'," . "'" . $commLevelUid . "')";
         
         
         $result = mysqli_query($dbConn, $query);
@@ -196,39 +203,43 @@ if ($procedure == "editTourGuide") {
        <input type="text" id="guideName" name="guideName" required value="' . $guideName . '"><br>
        <label for="guideSurname">Guide Surname:</label><br>
        <input type="text" id="guideSurname" size="20" name="guideSurname" required value="' . $guideSurname . '"><br><br>
-       <label for="commLevel">Comm Level:</label><br>';
-	   echo '<SELECT name="commLevel" required>';
+       <label for="commLevelUid">Comm Level:</label><br>';
+	   echo '<SELECT name="commLevelUid" required>';
 	   echo "<OPTION value='NONE'>NONE SELECTED</OPTION>\n";
 	   
-	   $query  = "SELECT * FROM commLevel ORDER BY commDescription";
-	   $result = mysqli_query($dbConn, $query);
-	   while ($Arrayline = mysqli_fetch_assoc($result)) {
+	   $query1  = "SELECT * FROM commLevel ORDER BY commDescription";
+	   $result1 = mysqli_query($dbConn, $query1);
+	   while ($Arrayline1 = mysqli_fetch_assoc($result1)) {
 		   
-		   echo "<OPTION value='" . $Arrayline["commDescription"] . "'";
+		   echo "<OPTION value='" . $Arrayline1["uid"] . "'";
 		   // uid is from the DB!
-		   if ($commLevel == $Arrayline["uid"]) {
+		   if ($commLevel == $Arrayline1["uid"]) {
 			   echo " SELECTED";
 		   }
-		   echo ">" . $Arrayline["commDescription"] . "</OPTION>\n";
+		   echo ">" . $Arrayline1["commDescription"] . "</OPTION>\n";
 		   
 	   }
 	   
 	   echo "</SELECT><br>";
- 
+       
+     
 	   echo '<br><br>
        		<input type="hidden" name="fromDB" value="no">
        		<input type="submit" value="Submit">
 	   		</form>
 	   		</div>';
     
+       
+
     if ($fromDB <> "") {
-        
-        $query  = "UPDATE tourGuide SET guideName='" . addslashes($guideName) . "',guideSurname='" . addslashes($guideSurname) . "',commLevel='" . $commLevel . "' WHERE tourGuide.uid='" . $guideUid . "'";
+    
+        $query  = "UPDATE tourGuide SET guideName='" . addslashes($guideName) . "',guideSurname='" . addslashes($guideSurname) . "',commLevelUid='" . $commLevelUid . "' WHERE tourGuide.uid='" . $guideUid . "'";
         $result = mysqli_query($dbConn, $query);
         
-        echo "Record updated successfully...";
+     
+       echo "Record updated successfully...";
         
-        echo '<meta http-equiv="refresh" content="0;url=tourguides.php?procedure=tourguides" />';
+       echo '<meta http-equiv="refresh" content="0;url=tourguides.php?procedure=tourguides" />';
         
     }
 }
@@ -243,4 +254,3 @@ if ($procedure == "editTourGuide") {
 
 
 </html>
-
