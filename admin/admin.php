@@ -24,7 +24,11 @@ $procedure		 = $_REQUEST["procedure"] ;
  <?php
  
  include('menuTabs.php');
- 
+ echo '<div class="sessionRole">';
+ echo '<p>';
+ echo 'Logged in as: ' .	$_SESSION["accessRole"];
+ echo '</p>';
+ echo '</div>';
  
  ?>
  </div>

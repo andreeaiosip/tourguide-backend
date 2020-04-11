@@ -42,8 +42,11 @@ if (isset($_REQUEST["showSnack"])){
 	echo '<body class="body-height">';
 	}
 
- include('menuTabs.php');
-
+	include('menuTabs.php');
+	echo '<div class="sessionRole">';
+	echo 'Logged in as:' .	$_SESSION["accessRole"];
+	echo '</div>';
+	
 
 // SHOW BOOKINGS ON THE PAGE ----------------
 if ($procedure=="bookings"){

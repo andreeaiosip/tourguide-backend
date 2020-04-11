@@ -26,6 +26,12 @@ include('deleteFunction.php');
  <?php
 
 include('menuTabs.php');
+echo '<div class="sessionRole">';
+echo '<p>';
+echo 'Logged in as: ' .	$_SESSION["accessRole"];
+echo '</p>';
+echo '</div>';
+
 
 
 
@@ -51,10 +57,11 @@ if ($procedure == "genpayroll") {
     
     
     echo '<br /><br /><br /><br />
+    <div class=" container container-form">
           <form action="myPayroll.php?procedure=genpayrollView" method="post">
           <label for="FromDate">Start Payroll Date:(Inclusive)</label><br>
           <input type="date" id="FromDate" name="FromDate" required value="' . $FromDate . '"><br>
-          <label for="lname">End Payroll Date:(Inclusive)</label><br>
+          <label for="EndDate">End Payroll Date:(Inclusive)</label><br>
           <input type="date" id="EndDate" name="EndDate" required value="' . $EndDate . '"><br><br>';
     
     if ($_SESSION["accessRole"] == "Adm") {
@@ -87,7 +94,8 @@ if ($procedure == "genpayroll") {
     echo '
           <input type="hidden" name="wasiposted" value="formposted">
           <input type="submit" value="Submit">
-          </form>';
+          </form>
+          </div>';
     
 }
 

@@ -93,6 +93,13 @@ html, body  {
 
 }
 
+.sessionRole>p {
+  text-align: right;
+  margin-right: 40px;
+  font-size: 18px;
+  color: #173620;
+  font-weight: bold;
+}
 
 @media screen and (max-width: 500px) {
   .navbar a {

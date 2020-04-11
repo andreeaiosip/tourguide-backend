@@ -31,8 +31,12 @@ include('deleteFunction.php');
 
  <?php
  
- include('menuTabs.php');
- 
+include('menuTabs.php');
+echo '<div class="sessionRole">';
+echo '<p>';
+echo 'Logged in as: ' .	$_SESSION["accessRole"];
+echo '</p>';
+echo '</div>';
  
  ?>
  </div>
@@ -115,7 +119,7 @@ if ($procedure=="deleteTour"){
    echo '</table>';
    echo '</form>';
 
-   echo '<button style="border-radius:4px; text-decoration: none;" class="btn success"><a href="tours.php?procedure=addnewtour" style="text-decoration:none;><i class="fa fa-fw fa-bus fa-2x" aria-hidden="true"></i> NEW</a></button>';
+   echo '<button style="border-radius:4px; text-decoration: none; margin-left: 50px;" class="btn success "><a href="tours.php?procedure=addnewtour" style="text-decoration:none;><i class="fa fa-fw fa-bus fa-2x" aria-hidden="true"></i> NEW</a></button>';
 	
  
 	 }

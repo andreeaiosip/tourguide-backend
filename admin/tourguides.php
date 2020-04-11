@@ -41,6 +41,11 @@ function myFunction() {
 
 
 include('menuTabs.php');
+echo '<div class="sessionRole">';
+echo '<p>';
+echo 'Logged in as: ' .	$_SESSION["accessRole"];
+echo '</p>';
+echo '</div>';
 
 if ($procedure == "tourguides") {
     
@@ -73,7 +78,7 @@ if ($procedure == "tourguides") {
     echo '</table>';
     
     
-    echo '<button class="btn success" style="border-radius:4px"><a href="tourguides.php?procedure=addnewtourguide" style="text-decoration:none;"><i class="fa fa-user-circle-o fa-2x" aria-hidden="true"></i> NEW</a></button>';
+    echo '<button class="btn success" style="border-radius:4px; margin-left: 50px;"><a href="tourguides.php?procedure=addnewtourguide" style="text-decoration:none;"><i class="fa fa-user-circle-o fa-2x" aria-hidden="true"></i> NEW</a></button>';
     
     
 }

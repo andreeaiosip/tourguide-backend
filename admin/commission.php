@@ -42,7 +42,13 @@ if (isset($_REQUEST["showSnack"])){
 	echo '<body>';
 	}
 
- include('menuTabs.php');
+	include('menuTabs.php');
+	echo '<div class="sessionRole">';
+	echo '<p>';
+	echo 'Logged in as: ' .	$_SESSION["accessRole"];
+	echo '</p>';
+	echo '</div>';
+	
  
  
  // SHOW COMMISSION TABLE
@@ -88,7 +94,7 @@ echo '<table>
 
   //echo '<a href="commission.php?procedure=addCommLevel"><i class="fa fa-fw fa-plus fa-2x"></i>NEW</a>';
     //echo '<button class="btn success"><a href="commission.php?procedure=editComm"><i class="fa fa-handshake-o fa-lg" aria-hidden="true"></i> Edit Commission Level</a></button>';
-	echo '<button class="btn success" style="border-radius:4px"><a href="commission.php?procedure=addCommLevel" style="text-decoration:none"><i class="fa fa-handshake-o fa-2x" aria-hidden="true"></i> NEW</a></button>';
+	echo '<button class="btn success" style="border-radius:4px; margin-left: 50px;"><a href="commission.php?procedure=addCommLevel" style="text-decoration:none"><i class="fa fa-handshake-o fa-2x" aria-hidden="true"></i> NEW</a></button>';
 	
 
 	}

@@ -48,6 +48,7 @@ echo '</div><br>';
 //echo "<hr>";
 //echo '<div class="headerBar" align="right"><span class="label success"><i class="fa fa-map-signs" aria-hidden="true"></i> Your are here |  '.strtoupper($procedure).'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></div><br>';
 
-echo 'role:' .	$_SESSION["accessRole"];
+//echo 'role:' .	$_SESSION["accessRole"];
+
 
 ?>
