@@ -58,6 +58,7 @@ if ($procedure=="deleteTour"){
  if ($procedure=="editTour"){
  
  echo '
+ <div class=" container container-form">
 	   <form action="tours.php">
 	   <input type="hidden" name="procedure" value= '.$procedure.'>
 	   <input type="hidden" name="tuid" value='.$tuid.'>
@@ -69,7 +70,8 @@ if ($procedure=="deleteTour"){
 	   <input type="number" id="Price" name="Price" required value="'.$Price.'"><br><br>
 	   <input type="hidden" name="fromDB" value="no">
 	   <input type="submit" value="Submit">
-	   </form>';
+	   </form>
+	   </div>';
  
  if ($fromDB <> ""){
  
@@ -149,6 +151,7 @@ if ($procedure=="deleteTour"){
  
  
  echo '
+ <div class=" container container-form">
    <form action="tours.php">
    <input type="hidden" name="procedure" value= '.$procedure.'>
    <label for="TourName">Tour name:</label><br>
@@ -159,7 +162,8 @@ if ($procedure=="deleteTour"){
    <input type="number" id="Price" name="Price" required value="'.$Price.'"><br><br>
    <input type="hidden" name="wasiposted" value="formposted">
    <input type="submit" value="Submit">
-   </form>';
+   </form>
+   </div>';
  
  
  if ($wasiposted <> ""){

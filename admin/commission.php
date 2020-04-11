@@ -110,11 +110,14 @@ echo '<table>
 	
 		}
 
+
+// ADD COMMISSION LEVEL
+
 if ($procedure=="addCommLevel"){
 
 
 
-$myerror = "Please complete the below!";
+//$myerror = "Please complete the below!";
 
 
 if ($wasiposted <> ""){
@@ -123,13 +126,13 @@ if ($wasiposted <> ""){
 
 	if ($cpercentage > 50){
 
-	  $myerror .= "<br><br><br><BIG><BIG><BIG>Commision can NOT be bigger then 50% of the tour price</BIG></BIG></BIG>";
+	  $myerror .= "<h2 style='text-align:center';>Commision can NOT be bigger then 50% of the tour price</h2>";
 
         }
         
         if ($commPercent < 1){
 
-            $myerror .= "<br><br><br><BIG><BIG><BIG>Commission can NOT be Less than 1% of the tour price</BIG></BIG></BIG>";
+            $myerror .= "<br><br><br><h2> style='text-align:center';>Commission can NOT be Less than 1% of the tour price</h2>";
       
               }
 
@@ -140,14 +143,21 @@ echo $myerror;
 
 
 echo '
+
+  
+  <div class=" container container-form">
   <form action="commission.php?procedure=addCommLevel" method="post">
-  <label for="fname">Commission Level </label><br>
+  <h4>ADD NEW COMMISSION LEVEL</h4>
+  <input type="hidden" name="procedure" value= '.$procedure.'>
+ 
+  <label for="commDescription">Commission</label><br>
   <input type="text" id="commDescription" name="commDescription" required value="'.$commDescription.'"><br>
-  <label for="lname">Commission Percentage:</label><br>
+  <label for="commPercent">Comm Percentage:</label><br>
   <input type="number" min="1" max="100" step="any" id="commPercent" name="commPercent" required value="'.$commPercent.'"><br><br>
   <input type="hidden" name="wasiposted" value="formposted">
   <input type="submit" value="Submit">
-  </form>';
+  </form>
+  </div>' ;
 
 
 
@@ -221,7 +231,7 @@ if ($wasiposted <> ""){
 
 echo '
 
-
+<div class=" container container-form">
 	   <form action="commission.php">
 	   <input type="hidden" name="procedure" value= '.$procedure.'>
 	   <input type="hidden" name="cuid" value='.$cuid.'>
@@ -231,7 +241,8 @@ echo '
 	   <input type="number" id="commPercent" name="commPercent" required value="'.$commPercent.'"><br><br>
 	   <input type="hidden" name="fromDB" value="no">
 	   <input type="submit" value="Submit">
-	   </form>';
+	   </form>
+	   </div>';
 
 
 

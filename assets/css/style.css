@@ -112,7 +112,7 @@ html, body  {
 
 
 
-input[type=text], input[name=EndDate], select, textarea, input[name=FromDate], #FromDate, #EndDate {
+input[type=text], input[type=number], input[name=commPercent], input[name=EndDate], select, textarea, input[name=FromDate], #FromDate, #EndDate {
   width: 100%;
   padding: 13px;
   border: 1px solid #ccc;
