@@ -131,8 +131,30 @@ if ($procedure == "addnewtourguide") {
       <input type="text" id="guideName" name="guideName" required value="' . $guideName . '"><br>
       <label for="guideSurname">Guide Surname:</label><br>
       <input type="text" id="guideSurname" size="30" name="guideSurname" required value="' . $guideSurname . '"><br><br>
-      <label for="commLevel">Comm Level:</label><br>
-      <input type="text" id="commLevel" name="commLevel" required value="' . $commLevel . '"><br><br>
+	  <label for="commLevel">Comm Level:</label><br>';
+	  echo '<SELECT name="commLevel" required>';
+	  echo "<OPTION value='NONE'>NONE SELECTED</OPTION>\n";
+	  
+	  
+	  
+	  $query  = "SELECT * FROM tourGuide ORDER BY commLevel";
+	  $result = mysqli_query($dbConn, $query);
+	  while ($Arrayline = mysqli_fetch_assoc($result)) {
+		  
+		  echo "<OPTION value='" . $Arrayline["uid"] . "'";
+		  // uid is from the DB!
+		  if ($tourGuide == $Arrayline["uid"]) {
+			  echo " SELECTED";
+		  }
+		  echo ">" . $Arrayline["commLevel"] . "</OPTION>\n";
+		  
+	  }
+	  
+	  echo "</SELECT><br>";
+
+	  echo '
+	
+	  <br><br>
       <input type="hidden" name="wasiposted" value="formposted">
       <input type="submit" value="Submit">
 	  </form>
@@ -166,17 +188,38 @@ if ($procedure == "editTourGuide") {
 	<div class=" container container-form">
     <form action="tourguides.php">
        <input type="hidden" name="procedure" value= ' . $procedure . '>
-       <input type="hidden" name="guideUid" value=' . $guideUid . '>
+	   <input type="hidden" name="guideUid" value=' . $guideUid . '>
+	   <h4>UPDATE DETAILS OF A TOUR GUIDE</h4>
+	   <br>
+	   <BR>
        <label for="guideName">Guide Name:</label><br>
        <input type="text" id="guideName" name="guideName" required value="' . $guideName . '"><br>
        <label for="guideSurname">Guide Surname:</label><br>
        <input type="text" id="guideSurname" size="20" name="guideSurname" required value="' . $guideSurname . '"><br><br>
-       <label for="commLevel">Comm Level:</label><br>
-       <input type="text" id="commLevel" name="commLevel" required value="' . $commLevel . '"><br><br>
-       <input type="hidden" name="fromDB" value="no">
-       <input type="submit" value="Submit">
-	   </form>
-	   </div>';
+       <label for="commLevel">Comm Level:</label><br>';
+	   echo '<SELECT name="commLevel" required>';
+	   echo "<OPTION value='NONE'>NONE SELECTED</OPTION>\n";
+	   
+	   $query  = "SELECT * FROM tourGuide ORDER BY commLevel";
+	   $result = mysqli_query($dbConn, $query);
+	   while ($Arrayline = mysqli_fetch_assoc($result)) {
+		   
+		   echo "<OPTION value='" . $Arrayline["uid"] . "'";
+		   // uid is from the DB!
+		   if ($tourGuide == $Arrayline["uid"]) {
+			   echo " SELECTED";
+		   }
+		   echo ">" . $Arrayline["commLevel"] . "</OPTION>\n";
+		   
+	   }
+	   
+	   echo "</SELECT><br>";
+ 
+	   echo '<br><br>
+       		<input type="hidden" name="fromDB" value="no">
+       		<input type="submit" value="Submit">
+	   		</form>
+	   		</div>';
     
     if ($fromDB <> "") {
         
