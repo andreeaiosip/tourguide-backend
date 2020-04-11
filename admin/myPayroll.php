@@ -110,11 +110,11 @@ if ($procedure == "genpayrollView") {
     
     $query  = "SELECT *
                 FROM tourGuide
-                LEFT JOIN commLevel ON commLevel.uid = tourGuide.commLevel
+                LEFT JOIN commLevel ON commLevel.uid = tourGuide.commLevelUid
                 WHERE tourGuide.uid='" . $tourGuide . "'";
     $result = mysqli_query($dbConn, $query);
     while ($Arrayline = mysqli_fetch_assoc($result)) {
-        $myGuideName   = $Arrayline["guideName"];
+        $guideName   = $Arrayline["guideName"];
         $myCommisValue = $Arrayline["commPercent"];
     }
     
@@ -154,7 +154,7 @@ if ($procedure == "genpayrollView") {
     
     $mySQLFilter .= " AND tourGuideUid='" . $tourGuide . "'";
     
-    echo "<h5> Bookings for " . $myGuideName . " from " . $FromDate . " to " . $EndDate . " @ Commission rate of :" . $myCommisValue . "%</h5>";
+    echo "<h5> Bookings for " . $guideName . " from " . $FromDate . " to " . $EndDate . " @ Commission rate of :" . $myCommisValue . "%</h5>";
     
     echo '<table>
   <tr>
