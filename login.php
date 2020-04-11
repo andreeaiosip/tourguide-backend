@@ -72,7 +72,11 @@ if ($wasaloginattempted == "yes") {
     
     
     if ($_SESSION["User_ID"] <> "") {  
-        echo '<meta http-equiv="refresh" content="0;url=admin/tours.php?procedure=tours" />';  
+        if ($_SESSION["accessRole"] == "Adm") {
+        echo '<meta http-equiv="refresh" content="0;url=admin/tours.php?procedure=tours" />'; 
+        }else{
+            echo '<meta http-equiv="refresh" content="0;url=admin/bookings.php?procedure=bookings" />';
+        } 
     } else {
         $uname     = "";
         $upass     = "";
