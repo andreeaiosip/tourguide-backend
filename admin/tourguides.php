@@ -103,7 +103,7 @@ if ($procedure == "addnewtourguide") {
     
     $wasiposted = $_REQUEST["wasiposted"];
     
-    $myerror = "Please complete the below!";
+    //$myerror = "Please complete the below!";
     
     
     if ($wasiposted <> "") {
@@ -120,9 +120,13 @@ if ($procedure == "addnewtourguide") {
     
     
     
-    echo '
+	echo '
+	<div class=" container container-form">
       <form action="tourguides.php">
-      <input type="hidden" name="procedure" value= ' . $procedure . '>
+	  <input type="hidden" name="procedure" value= ' . $procedure . '>
+	  <h4>ADD NEW TOUR GUIDE</h4>
+	  <br>
+	  <br>
       <label for="guideName">Guide Name:</label><br>
       <input type="text" id="guideName" name="guideName" required value="' . $guideName . '"><br>
       <label for="guideSurname">Guide Surname:</label><br>
@@ -131,7 +135,9 @@ if ($procedure == "addnewtourguide") {
       <input type="text" id="commLevel" name="commLevel" required value="' . $commLevel . '"><br><br>
       <input type="hidden" name="wasiposted" value="formposted">
       <input type="submit" value="Submit">
-      </form>';
+	  </form>
+	  </div>';
+	  
     
     
     if ($wasiposted <> "") {
@@ -156,7 +162,8 @@ if ($procedure == "addnewtourguide") {
 
 if ($procedure == "editTourGuide") {
     
-    echo '
+	echo '
+	<div class=" container container-form">
     <form action="tourguides.php">
        <input type="hidden" name="procedure" value= ' . $procedure . '>
        <input type="hidden" name="guideUid" value=' . $guideUid . '>
@@ -168,7 +175,8 @@ if ($procedure == "editTourGuide") {
        <input type="text" id="commLevel" name="commLevel" required value="' . $commLevel . '"><br><br>
        <input type="hidden" name="fromDB" value="no">
        <input type="submit" value="Submit">
-       </form>';
+	   </form>
+	   </div>';
     
     if ($fromDB <> "") {
         

@@ -43,10 +43,11 @@ if (isset($_REQUEST["showSnack"])){
 	}
 
 	include('menuTabs.php');
-	echo '<div class="sessionRole">';
-	echo 'Logged in as:' .	$_SESSION["accessRole"];
-	echo '</div>';
-	
+echo '<div class="sessionRole">';
+echo '<p>';
+echo 'Logged in as: ' .	$_SESSION["accessRole"];
+echo '</p>';
+echo '</div>';
 
 // SHOW BOOKINGS ON THE PAGE ----------------
 if ($procedure=="bookings"){
@@ -128,9 +129,12 @@ echo '<table >
 		
 
 		echo '
+		<div class=" container container-form">
 			  <form action="bookings.php">
 			  <input type="hidden" name="procedure" value= '.$procedure.'>
 			  <input type="hidden" name="bguid" value='.$bguid.'>
+			  <h3>UPDATE BOOKING</h3>
+			  <br>
 			  <label for="TourGuide">Tour Guide:</label><br>
 			  <select name="tourGuideUid">
 			  
@@ -148,7 +152,8 @@ echo '<table >
 			  </select>
 			  <input type="hidden" name="fromDB" value="no">
 			  <input type="submit" value="Submit">
-			  </form>';
+			  </form>
+			  </div>';
 		
 		if ($fromDB <> "" && !($completed == 1 && $tourGuideUid == "")){
 		
