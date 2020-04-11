@@ -131,13 +131,13 @@ if ($procedure == "addnewtourguide") {
       <input type="text" id="guideName" name="guideName" required value="' . $guideName . '"><br>
       <label for="guideSurname">Guide Surname:</label><br>
       <input type="text" id="guideSurname" size="30" name="guideSurname" required value="' . $guideSurname . '"><br><br>
-	  <label for="commLevel">Comm Level:</label><br>';
+	  <label for="commLevel">Commission Level:</label><br>';
 	  echo '<SELECT name="commLevel" required>';
 	  echo "<OPTION value='NONE'>NONE SELECTED</OPTION>\n";
 	  
 	  
 	  
-	  $query  = "SELECT * FROM tourGuide ORDER BY commLevel";
+	  $query  = "SELECT * FROM commLevel ORDER BY commDescription";
 	  $result = mysqli_query($dbConn, $query);
 	  while ($Arrayline = mysqli_fetch_assoc($result)) {
 		  
@@ -146,7 +146,7 @@ if ($procedure == "addnewtourguide") {
 		  if ($tourGuide == $Arrayline["uid"]) {
 			  echo " SELECTED";
 		  }
-		  echo ">" . $Arrayline["commLevel"] . "</OPTION>\n";
+		  echo ">" . $Arrayline["commDescription"] . "</OPTION>\n";
 		  
 	  }
 	  
