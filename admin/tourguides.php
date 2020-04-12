@@ -117,13 +117,13 @@ if ($procedure == "addnewtourguide") {
         
         if (strlen($Desc) < 15) {
             
-            $myerror .= "<br><br><br><BIG><BIG><BIG>Please enter a more comprehensive description</BIG></BIG></BIG>";
+          //  $myerror .= "<br><br><br><BIG><BIG><BIG>Please enter a more comprehensive description</BIG></BIG></BIG>";
             
         }
         
     }
     
-    echo $myerror;
+    //echo $myerror;
     
     
     
