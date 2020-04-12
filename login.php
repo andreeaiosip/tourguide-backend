@@ -1,9 +1,5 @@
 <?php
 
-// ini_set('display_errors', 1);
-// ini_set('display_startup_errors', 1);
-// error_reporting(E_ALL);
-
 session_start();
 
 include('admin/myDBConnection.php');
@@ -71,24 +67,24 @@ if ($wasaloginattempted == "yes") {
     }
     
     
-    if ($_SESSION["User_ID"] <> "") {  
+    if ($_SESSION["User_ID"] <> "") {
         if ($_SESSION["accessRole"] == "Adm") {
-        echo '<meta http-equiv="refresh" content="0;url=admin/tours.php?procedure=tours" />'; 
-        }else{
+            echo '<meta http-equiv="refresh" content="0;url=admin/tours.php?procedure=tours" />';
+        } else {
             echo '<meta http-equiv="refresh" content="0;url=admin/bookings.php?procedure=bookings" />';
-        } 
+        }
     } else {
         $uname     = "";
         $upass     = "";
-        $mymessage = "Your Username or password are not correct. Please try again.";  
+        $mymessage = "Your username or password are not correct. Please try again.";
     }
-
+    
 }
 
 
-echo $mymessage;
 
-echo "<hr>" . $query . "<hr>";
+
+
 echo '<div class=" container container-form">';
 echo '<form  action="login.php" method="post">';
 
@@ -97,10 +93,14 @@ echo '      <input type="text" id="uname" name="uname" size="5" required value="
 echo '<label for="password">Password:</label><br>';
 echo '      <input type="text" id="upass" size="5" name="upass" required value="' . $upass . '"><br><br>';
 echo '      <input type="hidden" name="wasaloginattempted" value="yes">';
-echo '      <input type="submit" value="Login">';
+echo '      <input type="submit" value="LOGIN">';
 echo '    </form>';
-echo '<div>';
+echo '<div>
+<br>
+<br>';
+echo $mymessage;
 ?>
+
 
 </center>
 

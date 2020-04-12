@@ -60,7 +60,6 @@ if ($procedure == "tourguides") {
         <th>Tour Guide ID</th>
         <th>Guide Name & Surname</th>
         <th>Experience Level</th>
-        
         <th>Action</th>
       </tr>';
     
@@ -110,20 +109,19 @@ if ($procedure == "addnewtourguide") {
     
     $wasiposted = $_REQUEST["wasiposted"];
     
-    //$myerror = "Please complete the below!";
+   
     
     
     if ($wasiposted <> "") {
         
         if (strlen($Desc) < 15) {
             
-          //  $myerror .= "<br><br><br><BIG><BIG><BIG>Please enter a more comprehensive description</BIG></BIG></BIG>";
-            
+           
         }
         
     }
     
-    //echo $myerror;
+
     
     
     
