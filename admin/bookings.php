@@ -153,6 +153,7 @@ echo '<table >
 			  <input type="hidden" name="fromDB" value="no">
 			  <input type="submit" value="Submit">
 			  </form>
+			  <h4>You cannot mark a booking as being completed without assigning a tour guide.</h4>
 			  </div>';
 		
 		if ($fromDB <> "" && !($completed == 1 && $tourGuideUid == "")){
@@ -167,7 +168,7 @@ echo '<table >
 			}
 
 			else {
-				echo "Please assign a tour guide before marking the booking as being complete.";
+				echo  '<h4>Please assign a tour guide before marking the booking as being completed.</h4>';
 			}
 
 	}
