@@ -34,12 +34,14 @@ if ($_SESSION["accessRole"]=="Adm"){
   echo '<a '.  $myActiveComms   . 'href="commission.php?procedure=commission"><i class="fa fa-handshake-o" aria-hidden="true"></i> COMM LEVEL</a>';
   echo '<a '.  $myActiveBook    . 'href="bookings.php?procedure=bookings"><i class="fa fa-book" aria-hidden="true"></i> BOOKINGS</a>';
   echo '<a '.  $myActivePayroll . 'href="myPayroll.php?procedure=genpayroll"><i class="fa fa-money" aria-hidden="true"></i></i> PAYROLL</a>';
-  echo '<a '.  $myActiveAdmin   . 'href="admin.php"><i class="fa fa-fw fa-user"></i> ADMIN</a>'
-  ;
+  echo '<a '.  $myActiveAdmin   . 'href="admin.php"><i class="fa fa-fw fa-user"></i> ADMIN</a>';
+  echo '<a href="HelpDocAdmin.pdf" target="_blank"><i class="fa fa-question-circle" aria-hidden="true"></i> HELP</a>';
 
 } else {
 echo '<a '.  $myActiveBook   . 'href="bookings.php?procedure=bookings"><i class="fa fa-book" aria-hidden="true"></i> BOOKINGS</a>';
  echo '<a '.  $myActivePayroll . 'href="myPayroll.php?procedure=genpayroll"><i class="fa fa-money" aria-hidden="true"></i></i> PAYROLL</a>';
+ echo '<a href="HelpDocTourGuide.pdf" target="_blank"><i class="fa fa-question-circle" aria-hidden="true"></i> HELP</a>';
+
  //echo "<span class='userAccess'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TG Logged in (".$SESSION["TG"].")</span>";
 }
   
