@@ -49,7 +49,7 @@ echo '</div>';
 
 // SHOW BOOKINGS ON THE PAGE ----------------
 if ($procedure == "bookings") {
-
+    
     echo '<table >
   <tr>
     <th>Book ID</th>
@@ -84,19 +84,20 @@ if ($procedure == "bookings") {
         } else {
             echo '<td> <i style="color: #323232bf" class="fa fa-check-circle-o fa-2x" aria-hidden="true"></i></td>';
         }
-
+        
         echo '<td>';
         if ($_SESSION["accessRole"] == "Adm") {
             echo '<a href="bookings.php?procedure=deleteBooking&bguid=' . $Arrayline['bguid'] . '" title="Delete Booking"><i style="color: #323232bf" class="fa fa-trash fa fa-2x" aria-hidden="true"></i></a>';
             echo '<a href="bookings.php?procedure=editBooking&bguid=' . $Arrayline['bguid'] . '" title="Assign a tour guide"><i style="color:#323232bf" class="fa fa-pencil-square fa-2x" aria-hidden="true"></i></a>';
             
+            // If the tour guide is logged in, don't show the delete button
         } else {
             echo '<a href="bookings.php?procedure=editBooking&bguid=' . $Arrayline['bguid'] . '" title="Assign a tour guide"><i style="color:#323232bf" class="fa fa-pencil-square fa-2x" aria-hidden="true"></i></a>';
             
         }
         echo '</td>';
         echo '</tr>';
-
+        
     }
     
     echo '</table>';
@@ -104,10 +105,11 @@ if ($procedure == "bookings") {
 
 
 if ($procedure == "isComplete") {
- 
+    
     echo $bguid;
 }
 
+// UPDATE A BOOKING 
 
 if ($procedure == "editBooking") {
     
@@ -155,7 +157,7 @@ if ($procedure == "editBooking") {
     
     else {
         echo '<h4>Please assign a tour guide before marking the booking as being completed.</h4>';
-    }  
+    }
 }
 
 
@@ -167,7 +169,7 @@ if ($procedure == "deleteBooking") {
     
     $query  = "DELETE FROM bookings WHERE guid='" . $bookingGuid . "'";
     $result = mysqli_query($dbConn, $query);
-    echo '<meta http-equiv="refresh" content="0;url=bookings.php?procedure=bookings&showSnack=Record Deleted! successfully..." />';   
+    echo '<meta http-equiv="refresh" content="0;url=bookings.php?procedure=bookings&showSnack=Record Deleted! successfully..." />';
 }
 
 if (isset($_REQUEST["showSnack"])) {
@@ -176,4 +178,4 @@ if (isset($_REQUEST["showSnack"])) {
 
 ?>
 </body>
-</html>
+</ht

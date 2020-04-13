@@ -81,10 +81,6 @@ if ($wasaloginattempted == "yes") {
     
 }
 
-
-
-
-
 echo '<div class=" container container-form">';
 echo '<form  action="login.php" method="post">';
 

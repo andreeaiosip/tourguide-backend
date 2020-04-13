@@ -25,9 +25,7 @@ if ($addrecord == "confirmRecord") {
     $bookid = "BkRef" . rand(1000, 9999);
     
     $bookguid = bin2hex(random_bytes(16));
-    //https://www.php.net/manual/en/function.com-create-guid.php
-    
-    
+   
     $myBookingSql = "INSERT INTO bookings (guid,bookref,tourUid,Pax,dateTour,
                                                 tourGuideUid,customerName,customerSurname,
                                                 customerEmail) 
@@ -35,12 +33,11 @@ if ($addrecord == "confirmRecord") {
     
     $myResult = mysqli_query($dbConn, $myBookingSql);
     if ($myResult) {
-        echo "Thank you for your booking<hr>";
-        //echo '<meta http-equiv="refresh" content="0;url=../thankyou.php?myBookid='.$bookid.'&myName='.$fname.'">';
+        echo "<h5 style='text-align:center'>Thank you for your booking</h5><hr>";
     } else {
         echo "Error: " . $myBookingSql . " <hr> " . mysqli_error($dbConn);
         die;
-    } 
+    }
 }
 
 ?>
@@ -94,7 +91,6 @@ if ($addrecord == "confirmRecord") {
               
                   <label for="email">Email address</label>
                      <input type="email"  name="email" id="email" required placeholder="Your email address">
-            
                  <br>
                  <br>
                   <label for="query">Select a tour:</label>
@@ -107,7 +103,7 @@ while ($Arrayline = mysqli_fetch_assoc($result)) {
     
 }
 ?>
-                 </select>
+                </select>
                      <br>
                      <div class="Pax">
                         <label for="Pax">Number of people:</label>

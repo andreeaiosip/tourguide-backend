@@ -45,8 +45,7 @@ echo '</div>';
 
 if ($procedure == "deleteTour") {
     Delete_A_record($dbConn, "tours", $tuid);
-    echo '<meta http-equiv="refresh" content="0;url=tours.php?procedure=tours&showSnack=Record Deleted! successfully..." />';
-    
+    echo '<meta http-equiv="refresh" content="0;url=tours.php?procedure=tours&showSnack=Record Deleted! successfully..." />';  
 }
 
 // EDIT TOUR------------------------
@@ -56,10 +55,10 @@ if ($procedure == "editTour") {
     echo '
  <div class=" container container-form">
        <form action="tours.php">
-	   <input type="hidden" name="procedure" value= ' . $procedure . '>
-	   <h3>UPDATE THIS TOUR</h3>
-	   <br>
-	   <br>
+       <input type="hidden" name="procedure" value= ' . $procedure . '>
+       <h3>UPDATE THIS TOUR</h3>
+       <br>
+       <br>
        <input type="hidden" name="tuid" value=' . $tuid . '>
        <label for="TourName">Tour name:</label><br>
        <input type="text" id="Tname" name="TourName" required value="' . $Tname . '"><br>
@@ -117,7 +116,7 @@ if ($procedure == "tours") {
     echo '</table>';
     echo '</form>';
     echo '<button style="border-radius:4px; text-decoration: none; margin-left: 50px;" class="btn success "><a href="tours.php?procedure=addnewtour" style="text-decoration:none;><i class="fa fa-fw fa-bus fa-2x" aria-hidden="true"></i> NEW</a></button>';
-
+    
 }
 
 // ADD NEW TOUR------------------
@@ -126,17 +125,17 @@ if ($procedure == "tours") {
 if ($procedure == "addnewtour") {
     
     $wasiposted = $_REQUEST["wasiposted"];
-
+    
     if ($wasiposted <> "") {
         
         if (strlen($Desc) < 15) {
             
-            $myerror .= "<h4>Please enter a more comprehensive description</h4>"; 
-        } 
+            $myerror .= "<h4>Please enter a more comprehensive description</h4>";
+        }
     }
     
     echo $myerror;
-
+    
     echo '
  <div class=" container container-form">
    <form action="tours.php"> 
@@ -144,7 +143,6 @@ if ($procedure == "addnewtour") {
    <br>
    <br>
    <input type="hidden" name="procedure" value= ' . $procedure . '>
-  
    <label for="TourName">Tour name:</label><br>
    <input type="text" id="Tname" name="TourName" required value="' . $Tname . '"><br>
    <label for="Description">Tour Description:</label><br>
@@ -160,13 +158,13 @@ if ($procedure == "addnewtour") {
     if ($wasiposted <> "") {
         
         $query = "INSERT INTO tours (TourName, Description, Price) VALUES (" . "'" . $Tname . "'," . "'" . $Desc . "'," . "'" . $Price . "')";
- 
+        
         $result = mysqli_query($dbConn, $query);
-
+        
         echo "Record added successfully...";
         echo '<meta http-equiv="refresh" content="0;url=tours.php?procedure=tours" />';
-
-    }  
+        
+    }
 }
 
 ?>

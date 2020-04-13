@@ -81,7 +81,7 @@ if ($procedure == "commission") {
         echo '<a href="commission.php?procedure=editComm&cuid=' . $Arrayline['uid'] . '" title="Edit me"><i style="color:#323232bf" class="fa fa-pencil-square fa-2x" aria-hidden="true"></i></a>';
         echo '</td>';
         echo '</tr>';
-
+        
     }
     
     echo '</table>';
@@ -107,7 +107,7 @@ if ($procedure == "deleteComm") {
 
 if ($procedure == "addCommLevel") {
     
-
+    
     if ($wasiposted <> "") {
         
         $myerror = "";
@@ -119,9 +119,9 @@ if ($procedure == "addCommLevel") {
         
         if ($commPercent < 1) {
             
-            $myerror .= "<br><br><br><h2> style='text-align:center';>Commission can NOT be Less than 1% of the tour price</h2>";  
+            $myerror .= "<br><br><br><h2> style='text-align:center';>Commission can NOT be Less than 1% of the tour price</h2>";
         }
-    
+        
     }
     
     echo $myerror;
@@ -146,21 +146,21 @@ if ($procedure == "addCommLevel") {
     
     
     if ($myerror == "" && $wasiposted <> "") {
-
+        
         $newCommUid = generateUid();
-        $query = "INSERT INTO commLevel (uid,commDescription,commPercent) VALUES (" . "'" . $newCommUid . "'," . "'" . $commDescription . "'," . "'" . $commPercent . "')";
-        $result = mysqli_query($dbConn, $query);
+        $query      = "INSERT INTO commLevel (uid,commDescription,commPercent) VALUES (" . "'" . $newCommUid . "'," . "'" . $commDescription . "'," . "'" . $commPercent . "')";
+        $result     = mysqli_query($dbConn, $query);
         echo "Record added successfully...";
-        echo '<meta http-equiv="refresh" content="0;url=commission.php?procedure=commission&showSnack=Record added successfully..." />'; 
+        echo '<meta http-equiv="refresh" content="0;url=commission.php?procedure=commission&showSnack=Record added successfully..." />';
     }
-
+    
 }
 
 
 if ($procedure == "editComm") {
-
+    
     $myerror = "";
-
+    
     if ($fromDB == "") {
         
         $query  = "SELECT * FROM commLevel WHERE uid='" . $cuid . "'";
@@ -172,7 +172,7 @@ if ($procedure == "editComm") {
     } else {
         
         $commDescription = $_REQUEST["commDescription"];
-        $commPercent     = $_REQUEST["commPercent"]; 
+        $commPercent     = $_REQUEST["commPercent"];
     }
     
     $myerror = "";
@@ -184,24 +184,24 @@ if ($procedure == "editComm") {
         
         if ($commPercent > 50) {
             
-            $myerror .= "<br><BIG><BIG>Commission can NOT be bigger then 50% of the tour price</BIG></BIG></BIG>";  
+            $myerror .= "<br><BIG><BIG>Commission can NOT be bigger then 50% of the tour price</BIG></BIG></BIG>";
         }
-
+        
         if ($commPercent == 0) {
             
             $myerror .= "<br><BIG><BIG>Commission must be more than Zero!!!</BIG></BIG></BIG>";
             
         }
     }
-     
+    
     echo '
 
 <div class=" container container-form">
        <form action="commission.php">
-	   <input type="hidden" name="procedure" value= ' . $procedure . '>
-	   <h3>UPDATE THIS COMMISSION LEVEL</h3>
-	   <br>
-	   <br>
+       <input type="hidden" name="procedure" value= ' . $procedure . '>
+       <h3>UPDATE THIS COMMISSION LEVEL</h3>
+       <br>
+       <br>
        <input type="hidden" name="cuid" value=' . $cuid . '>
        <label for="commDescription">Commission</label><br>
        <input type="text" id="commDescription" name="commDescription" required value="' . $commDescription . '"><br>
@@ -211,14 +211,14 @@ if ($procedure == "editComm") {
        <input type="submit" value="Submit">
        </form>
        </div>';
-
+    
     if ($myerror == "" && $fromDB <> "") {
         
         $query  = "UPDATE commLevel SET commDescription='" . addslashes($commDescription) . "',commPercent='" . addslashes($commPercent) . "' WHERE uid='" . $cuid . "'";
         $result = mysqli_query($dbConn, $query);
         
         echo '<meta http-equiv="refresh" content="0;url=commission.php?procedure=commission&showSnack=' . $commDescription . '- Record updated successfully..." />';
-   
+        
     }
 }
 
