@@ -6,7 +6,7 @@ $commDescription = $_REQUEST["commDescription"];
 $commPercent     = $_REQUEST["commPercent"];
 $wasiposted      = $_REQUEST["wasiposted"];
 $cuid            = $_REQUEST["cuid"];
-$fromDB          = $_REQUEST["fromDB"];
+$DBvalue          = $_REQUEST["DBvalue"];
 $procedure       = $_REQUEST["procedure"];
 
 include('myDBConnection.php');
@@ -161,7 +161,7 @@ if ($procedure == "editComm") {
     
     $myerror = "";
     
-    if ($fromDB == "") {
+    if ($DBvalue == "") {
         
         $query  = "SELECT * FROM commLevel WHERE uid='" . $cuid . "'";
         $result = mysqli_query($dbConn, $query);
@@ -207,12 +207,12 @@ if ($procedure == "editComm") {
        <input type="text" id="commDescription" name="commDescription" required value="' . $commDescription . '"><br>
        <label for="commPercent">Comm Percentage:</label><br>
        <input type="number" id="commPercent" name="commPercent" required value="' . $commPercent . '"><br><br>
-       <input type="hidden" name="fromDB" value="no">
+       <input type="hidden" name="DBvalue" value="no">
        <input type="submit" value="Submit">
        </form>
        </div>';
     
-    if ($myerror == "" && $fromDB <> "") {
+    if ($myerror == "" && $DBvalue <> "") {
         
         $query  = "UPDATE commLevel SET commDescription='" . addslashes($commDescription) . "',commPercent='" . addslashes($commPercent) . "' WHERE uid='" . $cuid . "'";
         $result = mysqli_query($dbConn, $query);

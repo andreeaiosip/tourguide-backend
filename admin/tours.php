@@ -6,7 +6,7 @@ $date   = $_REQUEST["dateTour"];
 $tours  = $_REQUEST["mytourselected"];
 $saveme = $_REQUEST["saveme"];
 $tuid   = $_REQUEST["tuid"];
-$fromDB = $_REQUEST["fromDB"];
+$DBvalue = $_REQUEST["DBvalue"];
 $Price  = $_REQUEST["Price"];
 $Tname  = $_REQUEST["TourName"];
 $Desc   = $_REQUEST["Description"];
@@ -66,12 +66,12 @@ if ($procedure == "editTour") {
        <input type="text" id="Desc" size="150" name="Description" required value="' . $Desc . '"><br><br>
        <label for="tourPrice">Tour Price:</label><br>
        <input type="number" id="Price" name="Price" required value="' . $Price . '"><br><br>
-       <input type="hidden" name="fromDB" value="no">
+       <input type="hidden" name="DBvalue" value="no">
        <input type="submit" value="Submit">
        </form>
        </div>';
     
-    if ($fromDB <> "") {
+    if ($DBvalue <> "") {
         
         $query  = "UPDATE tours SET TourName='" . addslashes($Tname) . "',Description='" . addslashes($Desc) . "',Price='" . $Price . "' WHERE uid='" . $tuid . "'";
         $result = mysqli_query($dbConn, $query);

@@ -7,7 +7,7 @@ $guideSurname = $_REQUEST["guideSurname"];
 $commLevelUid = $_REQUEST["commLevelUid"];
 $active       = $_REQUEST["active"];
 $guideUid     = $_REQUEST["guideUid"];
-$fromDB       = $_REQUEST["fromDB"];
+$DBvalue       = $_REQUEST["DBvalue"];
 
 
 $procedure = $_REQUEST["procedure"];
@@ -173,12 +173,12 @@ if ($procedure == "editTourGuide") {
     
     echo "</SELECT><br>";
     echo '<br><br>
-               <input type="hidden" name="fromDB" value="no">
+               <input type="hidden" name="DBvalue" value="no">
                <input type="submit" value="Submit">
                </form>
                </div>';
  
-    if ($fromDB <> "") {
+    if ($DBvalue <> "") {
         
         $query  = "UPDATE tourGuide SET guideName='" . addslashes($guideName) . "',guideSurname='" . addslashes($guideSurname) . "',commLevelUid='" . $commLevelUid . "' WHERE tourGuide.uid='" . $guideUid . "'";
         $result = mysqli_query($dbConn, $query);

@@ -159,7 +159,7 @@ if ($procedure == "genpayrollView") {
   </tr>';
     
     
-    $query = "SELECT *,bookings.guid AS bookingID_fromDB,MONTH(bookings.dateTour) AS monthNo
+    $query = "SELECT *,bookings.guid AS bookingID_DBvalue,MONTH(bookings.dateTour) AS monthNo
                 FROM bookings
                 LEFT JOIN tours ON tours.uid = bookings.tourUid
                 LEFT JOIN tourGuide ON tourGuide.uid = bookings.tourGuideUid

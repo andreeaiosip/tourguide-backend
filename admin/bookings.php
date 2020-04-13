@@ -8,7 +8,7 @@ $bguid        = $_REQUEST["bguid"];
 $procedure    = $_REQUEST["procedure"];
 $tourGuideUid = $_REQUEST["tourGuideUid"];
 $completed    = $_REQUEST["completed"];
-$fromDB       = $_REQUEST["fromDB"];
+$DBvalue       = $_REQUEST["DBvalue"];
 
 include('myDBConnection.php');
 include('deleteFunction.php');
@@ -139,13 +139,13 @@ if ($procedure == "editBooking") {
                  <option value="1">Completed</option>
                  <option value="0">Not completed</option>
               </select>
-              <input type="hidden" name="fromDB" value="no">
+              <input type="hidden" name="DBvalue" value="no">
               <input type="submit" value="Submit">
               </form>
               <h4>You cannot mark a booking as being completed without assigning a tour guide.</h4>
               </div>';
     
-    if ($fromDB <> "" && !($completed == 1 && $tourGuideUid == "")) {
+    if ($DBvalue <> "" && !($completed == 1 && $tourGuideUid == "")) {
         
         $query  = "UPDATE bookings SET tourGuideUid='" . addslashes($tourGuideUid) . "',completed='" . addslashes($completed) . "' WHERE guid='" . $bguid . "'";
         $result = mysqli_query($dbConn, $query);

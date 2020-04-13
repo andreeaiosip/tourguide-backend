@@ -171,7 +171,7 @@ if ($myerror=="" && $wasiposted <> ""){
 if ($procedure=="comms_editme"){
 
 	$cuid 	  	= $_REQUEST["cuid"] ;
-	$fromDB 	= $_REQUEST["fromDB"] ;
+	$DBvalue 	= $_REQUEST["DBvalue"] ;
     $wasiposted = $_REQUEST["wasiposted"] ;
 	$myerror    = ""; // use this for any validation we need!
 
@@ -179,7 +179,7 @@ if ($procedure=="comms_editme"){
    ////echo "<H1>".$tuid."</H1>";
 
 
-	if ($fromDB==""){
+	if ($DBvalue==""){
 
 		$query = "SELECT * FROM commLevel WHERE uid='".$cuid."'";
 		$result = mysqli_query($dbConn, $query);
@@ -226,14 +226,14 @@ echo '
   <input type="text" id="Commname" name="Commname" required value="'.$Commname.'"><br>
   <label for="cpercentage">Commission Percentage:</label><br>
   <input type="number" id="cpercentage" name="cpercentage" required value="'.$cpercentage.'"><br><br>
-  <input type="hidden" name="fromDB" value="no">
+  <input type="hidden" name="DBvalue" value="no">
   <input type="hidden" name="wasiposted" value="yes">
   <input type="submit" value="Submit">
   </form>';
 
 
 
-   if ($myerror=="" && $fromDB <> ""){
+   if ($myerror=="" && $DBvalue <> ""){
 
  	$query = "UPDATE commission SET description='".addslashes($Commname)."',value='".addslashes($cpercentage)."' WHERE uid='".$cuid."'";
 	$result = mysqli_query($dbConn, $query);
