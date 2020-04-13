@@ -56,7 +56,10 @@ if ($procedure == "editTour") {
     echo '
  <div class=" container container-form">
        <form action="tours.php">
-       <input type="hidden" name="procedure" value= ' . $procedure . '>
+	   <input type="hidden" name="procedure" value= ' . $procedure . '>
+	   <h3>UPDATE THIS TOUR</h3>
+	   <br>
+	   <br>
        <input type="hidden" name="tuid" value=' . $tuid . '>
        <label for="TourName">Tour name:</label><br>
        <input type="text" id="Tname" name="TourName" required value="' . $Tname . '"><br>
@@ -136,9 +139,12 @@ if ($procedure == "addnewtour") {
 
     echo '
  <div class=" container container-form">
-   <form action="tours.php">
+   <form action="tours.php"> 
+   <h3>ADD NEW TOUR</h3>
+   <br>
+   <br>
    <input type="hidden" name="procedure" value= ' . $procedure . '>
-   <h4>ADD NEW TOUR</h4>
+  
    <label for="TourName">Tour name:</label><br>
    <input type="text" id="Tname" name="TourName" required value="' . $Tname . '"><br>
    <label for="Description">Tour Description:</label><br>

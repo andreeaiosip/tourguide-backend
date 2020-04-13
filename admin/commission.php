@@ -132,7 +132,7 @@ if ($procedure == "addCommLevel") {
   
   <div class=" container container-form">
   <form action="commission.php?procedure=addCommLevel" method="post">
-  <h4>ADD NEW COMMISSION LEVEL</h4>
+  <h3>ADD NEW COMMISSION LEVEL</h3>
   <input type="hidden" name="procedure" value= ' . $procedure . '>
   <label for="commDescription">Commission</label><br>
   <input type="text" id="commDescription" name="commDescription" required value="' . $commDescription . '"><br>
@@ -198,7 +198,10 @@ if ($procedure == "editComm") {
 
 <div class=" container container-form">
        <form action="commission.php">
-       <input type="hidden" name="procedure" value= ' . $procedure . '>
+	   <input type="hidden" name="procedure" value= ' . $procedure . '>
+	   <h3>UPDATE THIS COMMISSION LEVEL</h3>
+	   <br>
+	   <br>
        <input type="hidden" name="cuid" value=' . $cuid . '>
        <label for="commDescription">Commission</label><br>
        <input type="text" id="commDescription" name="commDescription" required value="' . $commDescription . '"><br>

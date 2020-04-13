@@ -1,14 +1,9 @@
 <?php
 
-// ini_set('display_errors', 1);
-// ini_set('display_startup_errors', 1);
-// error_reporting(E_ALL);
-
 session_start();
 
 
 $procedure = $_REQUEST["procedure"];
-//$dateTour = $_REQUEST["dateTour"];
 include('myDBConnection.php');
 include('deleteFunction.php');
 
@@ -29,7 +24,7 @@ include('deleteFunction.php');
 include('menuTabs.php');
 echo '<div class="sessionRole">';
 echo '<p>';
-echo 'Logged in as: ' .	$_SESSION["accessRole"];
+echo 'Logged in as: ' . $_SESSION["accessRole"];
 echo '</p>';
 echo '</div>';
 
@@ -42,13 +37,6 @@ if (isset($_REQUEST["showSnack"])) {
     echo '<body>';
 }
 
-// if ($_SESSION["accessRole"] == "Adm") {
-//     echo ' <a href="myPayroll.php?procedure=genpayroll"><button class="btn success" >Generate Payroll (Admin Side)</button></a>';
-// } else {
-//     echo ' <a href="myPayroll.php?procedure=genpayroll"><button class="btn success" >Calculate Pay (Tour Guide Side)</button></a>';
-// }
-
-
 if (isset($_REQUEST["showSnack"])) {
     echo '<div id="snackbar">' . $_REQUEST["showSnack"] . '</div>';
 }
@@ -59,8 +47,16 @@ if ($procedure == "genpayroll") {
     
     echo '<br /><br /><br /><br />
     <div class=" container container-form">
-          <form action="myPayroll.php?procedure=genpayrollView" method="post">
-          <label for="FromDate">Start Payroll Date:(Inclusive)</label><br>
+          <form action="myPayroll.php?procedure=genpayrollView" method="post">';
+    if ($_SESSION["accessRole"] == "Adm") {
+        echo '<h3>SHOW THE PAYROLL FOR A TOUR GUIDE</h3>';
+    } else {
+        echo '<h3>SHOW MY MONEY</h3>';
+    }
+    echo '
+         <br>
+         <br>
+         <label for="FromDate">Start Payroll Date:(Inclusive)</label><br>
           <input type="date" id="FromDate" name="FromDate" required value="' . $FromDate . '"><br>
           <label for="EndDate">End Payroll Date:(Inclusive)</label><br>
           <input type="date" id="EndDate" name="EndDate" required value="' . $EndDate . '"><br><br>';
@@ -87,7 +83,7 @@ if ($procedure == "genpayroll") {
         }
         
         echo "</SELECT><br>";
-
+        
         // The below line is the main one that makes the tour guide payroll to show
     } else {
         echo '<input type="hidden" name="tourGuide" value="' . $_SESSION["TG_uid"] . '">';
@@ -115,7 +111,7 @@ if ($procedure == "genpayrollView") {
                 WHERE tourGuide.uid='" . $tourGuide . "'";
     $result = mysqli_query($dbConn, $query);
     while ($Arrayline = mysqli_fetch_assoc($result)) {
-        $guideName   = $Arrayline["guideName"];
+        $guideName     = $Arrayline["guideName"];
         $myCommisValue = $Arrayline["commPercent"];
     }
     
@@ -134,9 +130,9 @@ if ($procedure == "genpayrollView") {
     
     
     
-    $query       = "SELECT * FROM surcharges";
-    $result      = mysqli_query($dbConn, $query);
-    $myMonSurcharge = array();
+    $query            = "SELECT * FROM surcharges";
+    $result           = mysqli_query($dbConn, $query);
+    $myMonSurcharge   = array();
     while ($Surchline = mysqli_fetch_assoc($result)) {
         $myMonSurcharge[$Surchline["monthNo"]] = $Surchline["surchargePercent"];
     }
@@ -280,7 +276,6 @@ if ($procedure == "genpayrollView") {
     <th>Details</th>
     <th>Total</th>
   </tr>';
-    
     echo '<tr>';
     echo '<td>Total Earnings</td>';
     echo '<td>&euro;&nbsp;' . number_format($myPayis, 2) . '</td>';
@@ -293,19 +288,10 @@ if ($procedure == "genpayrollView") {
     echo '<td>Salary to Transfer</td>';
     echo '<td><BIG><BIG>&euro;&nbsp;' . number_format($myPayis - $myTAXpayment, 2) . '</BIG></BIG></td>';
     echo '</tr>';
-    
     echo '</table>';
-    
-    
-    echo '<a href="payrollprt.php?tourguide=' . $tourGuide . '&EndDate=' . $EndDate . '&FromDate=' . $FromDate . '" target="_blank"><button class="btn success" >Print Payslip</button></a>';
-    
-    
-    
 }
 
-
 ?>
- 
 
  </body>
  
