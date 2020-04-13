@@ -545,9 +545,11 @@ CONTACT Page
   padding-bottom: 15px;
 }
 
+.Pax, .date {
+  text-align: left;
+}
 
-
-input[type=text], input[name=upass], select, textarea, input[name=uname], #upass, #uname {
+input[type=text], input[name=upass], select, textarea, form>input[name=email], input[name=uname], #upass, #uname {
   width: 100%;
   padding: 13px;
   border: 1px solid #ccc;
